@@ -9,7 +9,7 @@ export OPENSSL_CONF="C:\Program Files\OpenSSL-Win64\bin\openssl.cfg"
 
 mkdir -p "$OUTPUT_DIR"
 
-echo "🔓 Descifrando ficheros con Argon2id + AES-256-CBC"
+echo "Descifrando ficheros con Argon2id + AES-256-CBC"
 
 for meta in "$DOCS_DIR"/*.meta; do
   base=$(basename "$meta" .meta)
@@ -27,7 +27,7 @@ for meta in "$DOCS_DIR"/*.meta; do
     -kdfopt lanes:1 \
     ARGON2ID | xxd -p -c 256)
 
-  echo "📂 Descifrando $base ..."
+  echo "Descifrando $base ..."
   "$OPENSSL" enc -d -aes-256-cbc \
     -in "$enc" \
     -out "$OUTPUT_DIR/$base" \
@@ -35,8 +35,8 @@ for meta in "$DOCS_DIR"/*.meta; do
     -iv "$iv" \
     -nosalt
 
-  echo "✅ $base descifrado → $OUTPUT_DIR/$base.dec"
+  echo "$base descifrado → $OUTPUT_DIR/$base.dec"
   echo "--------------------------------------------"
 done
 
-echo "🎉 Todos los archivos fueron descifrados correctamente"
+echo "Todos los archivos fueron descifrados correctamente"
