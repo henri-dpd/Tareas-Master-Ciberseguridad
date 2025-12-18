@@ -1,0 +1,18 @@
+1er ejercicio (gandcrab)
+flag{d4d07dbc129592db4c5ff26cf2c92012}
+
+2do ejercicio (locky)
+flag{a270bb19c22d88bd2a4046f1c304db2c}
+
+3er ejercicio (Eking)
+flag{bd2999c5dec144603c529b89781587b6}
+
+4to ejercicio (vssadmin.exe)
+flag{vssadmin.exe}
+
+5to ejercicio (DontPayRansom!!!)
+flag{2de5947546a61c62a6b056e99f2c6c85}
+
+
+6to ejercicio (www.ccncertnomorecryaadrtifaderesddferrrqdfwa.com)
+flag{78769a4b0c76cf449aa023a19df761ea}

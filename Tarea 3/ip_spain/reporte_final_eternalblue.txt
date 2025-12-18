@@ -1,0 +1,14 @@
+# Nmap 7.95 scan initiated Thu Dec 18 07:15:02 2025 as: /usr/lib/nmap/nmap -iL targets_finales.txt -p445 -Pn --script smb-vuln-ms17-010 -oN reporte_final_eternalblue.txt
+Nmap scan report for 18.pool1-178-249.dynamic.orange.es (1.178.249.18)
+Host is up (0.026s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+
+Nmap scan report for 174.pool1-178-251.dynamic.orange.es (1.178.251.174)
+Host is up (0.027s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+
+# Nmap done at Thu Dec 18 07:15:03 2025 -- 2 IP addresses (2 hosts up) scanned in 0.83 seconds
