@@ -172,7 +172,8 @@ syslog?
   **SPL**
 
   ```bash
-  index=botsv1 source="WinEventLog:Security" EventCode=4688 user=Bree.Moser earliest="08/12/2016:00:00:00" latest="08/12/2016:23:59:59"
+  index=botsv1 source="WinEventLog:Security" EventCode=4688
+  user=Bree.Moser earliest="08/12/2016:00:00:00" latest="08/12/2016:23:59:59"
   | stats count by process
   | sort - count
   | head 4
@@ -326,9 +327,11 @@ syslog?
 
   **Resultado**
 
-  | \_time              | host      | Image                              | sha256_hash                                                      | Description         |
-  | :------------------ | :-------- | :--------------------------------- | :--------------------------------------------------------------- | :------------------ |
-  | 2016-08-10 23:56:18 | we1149srv | C:\inetpub\wwwroot\joomla\3791.exe | EC78C938D8453739CA2A370B9C275971EC46CAF6E479DE2B2D04E97CC47FA45D | Meterpreter_Implant |
+  | \_time              | host      | Image                              | sha256_hash          | Description         |
+  | :------------------ | :-------- | :--------------------------------- | :------------------- | :------------------ |
+  | 2016-08-10 23:56:18 | we1149srv | C:\inetpub\wwwroot\joomla\3791.exe | EC78C...FA45D | Meterpreter_Implant |
+
+  **Nota**: He cortado el hash para evitar que la tabla haga scroll y no se vea completa. **Hash SHA256 completo:** `EC78C938D8453739CA2A370B9C275971EC46CAF6E479DE2B2D04E97CC47FA45D`
 
 - Entre el tráfico HTTP (sourcetype="stream:http") saliente hacia IPs públicas (dest_ip no privada), determina cuántas solicitudes HTTP se han realizado al TLD de cada dominio (site). Es decir, si el site=”whatever.microsoft.com”, el TLD de ese dominio será “com”. Ordena los resultados de TLD con más solicitudes a TLD con menos solicitudes.
 

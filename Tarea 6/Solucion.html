@@ -1,0 +1,660 @@
+<!DOCTYPE html><html><head>
+      <title>Solucion</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\henri\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.20\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="tarea-detección-correlación-y-acción">Tarea detección, correlación y acción </h1>
+<h2 id="12-ficheros-stix">1.2 Ficheros STIX </h2>
+<ul>
+<li>
+<p>¿Quién es el autor del informe?</p>
+<p>La Oficina Federal de Investigaciones (FBI), la Agencia de Seguridad Cibernética y de Infraestructuras (CISA) y el Centro Multiestatal de Intercambio y Análisis de Información (MS-ISAC) publicaron este informe en conjunto.</p>
+</li>
+<li>
+<p>¿De qué adversario trata el informe?</p>
+<p>Vice Society, operando con el ransomware Medusa en su variante como RaaS.</p>
+</li>
+<li>
+<p>¿Cómo clasificarías a este adversario dentro de los seis tipos que hemos visto?</p>
+<p>Lo clasificaría como Cibercrimen porque su motivación principal es el beneficio económico mediante la extorsión.</p>
+</li>
+<li>
+<p>¿En qué año se identificó por primera vez actividad de este adversario?</p>
+<p>Fue identificado por primera vez en junio de 2021.</p>
+</li>
+<li>
+<p>¿Está relacionado con algún otro adversario conocido?</p>
+<p>No está relacionado con la variante MedusaLocker ni con la variante de malware móvil Medusa. Sin embargo, sí existe una asociación técnica entre el nombre Vice Society y la operación Medusa Ransomware confirmada por las referencias externas.</p>
+</li>
+<li>
+<p>¿Qué vulnerabilidades suele explotar este adversario? (CVE y explicación breve del producto afectado y la vulnerabilidad)</p>
+<p>Principalmente explota dos fallos en programas que las empresas usan para gestionar datos: el <strong>CVE-2023-0669</strong>, que afecta a GoAnywhere MFT y les permite ejecutar código a distancia para tomar el control del servidor; y el <strong>CVE-2022-24990</strong>, que afecta a los discos duros en red (NAS) de la marca TerraMaster, permitiéndoles enviar comandos al equipo sin necesidad de contraseña para robar o borrar la información.</p>
+</li>
+<li>
+<p>¿Qué 5 direcciones de e-mail aparecen como indicadores?</p>
+<ol>
+<li><a href="mailto:key.medusa.serviceteam@protonmail.com">key.medusa.serviceteam@protonmail.com</a></li>
+<li><a href="mailto:medusa.support.team@protonmail.com">medusa.support.team@protonmail.com</a></li>
+<li><a href="mailto:medusa.recovery.help@protonmail.com">medusa.recovery.help@protonmail.com</a></li>
+<li><a href="mailto:help.medusa.service@protonmail.com">help.medusa.service@protonmail.com</a></li>
+<li><a href="mailto:support.medusa.key@protonmail.com">support.medusa.key@protonmail.com</a></li>
+</ol>
+</li>
+<li>
+<p>¿Qué finalidad crees que cumplen estas direcciones de e-mail para el adversario y sus víctimas?</p>
+<p>Sirven como canal de Mando y Control (C2) y negociación de forma que permiten a las víctimas contactar con los atacantes para recibir instrucciones de pago y se utilizan para gestionar la entrega de las llaves de descifrado tras el pago del rescate.</p>
+</li>
+<li>
+<p>¿Qué técnicas descritas en la matriz de MITRE ATT&amp;CK utiliza el adversario para el comando y control (TA0011 - Command and Control)? (Código identificador y nombre de la técnica / subtécnica)</p>
+<ul>
+<li>T1071.001 - Application Layer Protocol: Web Protocols: Utilizan protocolos web estándar (como HTTP o HTTPS) para que el tráfico malicioso se camufle entre la navegación normal de la empresa y pase desapercibido por los firewalls.</li>
+<li>T1105 - Ingress Tool Transfer: Esta técnica la usan para descargar herramientas adicionales o piezas de malware desde sus servidores externos hacia el equipo de la víctima una vez que ya han conseguido entrar.</li>
+</ul>
+</li>
+<li>
+<p>Entre las herramientas utilizadas por el adversario se encuentran Mimikatz, Anydesk y Certutil. Para cada una de ellas, contesta a las siguientes preguntas:</p>
+<ul>
+<li>¿Se encuentra por defecto en Windows?</li>
+<li>¿La categorizarías como malware?</li>
+<li>Si no la categorizarías como malware, ¿por qué aparece el informe?</li>
+</ul>
+<ol>
+<li>
+<p><strong>Mimikatz</strong></p>
+<ul>
+<li><strong>¿Se encuentra por defecto en Windows?</strong> No. Es una herramienta externa que el atacante debe descargar e instalar en el equipo comprometido.</li>
+<li><strong>¿La categorizarías como malware?</strong> Técnicamente no es malware en sí, es una herramienta legítima de pentesting creada para auditorías de seguridad. Sin embargo, como se usa tan frecuentemente en ataques reales para robar credenciales (extracción de contraseñas desde la memoria), prácticamente todos los antivirus la detectan y bloquean directamente como HackTool o software potencialmente peligroso.</li>
+<li><strong>¿Por qué aparece en el informe?</strong> Porque es la herramienta "estrella" de los atacantes para volcar las contraseñas almacenadas en la memoria de Windows y así conseguir las credenciales del Administrador del Dominio.</li>
+</ul>
+</li>
+<li>
+<p><strong>AnyDesk</strong></p>
+<ul>
+<li><strong>¿Se encuentra por defecto en Windows?</strong> No. Es un software de terceros, aunque es muy popular y legítimo para dar soporte técnico remoto.</li>
+<li><strong>¿La categorizarías como malware?</strong> No. Es una herramienta completamente legítima de administración remota, como TeamViewer.</li>
+<li><strong>¿Por qué aparece en el informe?</strong> Porque los atacantes la instalan para mantener el acceso persistente al sistema. Si el administrador de la red detecta y cierra sus "puertas traseras" habituales, todavía pueden seguir entrando cómodamente a través de AnyDesk como si fueran técnicos de soporte legítimos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Certutil</strong></p>
+<ul>
+<li><strong>¿Se encuentra por defecto en Windows?</strong> Sí. Es una utilidad de línea de comandos nativa de Windows diseñada para gestionar certificados digitales.</li>
+<li><strong>¿La categorizarías como malware?</strong> No. Es un componente oficial y legítimo del sistema operativo de Windows.</li>
+<li><strong>¿Por qué aparece en el informe?</strong> Porque tiene una funcionalidad que permite descargar archivos desde Internet usando el parámetro <code>-urlcache</code>. Los atacantes abusan de esta característica para descargar sus herramientas maliciosas o scripts sin levantar sospechas, ya que muchos sistemas de seguridad confían en procesos firmados por Windows como <code>certutil.exe</code>. Es lo que llamamos "Living off the Land".</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="13-expresiones-regulares">1.3 Expresiones Regulares </h2>
+<p>¿Cuál es el nombre de equipo (FQDN) del propio firewall del que proviene la traza<br>
+syslog?</p>
+<p><strong>paloalto.evil.corp</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Atributo</th>
+<th style="text-align:left">Valor</th>
+<th style="text-align:left">Expresión regular</th>
+<th style="text-align:left">Grupo de captura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Categoría</strong></td>
+<td style="text-align:left">THREAT</td>
+<td style="text-align:left"><code>cat\s*=\s*(?P&lt;categoria&gt;[^|]+)</code></td>
+<td style="text-align:left">categoria</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Subtipo</strong></td>
+<td style="text-align:left">virus</td>
+<td style="text-align:left"><code>Subtype\s*=\s*(?P&lt;subtipo&gt;[^|]+)</code></td>
+<td style="text-align:left">subtipo</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Timestamp</strong></td>
+<td style="text-align:left">May 06 2025 16:43:53 GMT</td>
+<td style="text-align:left"><code>devTime\s*=\s*(?P&lt;timestamp&gt;[^|]+)</code></td>
+<td style="text-align:left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>IP origen</strong></td>
+<td style="text-align:left">10.2.75.41</td>
+<td style="text-align:left"><code>src\s*=\s*(?P&lt;ip_origen&gt;[^|]+)</code></td>
+<td style="text-align:left">ip_origen</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>IP destino</strong></td>
+<td style="text-align:left">192.168.178.180</td>
+<td style="text-align:left"><code>dst\s*=\s*(?P&lt;ip_destino&gt;[^|]+)</code></td>
+<td style="text-align:left">ip_destino</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Regla</strong></td>
+<td style="text-align:left">Test-1</td>
+<td style="text-align:left"><code>RuleName\s*=\s*(?P&lt;regla&gt;[^|]+)</code></td>
+<td style="text-align:left">regla</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Usuario</strong></td>
+<td style="text-align:left">ealderson</td>
+<td style="text-align:left"><code>usrName\s*=\s*(?P&lt;usuario&gt;[^|]+)</code></td>
+<td style="text-align:left">usuario</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Aplicación</strong></td>
+<td style="text-align:left">web-browsing</td>
+<td style="text-align:left"><code>Application\s*=\s*(?P&lt;aplicacion&gt;[^|]+)</code></td>
+<td style="text-align:left">aplicacion</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Sistema Virtual</strong></td>
+<td style="text-align:left">vsys1</td>
+<td style="text-align:left"><code>VirtualSystem\s*=\s*(?P&lt;sistema_virtual&gt;[^|]+)</code></td>
+<td style="text-align:left">sistema_virtual</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Zona Origen</strong></td>
+<td style="text-align:left">INSIDE-ZN</td>
+<td style="text-align:left"><code>SourceZone\s*=\s*(?P&lt;zona_origen&gt;[^|]+)</code></td>
+<td style="text-align:left">zona_origen</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Zona Destino</strong></td>
+<td style="text-align:left">OUTSIDE-ZN</td>
+<td style="text-align:left"><code>DestinationZone\s*=\s*(?P&lt;zona_destino&gt;[^|]+)</code></td>
+<td style="text-align:left">zona_destino</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Puerto Origen</strong></td>
+<td style="text-align:left">63508</td>
+<td style="text-align:left"><code>srcPort\s*=\s*(?P&lt;puerto_origen&gt;\d+)</code></td>
+<td style="text-align:left">puerto_origen</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Puerto Destino</strong></td>
+<td style="text-align:left">80</td>
+<td style="text-align:left"><code>dstPort\s*=\s*(?P&lt;puerto_destino&gt;\d+)</code></td>
+<td style="text-align:left">puerto_destino</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Protocolo</strong></td>
+<td style="text-align:left">tcp</td>
+<td style="text-align:left"><code>proto\s*=\s*(?P&lt;protocolo&gt;\w+)</code></td>
+<td style="text-align:left">protocolo</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>URL</strong></td>
+<td style="text-align:left"><a href="">badguys.co/du/uploads/08052018_UG_FAQ.pdf</a></td>
+<td style="text-align:left"><code>Miscellaneous\s*=\s*"(?P&lt;url&gt;[^"]+)"</code></td>
+<td style="text-align:left">url</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Categoría URL</strong></td>
+<td style="text-align:left">educational-institutions</td>
+<td style="text-align:left"><code>URLCategory\s*=\s*(?P&lt;categoria_url&gt;[^|]+)</code></td>
+<td style="text-align:left">categoria_url</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Dominio</strong></td>
+<td style="text-align:left"><a href="http://badguys.co">badguys.co</a></td>
+<td style="text-align:left"><code>Miscellaneous\s*=\s*"(?P&lt;dominio&gt;[^\/"]+)</code></td>
+<td style="text-align:left">dominio</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Nombre Fichero</strong></td>
+<td style="text-align:left">08052018_UG_FAQ.pdf</td>
+<td style="text-align:left"><code>Miscellaneous\s*=\s*"[^"]*\/(?P&lt;nombre_fichero&gt;[^"\/]+)"</code></td>
+<td style="text-align:left">nombre_fichero</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Firma</strong></td>
+<td style="text-align:left">trojan/PDF.gen.eiez</td>
+<td style="text-align:left"><code>ThreatID\s*=\s*(?&lt;firma&gt;[^(\s]+)</code></td>
+<td style="text-align:left">firma</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>ID firma</strong></td>
+<td style="text-align:left">268198686</td>
+<td style="text-align:left"><code>ThreatID\s*=\s*.*?\((?P&lt;id_firma&gt;\d+)\)</code></td>
+<td style="text-align:left">id_firma</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota:</strong> En el caso de SourceZone, el PDF al copiar inserta un salto de línea, así que asumí que esto podría pasar en otros atributos e inserté <code>\s*</code> para que se encuentre el atributo buscado sin importar si hay saltos de línea o espacios inesperados antes o después de los símbolos de igualdad.</p>
+<h2 id="14-splunk">1.4 Splunk </h2>
+<ul>
+<li>
+<p>¿Cuántos eventos hay en el índice “botsv1”?</p>
+<p>Se busca en el índice botsv1 y con la función estadística <code>count</code> se cuenta la cantidad total de eventos.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token operator">|</span> stats count
+</code></pre><p><strong>Resultado</strong></p>
+<p>33413777</p>
+</li>
+<li>
+<p>¿Cuáles son los tres “sourcetype” con más eventos por sourcetype en el índice “botsv1”?</p>
+<p>Se busca en el índice botsv1, luego se hace un <code>count</code> agrupando por sourcetype. De esta forma se tiene la cantidad de eventos por sourcetype, a continuación se ordenan y se toman las 3 primeras posiciones que al estar ordenadas son precisamente los sourcetypes con mayor cantidad de elementos.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token operator">|</span> stats count by sourcetype <span class="token operator">|</span> <span class="token function">sort</span> - count <span class="token operator">|</span> <span class="token function">head</span> <span class="token number">3</span>
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">sourcetype</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WinEventLog</td>
+<td style="text-align:left">14236319</td>
+</tr>
+<tr>
+<td style="text-align:left">fortigate_traffic</td>
+<td style="text-align:left">7675023</td>
+</tr>
+<tr>
+<td style="text-align:left">suricata</td>
+<td style="text-align:left">5078376</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>¿Cuántos eventos contienen la palabra “ellyn.baltimore”?</p>
+<p>Se busca en el índice botsv1 aplicando el filtro "ellyn.baltimore". De esta forma se encuentran solo los eventos que contengan esta palabra, luego se aplica la función estadística <code>count</code>.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token string">"ellyn.baltimore"</span> <span class="token operator">|</span> stats count
+</code></pre><p><strong>Resultado</strong></p>
+<p>590</p>
+</li>
+<li>
+<p>¿Cuáles son los tres servidores (host) que más eventos han generado que contengan la palabra “ellyn.baltimore”?</p>
+<p>Se busca en el índice botsv1 con el filtro "ellyn.baltimore", luego se aplica un <code>count</code> agrupando por host, se ordena y una vez ordenados se toman solo los 3 primeros de la lista.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token string">"ellyn.baltimore"</span> <span class="token operator">|</span> stats count by <span class="token function">host</span> <span class="token operator">|</span> <span class="token function">sort</span> - count <span class="token operator">|</span> <span class="token function">head</span> <span class="token number">3</span>
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">host</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">we9748srv</td>
+<td style="text-align:left">4</td>
+</tr>
+<tr>
+<td style="text-align:left">we2024srv</td>
+<td style="text-align:left">3</td>
+</tr>
+<tr>
+<td style="text-align:left">we3068srv</td>
+<td style="text-align:left">3</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>¿Según la auditoría de seguridad de Windows, cuáles han sido los 4 programas ejecutados más veces por Bree.Moser (source=”wineventlog:security” EventCode=4688 user=Bree.Moser) durante el 12/08/2016?</p>
+<p>En el índice botsv1 se filtra por los campos mencionados y la fecha del 12/08/2016 (en formato MM/DD/YYYY), luego se agrupa por procesos para tener la lista de los programas, se ordena y se toman los 4 primeros de la lista ordenada.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">source</span><span class="token operator">=</span><span class="token string">"WinEventLog:Security"</span> <span class="token assign-left variable">EventCode</span><span class="token operator">=</span><span class="token number">4688</span>
+<span class="token assign-left variable">user</span><span class="token operator">=</span>Bree.Moser <span class="token assign-left variable">earliest</span><span class="token operator">=</span><span class="token string">"08/12/2016:00:00:00"</span> <span class="token assign-left variable">latest</span><span class="token operator">=</span><span class="token string">"08/12/2016:23:59:59"</span>
+<span class="token operator">|</span> stats count by process
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+<span class="token operator">|</span> <span class="token function">head</span> <span class="token number">4</span>
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">process</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">C:\Windows\system32\DllHost.exe /Processid:{7006698D-2974-4091-A424-85DD0B909E23}</td>
+<td style="text-align:left">2</td>
+</tr>
+<tr>
+<td style="text-align:left">C:\Windows\System32\WiFiTask.exe</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">C:\Windows\SysWOW64\DllHost.exe /Processid:{1EF75F33-893B-4E8F-9655-C3D602BA4897}</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">"C:\Windows\system32\backgroundTaskHost.exe" -ServerName:App.AppXwmnqm0nvq2b90pwvr42qmtdjp7cj3w82.mca</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>¿Cuáles han sido los 5 sitios (site) externos (dest_ip pública) más visitados (sourcetype=”stream:http”)?</p>
+<p>Se hace una búsqueda en botsv1 filtrando por sourcetype como indica en la pregunta, luego se eliminan del resultado de la búsqueda las IP que no sean públicas, tales como las de redes corporativas, entornos con red virtual y local. Luego se agrupa por site, se ordena y se toman los 5 primeros.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"stream:http"</span>
+<span class="token operator">|</span> search NOT <span class="token punctuation">(</span>dest_ip<span class="token operator">=</span><span class="token number">10.0</span>.0.0/8 OR <span class="token assign-left variable">dest_ip</span><span class="token operator">=</span><span class="token number">172.16</span>.0.0/12 OR <span class="token assign-left variable">dest_ip</span><span class="token operator">=</span><span class="token number">192.168</span>.0.0/16<span class="token punctuation">)</span>
+<span class="token operator">|</span> stats count by site
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+<span class="token operator">|</span> <span class="token function">head</span> <span class="token number">5</span>
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">site</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://ssw.live.com">ssw.live.com</a></td>
+<td style="text-align:left">11186</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://cdn.content.prod.cms.msn.com">cdn.content.prod.cms.msn.com</a></td>
+<td style="text-align:left">1171</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://ctldl.windowsupdate.com">ctldl.windowsupdate.com</a></td>
+<td style="text-align:left">805</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://tile-service.weather.microsoft.com">tile-service.weather.microsoft.com</a></td>
+<td style="text-align:left">399</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://update.joomla.org">update.joomla.org</a></td>
+<td style="text-align:left">373</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>¿Qué endpoints (host) ordenados por número descendente de conexiones tienen más de 640 conexiones de red registradas por sus agentes de Sysmon? (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=3)</p>
+<p>Se busca en el índice botsv1 con los filtros mencionados en la pregunta, luego se agrupa por host y se hace una consulta <code>where</code> para tomar los que tengan más de 640 eventos. Por último, se ordena para que aparezcan ordenados por número descendente.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"</span> <span class="token assign-left variable">EventCode</span><span class="token operator">=</span><span class="token number">3</span>
+<span class="token operator">|</span> stats count by <span class="token function">host</span>
+<span class="token operator">|</span> where count <span class="token operator">&gt;</span> <span class="token number">640</span>
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">host</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">we8105desk</td>
+<td style="text-align:left">53336</td>
+</tr>
+<tr>
+<td style="text-align:left">we1149srv</td>
+<td style="text-align:left">40835</td>
+</tr>
+<tr>
+<td style="text-align:left">we9748srv</td>
+<td style="text-align:left">5749</td>
+</tr>
+<tr>
+<td style="text-align:left">we9041srv</td>
+<td style="text-align:left">5149</td>
+</tr>
+<tr>
+<td style="text-align:left">we1864srv</td>
+<td style="text-align:left">2548</td>
+</tr>
+<tr>
+<td style="text-align:left">we5364srv</td>
+<td style="text-align:left">2513</td>
+</tr>
+<tr>
+<td style="text-align:left">we4999srv</td>
+<td style="text-align:left">830</td>
+</tr>
+<tr>
+<td style="text-align:left">we4781srv</td>
+<td style="text-align:left">804</td>
+</tr>
+<tr>
+<td style="text-align:left">we4915srv</td>
+<td style="text-align:left">797</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>¿Cuáles han sido los 8 nombres de ejecutables (process) que han originado procesos más anómalos en el equipo “we8105desk” según los eventos de Sysmon? La respuesta debe incluir los nombres de cada ejecutable en MAYÚSCULAS, su recuento y el porcentaje que representa del total. (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1 host=we8105desk)</p>
+<p>Se busca en el índice botsv1 con los filtros mostrados en la pregunta, luego se crea una columna nueva en la que se asigna el valor del proceso o ejecutable en mayúsculas. Después se calcula por cada ejecutable el total de eventos y usando esto se calcula el porcentaje para guardarlo en otra columna. Luego se ordena y se toman los 8 primeros, finalizando con un comando <code>table</code> para mostrar la información en formato de tabla.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"</span> <span class="token assign-left variable">EventCode</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">host</span><span class="token operator">=</span>we8105desk
+<span class="token operator">|</span> <span class="token builtin class-name">eval</span> <span class="token assign-left variable">process_name</span><span class="token operator">=</span>upper<span class="token punctuation">(</span>process<span class="token punctuation">)</span>
+<span class="token operator">|</span> stats count by process_name
+<span class="token operator">|</span> eventstats sum<span class="token punctuation">(</span>count<span class="token punctuation">)</span> as total_eventos
+<span class="token operator">|</span> <span class="token builtin class-name">eval</span> <span class="token assign-left variable">porcentaje</span><span class="token operator">=</span>round<span class="token punctuation">((</span>count/total_eventos<span class="token punctuation">)</span><span class="token punctuation">\</span>*100, <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+<span class="token operator">|</span> <span class="token function">head</span> <span class="token number">8</span>
+<span class="token operator">|</span> table process_name, count, porcentaje
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">host</th>
+<th style="text-align:left">count</th>
+<th style="text-align:left">porcentaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DLLHOST.EXE</td>
+<td style="text-align:left">60</td>
+<td style="text-align:left">10.20</td>
+</tr>
+<tr>
+<td style="text-align:left">CMD.EXE</td>
+<td style="text-align:left">50</td>
+<td style="text-align:left">8.50</td>
+</tr>
+<tr>
+<td style="text-align:left">CONHOST.EXE</td>
+<td style="text-align:left">48</td>
+<td style="text-align:left">8.16</td>
+</tr>
+<tr>
+<td style="text-align:left">NGEN.EXE</td>
+<td style="text-align:left">34</td>
+<td style="text-align:left">5.78</td>
+</tr>
+<tr>
+<td style="text-align:left">MSCORSVW.EXE</td>
+<td style="text-align:left">31</td>
+<td style="text-align:left">5.27</td>
+</tr>
+<tr>
+<td style="text-align:left">SEARCHPROTOCOLHOST.EXE</td>
+<td style="text-align:left">28</td>
+<td style="text-align:left">4.76</td>
+</tr>
+<tr>
+<td style="text-align:left">WMIPRVSE.EXE</td>
+<td style="text-align:left">26</td>
+<td style="text-align:left">4.42</td>
+</tr>
+<tr>
+<td style="text-align:left">SEARCHFILTERHOST.EXE</td>
+<td style="text-align:left">24</td>
+<td style="text-align:left">4.08</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>El equipo de sistemas observa actividad extraña en los servidores web y sospechas que alguien haya intentado explotar una vulnerabilidad de Path Traversal conocida por el equipo de desarrollo pero que aún no habían resuelto. Para contestar con certeza, revisas el tráfico HTTP (sourcetype="stream:http") del que dispones en Splunk y sabes que un signo evidente de intento de explotación de estas vulnerabilidades es la presencia de ".." (dos puntos seguidos) en la URL (uri) de una solicitud HTTP. ¿Puedes determinar si alguna IP ha realizado solicitudes que puedan indicar que estaba intentando explotar esta vulnerabilidad y en qué país está o están ubicadas?</p>
+<p>Se busca en el índice botsv1 con el filtro mostrado en la pregunta y además por los que tengan en la uri la cadena "..". Usando <code>*</code> indicamos que puede estar cualquier otra cadena de caracteres delante y detrás de "..". Luego se filtra por las IP externas para asegurar que no sea un log generado por alguna prueba interna de los desarrolladores o un equipo de auditoría. A continuación se obtiene con el comando <code>iplocation</code> el src_ip para obtener las IP del posible atacante así como su país de origen, y se agrupa por la misma para obtener la cantidad de intentos de ataque con la técnica de Path Traversal.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"stream:http"</span> <span class="token assign-left variable">uri</span><span class="token operator">=</span><span class="token string">"*..*"</span>
+<span class="token operator">|</span> search NOT <span class="token punctuation">(</span>src_ip<span class="token operator">=</span><span class="token number">10.0</span>.0.0/8 OR <span class="token assign-left variable">src_ip</span><span class="token operator">=</span><span class="token number">172.16</span>.0.0/12 OR <span class="token assign-left variable">src_ip</span><span class="token operator">=</span><span class="token number">192.168</span>.0.0/16<span class="token punctuation">)</span>
+<span class="token operator">|</span> iplocation src_ip
+<span class="token operator">|</span> stats count by src_ip, Country
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">src_ip</th>
+<th style="text-align:left">Country</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">40.80.148.42</td>
+<td style="text-align:left">United States</td>
+<td style="text-align:left">67</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>¿Puedes confirmar si hay algún tipo de comunicación HTTP (sourcetype=”stream:http”) hacia IPs públicas hacia algún puerto (dest_port) poco común (diferente al 80)? En caso afirmativo, ¿cuál es la IP (dest_ip) y el dominio (site)?</p>
+<p>Para ello se filtra por el índice botsv1, luego se aplican los filtros mostrados en la pregunta y el filtro <code>NOT dest_port=80</code> para evitar que lleguen eventos con el puerto destino 80. Luego se filtran las peticiones que no tienen como IP destino un dominio local. Para finalizar se obtiene la IP destino, el puerto destino y el dominio.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"stream:http"</span> NOT <span class="token assign-left variable">dest_port</span><span class="token operator">=</span><span class="token number">80</span>
+<span class="token operator">|</span> search NOT <span class="token punctuation">(</span>dest_ip<span class="token operator">=</span><span class="token number">10.0</span>.0.0/8 OR <span class="token assign-left variable">dest_ip</span><span class="token operator">=</span><span class="token number">172.16</span>.0.0/12 OR <span class="token assign-left variable">dest_ip</span><span class="token operator">=</span><span class="token number">192.168</span>.0.0/16<span class="token punctuation">)</span>
+<span class="token operator">|</span> stats count by dest_ip, dest_port, site
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">dest_ip</th>
+<th style="text-align:left">dest_port</th>
+<th style="text-align:left">site</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">23.22.63.114</td>
+<td style="text-align:left">1337</td>
+<td style="text-align:left"><a href="http://prankglassinebracket.jumpingcrab.com:1337">prankglassinebracket.jumpingcrab.com:1337</a></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>El equipo de sistemas te avisa de comportamiento sospechoso en el equipo “we1149srv” (host) y te pide confirmar si se ha ejecutado (EventCode=1) algún programa (app) malicioso en los eventos de Sysmon (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"). Como primera aproximación, decides cargar tu listado de hashes SHA256 de malware conocido (malicious-executable-hashes.csv) como lookup table para determinar si el hash (SHA256) de algún proceso lanzado coincide con los del listado. En caso de que alguno coincida, indica la descripción que ofrece el indicador y describe brevemente de qué tipo de malware se trata.</p>
+<p>Una vez cargada la lista de hashes maliciosos, se hace una búsqueda en el índice botsv1 con los filtros proporcionados, luego se usa una expresión regular para extraer el sha256 limpio y se coloca en una columna diferente en mayúsculas para evitar errores por letras en minúsculas. Luego se obtienen del lookup los datos haciendo coincidir el sha256 del evento con los del lookup, además se exporta la descripción contenida en el lookup para mostrarlo después. Para terminar se presenta en formato de tabla.</p>
+<p>Sí hay coincidencia, la descripción del indicador es el propio nombre técnico del malware: <strong>Meterpreter_Implant</strong>, que es un malware de post-explotación, un troyano de acceso remoto que permite a un atacante controlar el equipo infectado de forma total y secreta para espiar o robar datos.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"</span> <span class="token assign-left variable">EventCode</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token operator">|</span> rex <span class="token assign-left variable">field</span><span class="token operator">=</span>Hashes <span class="token string">"SHA256=(?&lt;sha256_hash&gt;[^,]+)"</span>
+<span class="token operator">|</span> <span class="token builtin class-name">eval</span> sha256_hash <span class="token operator">=</span> upper<span class="token punctuation">(</span>sha256_hash<span class="token punctuation">)</span>
+<span class="token operator">|</span> lookup malicious-executable-hashes.csv SHA256 AS sha256_hash OUTPUT Description
+<span class="token operator">|</span> search <span class="token assign-left variable">Description</span><span class="token operator">=</span>*
+<span class="token operator">|</span> table _time, host, Image, sha256_hash, Description
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">_time</th>
+<th style="text-align:left">host</th>
+<th style="text-align:left">Image</th>
+<th style="text-align:left">sha256_hash</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2016-08-10 23:56:18</td>
+<td style="text-align:left">we1149srv</td>
+<td style="text-align:left">C:\inetpub\wwwroot\joomla\3791.exe</td>
+<td style="text-align:left">EC78C...FA45D</td>
+<td style="text-align:left">Meterpreter_Implant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota</strong>: He cortado el hash para evitar que la tabla haga scroll y no se vea completa. <strong>Hash SHA256 completo:</strong> <code>EC78C938D8453739CA2A370B9C275971EC46CAF6E479DE2B2D04E97CC47FA45D</code></p>
+</li>
+<li>
+<p>Entre el tráfico HTTP (sourcetype="stream:http") saliente hacia IPs públicas (dest_ip no privada), determina cuántas solicitudes HTTP se han realizado al TLD de cada dominio (site). Es decir, si el site=”<a href="http://whatever.microsoft.com">whatever.microsoft.com</a>”, el TLD de ese dominio será “com”. Ordena los resultados de TLD con más solicitudes a TLD con menos solicitudes.</p>
+<p>Se busca en el índice botsv1 con el filtro mostrado en la pregunta. Luego se filtran las IP destino públicas. A continuación se usa una expresión regular para obtener el TLD del dominio (site). Para terminar se agrupa por TLD y se ordena el resultado final.</p>
+<p><strong>SPL</strong></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token assign-left variable">index</span><span class="token operator">=</span>botsv1 <span class="token assign-left variable">sourcetype</span><span class="token operator">=</span><span class="token string">"stream:http"</span>
+<span class="token operator">|</span> search NOT <span class="token punctuation">(</span>dest_ip<span class="token operator">=</span><span class="token number">10.0</span>.0.0/8 OR <span class="token assign-left variable">dest_ip</span><span class="token operator">=</span><span class="token number">172.16</span>.0.0/12 OR <span class="token assign-left variable">dest_ip</span><span class="token operator">=</span><span class="token number">192.168</span>.0.0/16<span class="token punctuation">)</span>
+<span class="token operator">|</span> rex <span class="token assign-left variable">field</span><span class="token operator">=</span>site <span class="token string">"\.(?&lt;tld&gt;[a-zA-Z]+)$"</span>
+<span class="token operator">|</span> stats count by tld
+<span class="token operator">|</span> <span class="token function">sort</span> - count
+</code></pre><p><strong>Resultado</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">tld</th>
+<th style="text-align:left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">com</td>
+<td style="text-align:left">14036</td>
+</tr>
+<tr>
+<td style="text-align:left">org</td>
+<td style="text-align:left">374</td>
+</tr>
+<tr>
+<td style="text-align:left">net</td>
+<td style="text-align:left">176</td>
+</tr>
+<tr>
+<td style="text-align:left">io</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
