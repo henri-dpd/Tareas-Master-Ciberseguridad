@@ -8,7 +8,7 @@
 
 - ¿De qué adversario trata el informe?
 
-  Vice Society operando con el ransomware Medusa en su variante como RaaS
+  Vice Society, operando con el ransomware Medusa en su variante como RaaS.
 
 - ¿Cómo clasificarías a este adversario dentro de los seis tipos que hemos visto?
 
@@ -20,11 +20,11 @@
 
 - ¿Está relacionado con algún otro adversario conocido?
 
-  No está relacionada con la variante MedusaLocker ni con la variante de malware móvil Medusa. Pero sí existe una asociación técnica entre el nombre Vice Society y la operación Medusa Ransomware confirmada por las referencias externas
+  No está relacionado con la variante MedusaLocker ni con la variante de malware móvil Medusa. Sin embargo, sí existe una asociación técnica entre el nombre Vice Society y la operación Medusa Ransomware confirmada por las referencias externas.
 
 - ¿Qué vulnerabilidades suele explotar este adversario? (CVE y explicación breve del producto afectado y la vulnerabilidad)
 
-  Principalmente de dos fallos en programas que las empresas usan para gestionar datos: el CVE-2023-0669, que afecta a GoAnywhere MFT y les permite ejecutar código a distancia para tomar el control del servidor; y el CVE-2022-24990, que afecta a los discos duros en red (NAS) de la marca TerraMaster, permitiéndoles enviar comandos al equipo sin necesidad de contraseña para robar o borrar la información.
+  Principalmente explota dos fallos en programas que las empresas usan para gestionar datos: el **CVE-2023-0669**, que afecta a GoAnywhere MFT y les permite ejecutar código a distancia para tomar el control del servidor; y el **CVE-2022-24990**, que afecta a los discos duros en red (NAS) de la marca TerraMaster, permitiéndoles enviar comandos al equipo sin necesidad de contraseña para robar o borrar la información.
 
 - ¿Qué 5 direcciones de e-mail aparecen como indicadores?
 
@@ -49,25 +49,30 @@
   - ¿La categorizarías como malware?
   - Si no la categorizarías como malware, ¿por qué aparece el informe?
 
-  1. Mimikatz
-     ¿Se encuentra por defecto en Windows? No. Es una herramienta externa que el atacante debe descargar e instalar en el equipo víctima.
-     ¿La categorizarías como malware? Sí. Aunque se usa en auditorías éticas, su función principal es el robo de credenciales (extracción de contraseñas de la memoria), por lo que casi cualquier antivirus la detecta directamente como software malicioso (HackTool).
-     ¿Por qué aparece en el informe? Porque es la herramienta "estrella" que usa Vice Society para volcar las contraseñas de la memoria de Windows y así conseguir las claves del Administrador del Dominio.
-  2. Anydesk
-     ¿Se encuentra por defecto en Windows? No. Es un software de terceros muy popular para soporte técnico remoto.
-     ¿La categorizarías como malware? No. Es una herramienta legítima y legal de administración remota.
-     ¿Por qué aparece en el informe? Porque los atacantes la instalan para mantener la persistencia. Si el administrador de la red cierra sus "puertas traseras" habituales, ellos pueden seguir entrando cómodamente a través de Anydesk como si fueran un técnico de soporte real.
-  3. Certutil
-     ¿Se encuentra por defecto en Windows? Sí. Es una utilidad de línea de comandos nativa de Windows que sirve para gestionar certificados digitales.
-     ¿La categorizarías como malware? No. Es un componente oficial y legítimo del sistema operativo.
-     ¿Por qué aparece en el informe? Porque tiene una función que permite descargar archivos de internet (mediante el parámetro -urlcache). Los atacantes la "abusan" para descargar sus virus o scripts maliciosos saltándose algunos filtros de seguridad, ya que el sistema confía en el proceso certutil.exe por ser de Microsoft.
+  1. **Mimikatz**
+
+     - **¿Se encuentra por defecto en Windows?** No. Es una herramienta externa que el atacante debe descargar e instalar en el equipo comprometido.
+     - **¿La categorizarías como malware?** Técnicamente no es malware en sí, es una herramienta legítima de pentesting creada para auditorías de seguridad. Sin embargo, como se usa tan frecuentemente en ataques reales para robar credenciales (extracción de contraseñas desde la memoria), prácticamente todos los antivirus la detectan y bloquean directamente como HackTool o software potencialmente peligroso.
+     - **¿Por qué aparece en el informe?** Porque es la herramienta "estrella" de los atacantes para volcar las contraseñas almacenadas en la memoria de Windows y así conseguir las credenciales del Administrador del Dominio.
+
+  2. **AnyDesk**
+
+     - **¿Se encuentra por defecto en Windows?** No. Es un software de terceros, aunque es muy popular y legítimo para dar soporte técnico remoto.
+     - **¿La categorizarías como malware?** No. Es una herramienta completamente legítima de administración remota, como TeamViewer.
+     - **¿Por qué aparece en el informe?** Porque los atacantes la instalan para mantener el acceso persistente al sistema. Si el administrador de la red detecta y cierra sus "puertas traseras" habituales, todavía pueden seguir entrando cómodamente a través de AnyDesk como si fueran técnicos de soporte legítimos.
+
+  3. **Certutil**
+
+     - **¿Se encuentra por defecto en Windows?** Sí. Es una utilidad de línea de comandos nativa de Windows diseñada para gestionar certificados digitales.
+     - **¿La categorizarías como malware?** No. Es un componente oficial y legítimo del sistema operativo de Windows.
+     - **¿Por qué aparece en el informe?** Porque tiene una funcionalidad que permite descargar archivos desde Internet usando el parámetro `-urlcache`. Los atacantes abusan de esta característica para descargar sus herramientas maliciosas o scripts sin levantar sospechas, ya que muchos sistemas de seguridad confían en procesos firmados por Windows como `certutil.exe`. Es lo que llamamos "Living off the Land".
 
 ## 1.3 Expresiones Regulares
 
-¿Cúal es el nombre de equipo (FQDN) del propio firewall del que proviene la traza
+¿Cuál es el nombre de equipo (FQDN) del propio firewall del que proviene la traza
 syslog?
 
-paloalto.evil.corp
+**paloalto.evil.corp**
 
 | Atributo            | Valor                                         | Expresión regular                                          | Grupo de captura |
 | :------------------ | :-------------------------------------------- | :--------------------------------------------------------- | :--------------- |
@@ -92,15 +97,15 @@ paloalto.evil.corp
 | **Firma**           | trojan/PDF.gen.eiez                           | `ThreatID\s*=\s*(?<firma>[^(\s]+)`                         | firma            |
 | **ID firma**        | 268198686                                     | `ThreatID\s*=\s*.*?\((?P<id_firma>\d+)\)`                  | id_firma         |
 
-Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así que asumiq ue esto podría pasar en otros atributos e inserte \s\* para que se encuentre el atributo buscado no importa si hay saltos de lineas o espaciones inesperados antes o despues de los símbolos de igualdad.
+**Nota:** En el caso de SourceZone, el PDF al copiar inserta un salto de línea, así que asumí que esto podría pasar en otros atributos e inserté `\s*` para que se encuentre el atributo buscado sin importar si hay saltos de línea o espacios inesperados antes o después de los símbolos de igualdad.
 
 ## 1.4 Splunk
 
 - ¿Cuántos eventos hay en el índice “botsv1”?
 
-  Se busca en el índice botsv1 y con la función estadística count se cuenta la cantidad total de eventos
+  Se busca en el índice botsv1 y con la función estadística `count` se cuenta la cantidad total de eventos.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 | stats count
@@ -112,9 +117,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Cuáles son los tres “sourcetype” con más eventos por sourcetype en el índice “botsv1”?
 
-  Se busca en el índice botsv1, luego se hace un count agrupando por sourcetype, de esta forma se tiene la cantidad de eventos por sourcetypes, a continuación se ordenan, y se toman las 3 primeras que al estar ordenado son precisamente los sourcetypes con mayor cantidad de elementos.
+  Se busca en el índice botsv1, luego se hace un `count` agrupando por sourcetype. De esta forma se tiene la cantidad de eventos por sourcetype, a continuación se ordenan y se toman las 3 primeras posiciones que al estar ordenadas son precisamente los sourcetypes con mayor cantidad de elementos.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 | stats count by sourcetype | sort - count | head 3
@@ -130,10 +135,13 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Cuántos eventos contienen la palabra “ellyn.baltimore”?
 
-  Se busca en el índice botsv1 y el filtro de "ellyn.baltimore", de esta forma encuentra solo los eventos que contengan esta palabra, luego se aplica la función estadística count.
+  Se busca en el índice botsv1 aplicando el filtro "ellyn.baltimore". De esta forma se encuentran solo los eventos que contengan esta palabra, luego se aplica la función estadística `count`.
 
-  **SLP**
+  **SPL**
+
+  ```bash
   index=botsv1 "ellyn.baltimore" | stats count
+  ```
 
   **Resultado**
 
@@ -141,9 +149,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Cuáles son los tres servidores (host) que más eventos han generado que contengan la palabra “ellyn.baltimore”?
 
-  Se busca en el índice botsv1 con el filtro "ellyn.baltimore", luego se aplica un count pero agrupando por host, se ordena y una vez ordenados se toma solo los 3 primeros de la lista.
+  Se busca en el índice botsv1 con el filtro "ellyn.baltimore", luego se aplica un `count` agrupando por host, se ordena y una vez ordenados se toman solo los 3 primeros de la lista.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 "ellyn.baltimore" | stats count by host | sort - count | head 3
@@ -159,9 +167,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Según la auditoría de seguridad de Windows, cuáles han sido los 4 programas ejecutados más veces por Bree.Moser (source=”wineventlog:security” EventCode=4688 user=Bree.Moser) durante el 12/08/2016?
 
-  En el índice botsv1 se filtra por los campos mencionados y la fecha del 12/08/2026(en formato MM/DD/YYYY), luego se agrupa por procesos para tener la lista de los programas, lo ordenamos y se toma los 4 primeros de la lista ordenada.
+  En el índice botsv1 se filtra por los campos mencionados y la fecha del 12/08/2016 (en formato MM/DD/YYYY), luego se agrupa por procesos para tener la lista de los programas, se ordena y se toman los 4 primeros de la lista ordenada.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 source="WinEventLog:Security" EventCode=4688 user=Bree.Moser earliest="08/12/2016:00:00:00" latest="08/12/2016:23:59:59"
@@ -181,9 +189,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Cuáles han sido los 5 sitios (site) externos (dest_ip pública) más visitados (sourcetype=”stream:http”)?
 
-  Se hace una búsqueda en botsv1 filtrando por sourcetype como indica en la pregunta, luego se elimina del resultado de la búsqueda los ip que no sean públicos tales como los de redes corporativas, de entornos con red virtual y local. Luego se agrupa por site, se ordena y se toma los 5 primeros.
+  Se hace una búsqueda en botsv1 filtrando por sourcetype como indica en la pregunta, luego se eliminan del resultado de la búsqueda las IP que no sean públicas, tales como las de redes corporativas, entornos con red virtual y local. Luego se agrupa por site, se ordena y se toman los 5 primeros.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="stream:http"
@@ -203,11 +211,11 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
   | tile-service.weather.microsoft.com | 399   |
   | update.joomla.org                  | 373   |
 
-- ¿Qué endpoints (host) ordenados por número descendiente de conexiones tienen más de 640 conexiones de red registradas por sus agentes de Sysmon? (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=3)
+- ¿Qué endpoints (host) ordenados por número descendente de conexiones tienen más de 640 conexiones de red registradas por sus agentes de Sysmon? (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=3)
 
-  Se busca en el índice botsv1 con los filtros mencionados en la pregunta, luego se agrupa por host y se hace una consulta where para tomar los que tengan mas de 640 eventos, por último se ordena para que aparezcan ordenados por números descendientes.
+  Se busca en el índice botsv1 con los filtros mencionados en la pregunta, luego se agrupa por host y se hace una consulta `where` para tomar los que tengan más de 640 eventos. Por último, se ordena para que aparezcan ordenados por número descendente.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=3
@@ -232,9 +240,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Cuáles han sido los 8 nombres de ejecutables (process) que han originado procesos más anómalos en el equipo “we8105desk” según los eventos de Sysmon? La respuesta debe incluir los nombres de cada ejecutable en MAYÚSCULAS, su recuento y el porcentaje que representa del total. (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1 host=we8105desk)
 
-  Se busca en el índice botsv1 con los filtros mostrados en la pregunta, luego se crea una columna nueva en la asignamos el valor del proceso o ejecutable en mayúsculas, luego calculamos por cada ejecutable el total de eventos y usando ello se calcula el porcentaje para guardarlo en otra columna. Luego se ordena y se toma los 8 primeros, finalizando con un comando table para mostrar la información en formato de tabla.
+  Se busca en el índice botsv1 con los filtros mostrados en la pregunta, luego se crea una columna nueva en la que se asigna el valor del proceso o ejecutable en mayúsculas. Después se calcula por cada ejecutable el total de eventos y usando esto se calcula el porcentaje para guardarlo en otra columna. Luego se ordena y se toman los 8 primeros, finalizando con un comando `table` para mostrar la información en formato de tabla.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1 host=we8105desk
@@ -260,11 +268,11 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
   | WMIPRVSE.EXE           | 26    | 4.42       |
   | SEARCHFILTERHOST.EXE   | 24    | 4.08       |
 
-- El equipo de sistemas observa actividad extraña en los servidores web y sospechas que alguien haya intentado explotar una vulnerabilidad de Path Traversal conocida por el equipo de desarrollo pero que aún no habían resuelto. Para contestar con certeza, revisas el tráfico http (sourcetype=”stream:http”) del que dispones en Splunk y sabes que un signo evidente de intento de explotación de estar vulnerabilidades es la presencia de “..” (dos puntos seguidos) en la URL (uri) de una solicitud HTTP. ¿Puedes determinar si alguna IP ha realizado solicitudes que puedan indicar que estaba intentando explotar esta vulnerabilidad y en qué país está o están ubicadas?
+- El equipo de sistemas observa actividad extraña en los servidores web y sospechas que alguien haya intentado explotar una vulnerabilidad de Path Traversal conocida por el equipo de desarrollo pero que aún no habían resuelto. Para contestar con certeza, revisas el tráfico HTTP (sourcetype="stream:http") del que dispones en Splunk y sabes que un signo evidente de intento de explotación de estas vulnerabilidades es la presencia de ".." (dos puntos seguidos) en la URL (uri) de una solicitud HTTP. ¿Puedes determinar si alguna IP ha realizado solicitudes que puedan indicar que estaba intentando explotar esta vulnerabilidad y en qué país está o están ubicadas?
 
-  Se busca en el índice botsv1 con el filtro mostrado en la pregunta y ademas por los que tengan en la uri la cadena "..", usando \* indica que puede estar cualquier otra cadena de caracteres delante y detras de "..", luego se filtra por las ip externas para asegurar que no sea un log generado por alguna prueba interna de los desarrolladores o un equipo de auditoría. A continuación se obtiene con el comando `iplocation` el src_ip para obtener las ip del posible atacante así como su país de origen, y se agrupa por la misma para obtener la cantidad de intentos de ataques con la técnica de Path Traversal.
+  Se busca en el índice botsv1 con el filtro mostrado en la pregunta y además por los que tengan en la uri la cadena "..". Usando `*` indicamos que puede estar cualquier otra cadena de caracteres delante y detrás de "..". Luego se filtra por las IP externas para asegurar que no sea un log generado por alguna prueba interna de los desarrolladores o un equipo de auditoría. A continuación se obtiene con el comando `iplocation` el src_ip para obtener las IP del posible atacante así como su país de origen, y se agrupa por la misma para obtener la cantidad de intentos de ataque con la técnica de Path Traversal.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="stream:http" uri="*..*"
@@ -282,9 +290,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - ¿Puedes confirmar si hay algún tipo de comunicación HTTP (sourcetype=”stream:http”) hacia IPs públicas hacia algún puerto (dest_port) poco común (diferente al 80)? En caso afirmativo, ¿cuál es la IP (dest_ip) y el dominio (site)?
 
-  Para ello se filtra por el índice botsv1, luego se aplica los filtros mostrado en la pregunta, y el filtro `NOT dest_port=80` para evitar que lleguen eventos con el puerto destino 80. Luego, se filtra las peticiones que no tienen a una ip detino de dominio local. Para finalizar se obtiene la ip destino, el puerto destino y el dominio
+  Para ello se filtra por el índice botsv1, luego se aplican los filtros mostrados en la pregunta y el filtro `NOT dest_port=80` para evitar que lleguen eventos con el puerto destino 80. Luego se filtran las peticiones que no tienen como IP destino un dominio local. Para finalizar se obtiene la IP destino, el puerto destino y el dominio.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="stream:http" NOT dest_port=80
@@ -301,11 +309,11 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - El equipo de sistemas te avisa de comportamiento sospechoso en el equipo “we1149srv” (host) y te pide confirmar si se ha ejecutado (EventCode=1) algún programa (app) malicioso en los eventos de Sysmon (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"). Como primera aproximación, decides cargar tu listado de hashes SHA256 de malware conocido (malicious-executable-hashes.csv) como lookup table para determinar si el hash (SHA256) de algún proceso lanzado coincide con los del listado. En caso de que alguno coincida, indica la descripción que ofrece el indicador y describe brevemente de qué tipo de malware se trata.
 
-  Una vez cargado la lista de hash maliciosos, se hace una búsqueda en el índice botsv1 con los filtros proporcionados, luego se usa una expresion regular para extrael el sha256 limpio y se pone en una columna diferente en mayúsculas para evitar errores por letras en minúsculas. Luego se obtiene del lookup los datos haciendo coincidir el sha256 del evento con los del lookup, además se exporta la descripción contenida en el lookup para mostrarlo luego. Para terminar se presenta en formato de tabla.
+  Una vez cargada la lista de hashes maliciosos, se hace una búsqueda en el índice botsv1 con los filtros proporcionados, luego se usa una expresión regular para extraer el sha256 limpio y se coloca en una columna diferente en mayúsculas para evitar errores por letras en minúsculas. Luego se obtienen del lookup los datos haciendo coincidir el sha256 del evento con los del lookup, además se exporta la descripción contenida en el lookup para mostrarlo después. Para terminar se presenta en formato de tabla.
 
-  Sí hay coincidencia, la descripción del indicador es el propio nombre técnico del malware que es Meterpreter_Implant que es un malware de post-explotación, un troyano de acceso remoto que permite a un atacante controlar el equipo infectado de forma total y secreta para espiar o robar datos.
+  Sí hay coincidencia, la descripción del indicador es el propio nombre técnico del malware: **Meterpreter_Implant**, que es un malware de post-explotación, un troyano de acceso remoto que permite a un atacante controlar el equipo infectado de forma total y secreta para espiar o robar datos.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
@@ -324,9 +332,9 @@ Nota: En el caso de SourceZone el pdf al copiar inserta un salto de línea, así
 
 - Entre el tráfico HTTP (sourcetype="stream:http") saliente hacia IPs públicas (dest_ip no privada), determina cuántas solicitudes HTTP se han realizado al TLD de cada dominio (site). Es decir, si el site=”whatever.microsoft.com”, el TLD de ese dominio será “com”. Ordena los resultados de TLD con más solicitudes a TLD con menos solicitudes.
 
-  Se busca en el índice botsv1 con el filtro mostrado en la pregunta. Luego, se filtran los ip destinos públicos. A continuación, se usa una expresion regular para obtener el tld del dominio(site). Para terminar se agrupa por tld y se ordena el resultado final
+  Se busca en el índice botsv1 con el filtro mostrado en la pregunta. Luego se filtran las IP destino públicas. A continuación se usa una expresión regular para obtener el TLD del dominio (site). Para terminar se agrupa por TLD y se ordena el resultado final.
 
-  **SLP**
+  **SPL**
 
   ```bash
   index=botsv1 sourcetype="stream:http"
