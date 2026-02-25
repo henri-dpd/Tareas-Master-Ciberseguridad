@@ -93,7 +93,16 @@ Dada la interconexión entre infraestructuras críticas descrita en el sector ag
 - **Seguridad Ciudadana:** Una caída en la presión de la red anularía la efectividad de los sistemas de extinción de incendios (hidrantes).
 - **Impacto Económico:** Parada de la industria local y del sector servicios que dependen directamente del suministro constante de agua tratada.
 
-#### D. Consecuencias Legales y Reputacionales
+#### D. Consecuencias Ambientales
+
+Además del impacto en personas y servicio, en una ETAP también puede haber **impacto ambiental**, sobre todo si el incidente deriva en vertidos, consumos anómalos o tratamiento fuera de especificación:
+
+- **Vertidos o alivios no controlados:** una parada súbita, una avería (p. ej., por golpe de ariete) o una mala maniobra puede acabar en alivios/derivaciones de agua sin el tratamiento previsto, con afectación potencial de cauces, suelos o ecosistemas cercanos.
+- **Sobredosificación de reactivos:** una manipulación de dosificación puede incrementar la carga química en el proceso y generar efluentes o lodos con peores características, complicando su gestión.
+- **Consumo energético y emisiones indirectas:** operar en modo degradado (grupos electrógenos) o con ineficiencias por fallos de control puede aumentar consumos y, por extensión, la huella asociada.
+- **Mayor generación de residuos/lodos:** un mal control del proceso (coagulación/floculación/filtración) puede elevar la cantidad de lodos y residuos que hay que tratar y transportar.
+
+#### E. Consecuencias Legales y Reputacionales
 
 - **Sanciones y medidas regulatorias:** Un incidente grave podría implicar incumplimientos de obligaciones de seguridad (Ley PIC y marcos como NIS2, según aplique), con potenciales sanciones, requerimientos correctivos y auditorías.
 - **Alarma Social:** La pérdida de confianza en un suministro tan básico como el agua puede generar alarma social y presión mediática, complicando la gestión del incidente.
