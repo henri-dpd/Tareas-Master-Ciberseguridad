@@ -56,6 +56,7 @@ En este punto he intentado ser muy directo: primero pienso en los **activos/serv
 **Valoración final del riesgo identificado (resumen):**
 
 - **Riesgo Alto/Crítico (V=6):**
+
   - **Manipulación de parámetros de tratamiento (I):** aunque no sea el evento más frecuente, cuando ocurre el impacto es máximo por afectar directamente a la **calidad del agua**.
   - **Denegación de servicio OT/SCADA (D):** la indisponibilidad de supervisión/control puede llevar a parada del proceso o a operación insegura en poco tiempo.
   - **Acceso no autorizado a sistemas de operación (C/I/D):** funciona como _amenaza habilitadora_ (permite encadenar cambios y persistencia), por lo que eleva el riesgo real del conjunto.
@@ -106,3 +107,75 @@ Además del impacto en personas y servicio, en una ETAP también puede haber **i
 
 - **Sanciones y medidas regulatorias:** Un incidente grave podría implicar incumplimientos de obligaciones de seguridad (Ley PIC y marcos como NIS2, según aplique), con potenciales sanciones, requerimientos correctivos y auditorías.
 - **Alarma Social:** La pérdida de confianza en un suministro tan básico como el agua puede generar alarma social y presión mediática, complicando la gestión del incidente.
+
+### 1.4 Medidas de mitigación para los riesgos identificados
+
+En una ETAP, identificar riesgos está bien, pero lo importante es **cómo los reduces sin romper la operación**. En OT manda el binomio: que el servicio siga funcionando y que el proceso sea seguro.
+
+Teniendo en mira los riesgos más altos (V=6), hay tres prioridades claras:
+
+- **Evitar accesos no autorizados** a sistemas de operación (porque habilita el resto).
+- **Impedir la manipulación peligrosa de setpoints** (integridad del tratamiento) incluso aunque alguien “consiga entrar”.
+- **Mantener capacidad de control en modo degradado** si cae la supervisión (DoS/indisponibilidad OT/SCADA).
+
+#### A. Gobernanza y operación
+
+Aquí busco que la planta sea **auditable y controlable** en el día a día (especialmente cuando hay terceros y mantenimiento).
+
+- **Inventario y criticidad de activos OT:** PLCs, SCADA/HMI, estación de ingeniería, enlaces, instrumentación y puntos de mando; qué depende de qué y qué duele más perder.
+- **Gestión del cambio (MOC):** cambios en dosificación (cloro, pH, coagulantes) y en lógica de PLC se registran, se justifican y se revisan (si es viable, con doble validación: operación + responsable técnico).
+- **Trazabilidad y cuentas nominativas:** evitar cuentas compartidas, registrar acciones relevantes y revisar periódicamente accesos (especialmente los de mantenimiento/contratas).
+
+#### B. Arquitectura IT/OT y segmentación
+
+La idea es que un incidente en IT no salte a OT, y que el acceso a equipos críticos pase por puntos controlados.
+
+- **Separación IT–OT real:** la red corporativa y el acceso a Internet no deben tener ruta directa a PLC/SCADA; se usan **firewalls industriales** y reglas mínimas.
+- **DMZ industrial y salto controlado:** para accesos remotos y transferencia de ficheros, usar una **DMZ** y un **jump server** (bastión). Así se controla y audita el acceso sin “abrir” la planta.
+- **Mitigación de DoS/tormentas de red:** limitar y filtrar tráfico industrial, evitar “todo habla con todo”, y asegurar que existe operación local si la supervisión central se degrada.
+
+#### C. Control de acceso y hardening
+
+Una vez segmentado, el siguiente paso es endurecer el “quién entra” y el “desde dónde”, sin perder trazabilidad.
+
+- **MFA para acceso remoto y de administración:** obligatorio para terceros y personal con privilegios, con ventanas de acceso y autorización explícita.
+- **Mínimo privilegio y separación de funciones:** perfiles diferenciados (operación, mantenimiento, ingeniería) para reducir abuso de credenciales.
+- **Endurecimiento de estaciones OT:** control de USB, deshabilitar servicios innecesarios, y parcheo coordinado con operación (en OT no se parchea “cuando salga”, se planifica).
+
+#### D. Integridad del proceso
+
+Esta parte es clave en agua: aunque el atacante tenga acceso a SCADA, el proceso debe tener **topes y lógica de seguridad** que le pongan freno.
+
+- **Límites e interbloqueos en PLC (no solo en SCADA):** topes máximos/mínimos de setpoints, validaciones de rango y lógica de failsafe para impedir sobredosificación o maniobras peligrosas.
+- **Alarmas por desviación y verificación operativa:** si la telemetría es incoherente (posible spoofing/fallo), el operador tiene procedimientos para confirmar (p. ej., muestreo/laboratorio) antes de aplicar cambios agresivos.
+- **Versionado de setpoints/recetas y rollback:** historial de cambios y posibilidad de volver rápido a una configuración conocida y segura.
+
+#### E. Monitorización y detección
+
+Asumo que algo puede fallar o colarse; por eso necesito visibilidad y alertas que ayuden al operador a decidir.
+
+- **IDS/monitorización industrial:** detección de patrones anómalos (escaneos, escritura inusual a PLC, cambios inesperados) y alertas útiles para MitM/Spoofing.
+- **Centralización mínima de logs y sincronización horaria:** logs de SCADA/bastión/firewall y hora consistente para que la investigación posterior sea posible.
+- **Validación cruzada de instrumentación:** comparar sensores y tendencias del proceso para detectar lecturas “imposibles” (fallo o manipulación).
+
+#### F. Resiliencia y continuidad
+
+Cuando el problema no se puede evitar (corte eléctrico, avería, ataque), la pregunta es: ¿cómo sigo operando y cómo recupero rápido?
+
+- **Continuidad eléctrica probada:** SAI + grupos electrógenos con pruebas periódicas y procedimientos claros.
+- **Mantenimiento preventivo y repuestos críticos:** reduce la probabilidad alta de fallos físicos y acelera recuperación.
+- **Backups OT y recuperación:** copias de configuraciones SCADA/estación de ingeniería y programas de PLC, almacenadas de forma segura y con restauraciones probadas.
+- **Stock crítico de reactivos (realista):** reserva considerando rotación/caducidad, más acuerdos con proveedores para reposición prioritaria.
+- **Planes y simulacros:** operación manual, respuesta a incidentes y coordinación ante sequía/eventos extremos (si no se entrena, el plan no funciona).
+
+| Amenaza de mi lista          | Medidas de mitigación (principal/es)                                                                 |
+| :--------------------------- | :--------------------------------------------------------------------------------------------------- |
+| **Acceso no autorizado**     | MFA, mínimo privilegio, cuentas nominativas, auditoría; acceso remoto vía DMZ/jump server.           |
+| **Manipulación química**     | Límites/interbloqueos en PLC, MOC, versionado y rollback de setpoints/recetas, alarmas por desviación. |
+| **Ataque DoS / Infecciones** | Segmentación IT/OT, filtrado y reglas mínimas, reducción de “todo a todo”, operación local degradada. |
+| **Ataque MitM / Spoofing**   | IDS industrial, logs y sincronía horaria, validación cruzada y verificación operativa (muestreo/lab). |
+| **Fallas en sensores**       | Validación cruzada, calibración/mantenimiento y alarmas conservadoras con confirmación manual.       |
+| **Corte de luz / Averías**   | SAI+grupos con pruebas, mantenimiento preventivo, repuestos críticos y plan de recuperación.         |
+| **Falta de reactivos**       | Stock crítico con control de caducidad y acuerdos de reposición prioritaria.                         |
+| **Desastres / Sequía**       | Planes de contingencia, operación manual, coordinación y protocolos de emergencia/gestión de demanda. |
+
