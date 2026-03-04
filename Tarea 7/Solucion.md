@@ -168,14 +168,83 @@ Cuando el problema no se puede evitar (corte eléctrico, avería, ataque), la pr
 - **Stock crítico de reactivos (realista):** reserva considerando rotación/caducidad, más acuerdos con proveedores para reposición prioritaria.
 - **Planes y simulacros:** operación manual, respuesta a incidentes y coordinación ante sequía/eventos extremos (si no se entrena, el plan no funciona).
 
-| Amenaza de mi lista          | Medidas de mitigación (principal/es)                                                                 |
-| :--------------------------- | :--------------------------------------------------------------------------------------------------- |
-| **Acceso no autorizado**     | MFA, mínimo privilegio, cuentas nominativas, auditoría; acceso remoto vía DMZ/jump server.           |
+| Amenaza de mi lista          | Medidas de mitigación (principal/es)                                                                   |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------- |
+| **Acceso no autorizado**     | MFA, mínimo privilegio, cuentas nominativas, auditoría; acceso remoto vía DMZ/jump server.             |
 | **Manipulación química**     | Límites/interbloqueos en PLC, MOC, versionado y rollback de setpoints/recetas, alarmas por desviación. |
-| **Ataque DoS / Infecciones** | Segmentación IT/OT, filtrado y reglas mínimas, reducción de “todo a todo”, operación local degradada. |
-| **Ataque MitM / Spoofing**   | IDS industrial, logs y sincronía horaria, validación cruzada y verificación operativa (muestreo/lab). |
-| **Fallas en sensores**       | Validación cruzada, calibración/mantenimiento y alarmas conservadoras con confirmación manual.       |
-| **Corte de luz / Averías**   | SAI+grupos con pruebas, mantenimiento preventivo, repuestos críticos y plan de recuperación.         |
-| **Falta de reactivos**       | Stock crítico con control de caducidad y acuerdos de reposición prioritaria.                         |
-| **Desastres / Sequía**       | Planes de contingencia, operación manual, coordinación y protocolos de emergencia/gestión de demanda. |
+| **Ataque DoS / Infecciones** | Segmentación IT/OT, filtrado y reglas mínimas, reducción de “todo a todo”, operación local degradada.  |
+| **Ataque MitM / Spoofing**   | IDS industrial, logs y sincronía horaria, validación cruzada y verificación operativa (muestreo/lab).  |
+| **Fallas en sensores**       | Validación cruzada, calibración/mantenimiento y alarmas conservadoras con confirmación manual.         |
+| **Corte de luz / Averías**   | SAI+grupos con pruebas, mantenimiento preventivo, repuestos críticos y plan de recuperación.           |
+| **Falta de reactivos**       | Stock crítico con control de caducidad y acuerdos de reposición prioritaria.                           |
+| **Desastres / Sequía**       | Planes de contingencia, operación manual, coordinación y protocolos de emergencia/gestión de demanda.  |
 
+### 1.5 Diseño y Configuración del Escenario de Red (Simulación)
+
+Para la demostración técnica, he diseñado un laboratorio que simula (de forma simplificada) el segmento de control **OT** de la ETAP de Colmenar Viejo. Siguiendo los requisitos de la tarea, uso direccionamiento privado de **Clase B** dentro del rango **172.16.0.0/12**.
+
+**Cálculo de red (según el enunciado):**
+Sea $X$ el resultado de aplicar el módulo a los **últimos 3 dígitos del DNI**.
+
+- **Fórmula:** $X = (\text{últimos 3 dígitos}) \pmod{255}$
+- **Mi valor:** últimos 3 dígitos = **___** → $X = ___$
+
+Con esto, la red de trabajo queda:
+
+- **Red OT simulada:** `172.16.X.0/24`
+- **Máscara:** `255.255.255.0` (254 hosts útiles)
+- **Puerta de enlace:** no es necesaria si todo el laboratorio está en la misma LAN (si se usa NAT/Internet en la VM, se configura aparte)
+
+#### A. Esquema Gráfico de Red
+
+El siguiente esquema representa la topología en estrella utilizada en el simulador:
+
+- **Maestro (SCADA/HMI):** Estación de supervisión que consulta el estado de la planta.
+- **Esclavo (ModbusPal):** Simulador de PLC industrial que gestiona los actuadores y sensores de la ETAP.
+- **Atacante (Kali Linux):** Máquina de auditoría desde la que se inyectará el tráfico Modbus malicioso.
+
+![Simulacion Ataque](Simulacion-Ataque.drawio.png)
+
+#### B. Direccionamiento IP y Software
+
+| Dispositivo  | Función           | Dirección IP   | Software / Herramientas  |
+| :----------- | :---------------- | :------------- | :----------------------- |
+| **Maestro**  | Supervisión SCADA | `172.16.X.10`  | QModMaster / ScadaBR     |
+| **Esclavo**  | PLC Dosificación  | `172.16.X.20`  | ModbusPal (Java)         |
+| **Atacante** | Estación Kali     | `172.16.X.100` | Mbtget, Metasploit, Nmap |
+
+Notas de direccionamiento:
+
+- Reservo `172.16.X.10` y `172.16.X.20` para roles “de operación” (maestro/esclavo) y `172.16.X.100` para auditoría.
+- La segmentación se deja plana a propósito para la práctica; en una ETAP real lo normal es que el atacante **no** esté en la misma LAN OT sin una intrusión previa (o un acceso físico).
+
+#### C. Configuración del Mapa de Memoria (ModbusPal)
+
+Se ha configurado el esclavo (Unit ID: 1) con los siguientes registros para representar el proceso de potabilización:
+
+**12 Coils (Salidas Digitales - On/Off):**
+
+1.  **Coil 1-2:** Bombas de captación de agua bruta (Embalse).
+2.  **Coil 3-6:** Bombas de impulsión a alta presión (Salida a red).
+3.  **Coil 7-10:** Válvulas de limpieza de filtros.
+4.  **Coil 11-12:** Agitadores de mezcla de reactivos químicos.
+
+**14 Holding Registers (Valores de 16 bits):**
+
+- **40001:** Concentración de Cloro Residual (mg/L x100).
+- **40002:** Nivel de pH (Acidez del agua).
+- **40003:** Turbidez (NTU).
+- **40004:** Caudal de entrada ($m^3/h$).
+- **40005:** Caudal de salida ($m^3/h$).
+- **40006:** Nivel Tanque Cloro (%).
+- **40007:** Nivel Tanque Coagulante (%).
+- **40008:** Presión tubería principal (Bar).
+- **40009:** Conductividad.
+- **40010:** Temperatura del agua.
+- **40011-40014:** _Setpoints_ de seguridad (Límites programados por el operario).
+
+#### D. Configuración de Comunicación
+
+El Maestro está configurado para realizar consultas cíclicas (polling) cada 1000 ms al Esclavo (Unit ID: 1) en el puerto estándar **TCP/502**.
+
+En el laboratorio asumo que el atacante ya tiene presencia en la misma red `172.16.X.0/24` (misma LAN L2), lo que le permite observar e interactuar con el tráfico Modbus. En un escenario real, esto normalmente sería consecuencia de una fase previa (compromiso de IT con salto a OT, mala segmentación, o acceso físico a la red).
