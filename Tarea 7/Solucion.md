@@ -319,7 +319,7 @@ La causa raíz es la **ausencia de seguridad por diseño** en Modbus TCP:
 
 Este ejercicio se alinea con los riesgos descritos en 1.2 (pérdida/engaño de monitorización y acceso no autorizado): si se puede leer el estado del proceso, es más fácil preparar ataques posteriores (p. ej., manipulación de setpoints o cambios de estado).
 
-Las **medidas de mitigación** asociadas a esta PoC se detallan en el apartado **1.8**.
+Las **medidas de mitigación** asociadas a este ataque se detallan en el apartado **1.8**.
 
 ### 1.7 Simulación ataque Sistemas SCADA/ICS: Modificación de Registros/Coils
 
@@ -329,7 +329,7 @@ En esta fase paso de la observación a la **manipulación activa del proceso**, 
 - **Maestro (SCADA/HMI):** `172.16.207.20`.
 - **Esclavo (PLC simulado / ModbusPal):** `172.16.207.10` (Unit ID: 1, puerto TCP/502).
 
-#### A. Evidencia 1: Escritura de Holding Registers (alteración de variables de proceso)
+#### Escritura de Holding Registers (alteración de variables de proceso)
 
 Partiendo del estado normal del proceso en el simulador (valores estables y coherentes), fuerzo cambios bruscos escribiendo directamente en memoria.
 
@@ -362,7 +362,7 @@ Resultado (después del ataque):
 
 ![Registros despues de ataque](Registros-Despues-Ataque-Simulacion.png)
 
-#### B. Evidencia 2: Escritura de Coils (control de actuadores)
+#### Escritura de Coils (control de actuadores)
 
 Además de variables analógicas, un atacante puede actuar sobre salidas digitales (coils), afectando a actuadores (bombas/válvulas) y forzando estados no deseados.
 
@@ -392,7 +392,7 @@ Resultado (después del ataque):
 
 ![Coils despues de Ataque](Coils-Despues-Ataque-Simulacion.png)
 
-#### C. Vulnerabilidad explotada y relación con el análisis de riesgos
+#### Vulnerabilidad explotada y relación con el análisis de riesgos
 
 La causa raíz es la **ausencia de seguridad por diseño en Modbus TCP**:
 
@@ -402,12 +402,49 @@ La causa raíz es la **ausencia de seguridad por diseño en Modbus TCP**:
 
 Este ataque valida el riesgo de **manipulación de parámetros de tratamiento (Integridad)** y **control de actuadores (Disponibilidad/seguridad del proceso)**, que en el análisis 1.2 se considera de impacto alto.
 
-Las **medidas de mitigación** asociadas a esta PoC se detallan en el apartado **1.8**.
+Las **medidas de mitigación** asociadas a este ataque se detallan en el apartado **1.8**.
 
-### 1.8 Medidas de mitigación (respuesta asociada al punto evaluable)
+### 1.8 Medidas de mitigación (continuación y detalle técnico)
 
-Las medidas propuestas para reducir el riesgo demostrado en **1.6** (lectura no autorizada) y **1.7** (escritura/manipulación) sobre Modbus TCP se alinean con las líneas generales descritas en 1.4, aterrizándolas al caso concreto de Modbus/PLC.
+Las pruebas realizadas en 1.6 (lectura) y 1.7 (escritura) evidencian que **Modbus TCP carece de autenticación, cifrado e integridad por diseño**. Por ello, la mitigación debe aplicarse como **Defensa en Profundidad**, combinando controles de red, de acceso y de lógica de proceso (alineado con 1.4).
 
-- **Segmentación IT/OT y control de flujo:** limitar quién puede hablar con TCP/502 (ACL/firewall industrial, zonas y conduits).
-- **Acceso remoto vía DMZ/jump server + MFA:** evitar que un equipo “no operativo” llegue a la red de control.
-- **Monitorización/IDS industrial y alertas:** detectar lecturas masivas o patrones anómalos de función/direcciones hacia PLC.
+#### Objetivo de mitigación
+
+- Evitar que un equipo no autorizado alcance el segmento PLC (reducción de superficie y exposición).
+- Impedir o limitar operaciones **WRITE** hacia PLCs (protección de integridad del proceso).
+- Detectar de forma temprana lecturas/escrituras anómalas (capacidad de respuesta).
+
+#### Controles a nivel de red (IT/OT)
+
+- **Segmentación en zonas y conduits:** VLAN/segmentos separados para SCADA/PLC; sin rutas directas desde redes de usuario o Wi‑Fi hacia TCP/502.
+- **Firewall industrial con reglas mínimas:** permitir solo los flujos necesarios (por IP/origen/destino/puerto) hacia `172.16.207.10:502`.
+- **Filtrado por función (DPI) si está disponible:** reglas específicas para Modbus (p. ej., permitir `READ` desde el SCADA `172.16.207.20` y restringir `WRITE` a estaciones autorizadas y ventanas controladas).
+- **Controles de Capa 2:** port-security / deshabilitar puertos no usados para reducir el riesgo de conexión física de un atacante a la LAN de control.
+
+#### Controles de acceso y operación (personas/terceros)
+
+- **Acceso remoto mediante DMZ/jump server + MFA:** el acceso a OT se realiza por salto controlado, con trazabilidad y aprobación.
+- **Cuentas nominativas y mínimo privilegio:** separar perfiles (operación vs. ingeniería) y revisar accesos periódicamente.
+- **Gestión del cambio (MOC):** cambios en lógica de PLC, recetas o setpoints con registro, justificación y validación.
+
+#### Controles en PLC / lógica de proceso (integridad)
+
+- **Validación de rangos e interbloqueos en PLC:** rechazar valores fuera de límites físicos (p. ej., pH extremo) y forzar estado seguro/alarma ante entradas incoherentes.
+- **Hardening del dispositivo:** deshabilitar servicios de administración innecesarios y restringir interfaces de programación a hosts autorizados.
+- **Seguridad de canal cuando sea viable:** usar el estándar **Modbus Security** (TLS con certificados) o, alternativamente, túneles cifrados en el conduit (siempre que sea compatible con latencia/operación).
+
+#### Monitorización y detección temprana
+
+- **IDS/monitorización industrial:** alertar ante patrones anómalos (p. ej., aparición de `WRITE_REGISTER`/`WRITE_COIL` desde hosts no esperados o lecturas masivas).
+- **Centralización de logs y sincronización horaria:** NTP consistente y logs de firewall/jump server/SCADA para poder reconstruir el incidente.
+
+#### Resumen de controles por ataque
+
+| Ataque / Amenaza | Medida de mitigación técnica | Objetivo principal |
+| :--- | :--- | :--- |
+| **Sniffing (1.6)** | Segmentación + cifrado de canal (Modbus Security/TLS o túnel en conduit cuando aplique). | **Confidencialidad** |
+| **Lectura no autorizada (1.6)** | ACL/firewall industrial (permitir solo SCADA autorizado) + control de acceso a OT (DMZ/jump). | **Autorización** |
+| **Escritura de registros (1.7)** | DPI para bloquear `WRITE` + validación de rangos/interbloqueos en PLC. | **Integridad** |
+| **Manipulación de coils (1.7)** | Restringir `WRITE_COIL` por origen/función + cuentas/roles y trazabilidad de cambios. | **Integridad/Disponibilidad** |
+
+**Conclusión:** en una ETAP, la mitigación efectiva no “arregla Modbus”, sino que reduce exposición (segmentación), controla quién puede operar (acceso) y evita que valores peligrosos lleguen a tener efecto (interbloqueos/validaciones), con detección temprana para contener.
