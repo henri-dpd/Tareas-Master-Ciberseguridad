@@ -72,21 +72,21 @@ En este punto he intentado ser muy directo: primero pienso en los **activos/serv
 
 La materialización de las amenazas con mayor valoración de riesgo (Nivel 6) en la ETAP de Colmenar Viejo acarrearía consecuencias en múltiples dimensiones, dada la naturaleza de servicio esencial del Canal de Isabel II:
 
-#### A. Consecuencias sobre la Salud Pública (Integridad)
+#### Consecuencias sobre la Salud Pública (Integridad)
 
 La **manipulación de parámetros químicos** es la consecuencia más crítica.
 
 - **Toxicidad:** Un aumento malintencionado en la dosificación de cloro o agentes correctores de pH podría provocar efectos adversos en la salud (especialmente en colectivos vulnerables) y obligaría a activar medidas de emergencia.
 - **Insalubridad:** Por el contrario, si se reduce o se inhibe la desinfección, aumenta el riesgo de proliferación de patógenos (bacterias, virus) en la red de distribución, pudiendo derivar en brotes.
 
-#### B. Consecuencias Operativas y Técnicas (Disponibilidad)
+#### Consecuencias Operativas y Técnicas (Disponibilidad)
 
 La **Denegación de Servicio (DoS)** o las **Fallas físicas críticas** afectan la continuidad:
 
 - **Daños en Activos:** Una manipulación brusca de válvulas o una parada súbita de bombas puede provocar el fenómeno de _golpe de ariete_ y ocasionar daños en tuberías o equipos, aumentando el tiempo de recuperación.
 - **Ceguera Operativa:** En el caso de ataques MitM, el operador podría estar tomando decisiones basadas en datos falsos, lo que retrasa la detección de desbordamientos o fugas críticas.
 
-#### C. Consecuencias Socioeconómicas e Interdependencias
+#### Consecuencias Socioeconómicas e Interdependencias
 
 Dada la interconexión entre infraestructuras críticas descrita en el sector agua:
 
@@ -94,7 +94,7 @@ Dada la interconexión entre infraestructuras críticas descrita en el sector ag
 - **Seguridad Ciudadana:** Una caída en la presión de la red anularía la efectividad de los sistemas de extinción de incendios (hidrantes).
 - **Impacto Económico:** Parada de la industria local y del sector servicios que dependen directamente del suministro constante de agua tratada.
 
-#### D. Consecuencias Ambientales
+#### Consecuencias Ambientales
 
 Además del impacto en personas y servicio, en una ETAP también puede haber **impacto ambiental**, sobre todo si el incidente deriva en vertidos, consumos anómalos o tratamiento fuera de especificación:
 
@@ -103,7 +103,7 @@ Además del impacto en personas y servicio, en una ETAP también puede haber **i
 - **Consumo energético y emisiones indirectas:** operar en modo degradado (grupos electrógenos) o con ineficiencias por fallos de control puede aumentar consumos y, por extensión, la huella asociada.
 - **Mayor generación de residuos/lodos:** un mal control del proceso (coagulación/floculación/filtración) puede elevar la cantidad de lodos y residuos que hay que tratar y transportar.
 
-#### E. Consecuencias Legales y Reputacionales
+#### Consecuencias Legales y Reputacionales
 
 - **Sanciones y medidas regulatorias:** Un incidente grave podría implicar incumplimientos de obligaciones de seguridad (Ley PIC y marcos como NIS2, según aplique), con potenciales sanciones, requerimientos correctivos y auditorías.
 - **Alarma Social:** La pérdida de confianza en un suministro tan básico como el agua puede generar alarma social y presión mediática, complicando la gestión del incidente.
@@ -118,7 +118,7 @@ Teniendo en mira los riesgos más altos (V=6), hay tres prioridades claras:
 - **Impedir la manipulación peligrosa de setpoints** (integridad del tratamiento) incluso aunque alguien “consiga entrar”.
 - **Mantener capacidad de control en modo degradado** si cae la supervisión (DoS/indisponibilidad OT/SCADA).
 
-#### A. Gobernanza y operación
+#### Gobernanza y operación
 
 Aquí busco que la planta sea **auditable y controlable** en el día a día (especialmente cuando hay terceros y mantenimiento).
 
@@ -126,7 +126,7 @@ Aquí busco que la planta sea **auditable y controlable** en el día a día (esp
 - **Gestión del cambio (MOC):** cambios en dosificación (cloro, pH, coagulantes) y en lógica de PLC se registran, se justifican y se revisan (si es viable, con doble validación: operación + responsable técnico).
 - **Trazabilidad y cuentas nominativas:** evitar cuentas compartidas, registrar acciones relevantes y revisar periódicamente accesos (especialmente los de mantenimiento/contratas).
 
-#### B. Arquitectura IT/OT y segmentación
+#### Arquitectura IT/OT y segmentación
 
 La idea es que un incidente en IT no salte a OT, y que el acceso a equipos críticos pase por puntos controlados.
 
@@ -134,7 +134,7 @@ La idea es que un incidente en IT no salte a OT, y que el acceso a equipos crít
 - **DMZ industrial y salto controlado:** para accesos remotos y transferencia de ficheros, usar una **DMZ** y un **jump server** (bastión). Así se controla y audita el acceso sin “abrir” la planta.
 - **Mitigación de DoS/tormentas de red:** limitar y filtrar tráfico industrial, evitar “todo habla con todo”, y asegurar que existe operación local si la supervisión central se degrada.
 
-#### C. Control de acceso y hardening
+#### Control de acceso y hardening
 
 Una vez segmentado, el siguiente paso es endurecer el “quién entra” y el “desde dónde”, sin perder trazabilidad.
 
@@ -142,7 +142,7 @@ Una vez segmentado, el siguiente paso es endurecer el “quién entra” y el �
 - **Mínimo privilegio y separación de funciones:** perfiles diferenciados (operación, mantenimiento, ingeniería) para reducir abuso de credenciales.
 - **Endurecimiento de estaciones OT:** control de USB, deshabilitar servicios innecesarios, y parcheo coordinado con operación (en OT no se parchea “cuando salga”, se planifica).
 
-#### D. Integridad del proceso
+#### Integridad del proceso
 
 Esta parte es clave en agua: aunque el atacante tenga acceso a SCADA, el proceso debe tener **topes y lógica de seguridad** que le pongan freno.
 
@@ -150,7 +150,7 @@ Esta parte es clave en agua: aunque el atacante tenga acceso a SCADA, el proceso
 - **Alarmas por desviación y verificación operativa:** si la telemetría es incoherente (posible spoofing/fallo), el operador tiene procedimientos para confirmar (p. ej., muestreo/laboratorio) antes de aplicar cambios agresivos.
 - **Versionado de setpoints/recetas y rollback:** historial de cambios y posibilidad de volver rápido a una configuración conocida y segura.
 
-#### E. Monitorización y detección
+#### Monitorización y detección
 
 Asumo que algo puede fallar o colarse; por eso necesito visibilidad y alertas que ayuden al operador a decidir.
 
@@ -158,7 +158,7 @@ Asumo que algo puede fallar o colarse; por eso necesito visibilidad y alertas qu
 - **Centralización mínima de logs y sincronización horaria:** logs de SCADA/bastión/firewall y hora consistente para que la investigación posterior sea posible.
 - **Validación cruzada de instrumentación:** comparar sensores y tendencias del proceso para detectar lecturas “imposibles” (fallo o manipulación).
 
-#### F. Resiliencia y continuidad
+#### Resiliencia y continuidad
 
 Cuando el problema no se puede evitar (corte eléctrico, avería, ataque), la pregunta es: ¿cómo sigo operando y cómo recupero rápido?
 
@@ -195,7 +195,7 @@ Con esto, la red de trabajo queda:
 - **Máscara:** `255.255.255.0` (254 hosts útiles)
 - **Puerta de enlace:** no es necesaria si todo el laboratorio está en la misma LAN (si se usa NAT/Internet en la VM, se configura aparte)
 
-#### A. Esquema Gráfico de Red
+#### Esquema Gráfico de Red
 
 El siguiente esquema representa la topología en estrella utilizada en el simulador:
 
@@ -205,7 +205,7 @@ El siguiente esquema representa la topología en estrella utilizada en el simula
 
 ![Simulacion Ataque](Simulacion-Ataque.drawio.png)
 
-#### B. Direccionamiento IP y Software
+#### Direccionamiento IP y Software
 
 | Dispositivo  | Función           | Dirección IP     | Software / Herramientas  |
 | :----------- | :---------------- | :--------------- | :----------------------- |
@@ -218,7 +218,7 @@ Notas de direccionamiento:
 - Reservo `172.16.207.20` para el rol de **maestro (SCADA/HMI)**, `172.16.207.10` para el **esclavo (PLC/ModbusPal)** y `172.16.207.100` para auditoría.
 - La segmentación se deja plana a propósito para la práctica; en una ETAP real lo normal es que el atacante **no** esté en la misma LAN OT sin una intrusión previa (o un acceso físico).
 
-#### C. Configuración del Mapa de Memoria (ModbusPal)
+#### Configuración del Mapa de Memoria (ModbusPal)
 
 Se ha configurado el esclavo (Unit ID: 1) con los siguientes registros para representar el proceso de potabilización:
 
@@ -243,7 +243,7 @@ Se ha configurado el esclavo (Unit ID: 1) con los siguientes registros para repr
 - **40010:** Temperatura del agua.
 - **40011-40014:** _Setpoints_ de seguridad (Límites programados por el operario).
 
-#### D. Configuración de Comunicación
+#### Configuración de Comunicación
 
 El Maestro está configurado para realizar consultas cíclicas (polling) cada 1000 ms al Esclavo (Unit ID: 1) en el puerto estándar **TCP/502**.
 
@@ -255,14 +255,12 @@ En el laboratorio asumo que el atacante ya tiene presencia en la misma red `172.
 
 En esta fase, el objetivo es demostrar la **falta de confidencialidad** y de **control de acceso** en **Modbus TCP**, validando que un atacante en la misma LAN OT puede **leer** el estado del proceso (registros analógicos y coils digitales) sin credenciales.
 
-#### A. Objetivo, alcance y activos
-
 - **Atacante:** Kali Linux `172.16.207.100`.
 - **Maestro (SCADA/HMI):** `172.16.207.20`.
 - **Esclavo (PLC simulado / ModbusPal):** `172.16.207.10` (Unit ID: 1, puerto TCP/502).
 - **Alcance (lectura):** **Holding Registers** (14 registros, equivalentes a `40001–40014`) y **Coils** (12 coils, equivalentes a `00001–00012`) según el mapa definido en 1.5.
 
-#### B. Evidencia 1: Observación de tráfico con Wireshark (sniffing)
+#### Observación de tráfico con Wireshark (sniffing)
 
 Antes de lanzar consultas activas, capturé tráfico para confirmar:
 
@@ -274,7 +272,7 @@ Esto es relevante porque Modbus TCP no cifra ni autentica: el contenido del proc
 
 ![Auditoría Wireshark](Auditoria-Wireshark-Simulacion.png)
 
-#### C. Evidencia 2: Lectura de Holding Registers con Metasploit
+#### Lectura de Holding Registers con Metasploit
 
 Con la información anterior, leí los **Holding Registers** del PLC simulado (valores de proceso como cloro, pH, caudales, etc., según el mapa de memoria del 1.5).
 
@@ -294,7 +292,7 @@ La salida confirma que el atacante obtiene valores del proceso (p. ej., `1200`, 
 
 ![Auditoría Metasploit - Lectura de Registros](Auditoria-Leer-Registros-Simulacion.png)
 
-#### D. Evidencia 3: Lectura de Coils con Metasploit
+#### Lectura de Coils con Metasploit
 
 Después repetí el procedimiento para leer el estado digital (On/Off) de bombas, válvulas y actuadores representados por coils.
 
@@ -311,7 +309,7 @@ El PLC devuelve una cadena de bits (0/1) que refleja el estado operativo de los 
 
 ![Auditoría Metasploit - Lectura de Coils](Auditoria-Leer-Coils-Simulacion.png)
 
-#### E. Vulnerabilidad explotada y relación con el análisis de riesgos
+#### Vulnerabilidad explotada y relación con el análisis de riesgos
 
 La causa raíz es la **ausencia de seguridad por diseño** en Modbus TCP:
 
@@ -323,11 +321,92 @@ Este ejercicio se alinea con los riesgos descritos en 1.2 (pérdida/engaño de m
 
 Las **medidas de mitigación** asociadas a esta PoC se detallan en el apartado **1.8**.
 
+### 1.7 Simulación ataque Sistemas SCADA/ICS: Modificación de Registros/Coils
 
+En esta fase paso de la observación a la **manipulación activa del proceso**, demostrando el impacto sobre **Integridad**: un atacante en la misma LAN OT puede **escribir** valores en registros y coils sin autenticación.
+
+- **Atacante:** Kali Linux `172.16.207.100`.
+- **Maestro (SCADA/HMI):** `172.16.207.20`.
+- **Esclavo (PLC simulado / ModbusPal):** `172.16.207.10` (Unit ID: 1, puerto TCP/502).
+
+#### A. Evidencia 1: Escritura de Holding Registers (alteración de variables de proceso)
+
+Partiendo del estado normal del proceso en el simulador (valores estables y coherentes), fuerzo cambios bruscos escribiendo directamente en memoria.
+
+Estado inicial (antes del ataque):
+
+![Registros antes de Ataque](Registros-Antes-Ataque-Simulacion.png)
+
+Ejecución del ataque (Metasploit). Se usa `modbusclient` para sobreescribir valores en las direcciones de memoria definidas en el PLC simulado:
+
+Comandos ejecutados:
+
+```bash
+use auxiliary/scanner/scada/modbusclient
+set RHOSTS 172.16.207.10
+set UNIT_NUMBER 1
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 2
+set DATA 1400
+run
+set DATA_ADDRESS 0
+set DATA 0
+run
+```
+
+Evidencia de ejecución:
+
+![Ataque - Escribir Registros](Auditoria-Escribir-Registros-Simulacion.png)
+
+Resultado (después del ataque):
+
+![Registros despues de ataque](Registros-Despues-Ataque-Simulacion.png)
+
+#### B. Evidencia 2: Escritura de Coils (control de actuadores)
+
+Además de variables analógicas, un atacante puede actuar sobre salidas digitales (coils), afectando a actuadores (bombas/válvulas) y forzando estados no deseados.
+
+Estado inicial (antes del ataque):
+
+![Coils antes de Ataque](Coils-Antes-Ataque-Simulacion.png)
+
+Ejecución del ataque (Metasploit). Mantengo la sesión del módulo y cambio la acción a escritura de coils:
+
+Comandos ejecutados:
+
+```bash
+set ACTION WRITE_COIL
+set DATA_ADDRESS 1
+set DATA 0
+run
+set DATA_ADDRESS 2
+set DATA 0
+run
+```
+
+Evidencia de ejecución:
+
+![Ataque - Escribir Coils](Auditoria-Escribir-Coils-Simulacion.png)
+
+Resultado (después del ataque):
+
+![Coils despues de Ataque](Coils-Despues-Ataque-Simulacion.png)
+
+#### C. Vulnerabilidad explotada y relación con el análisis de riesgos
+
+La causa raíz es la **ausencia de seguridad por diseño en Modbus TCP**:
+
+- **Falta de autenticación y autorización:** el PLC acepta escrituras sin verificar el origen.
+- **Sin control de integridad/antireplay:** no hay mecanismo criptográfico que impida modificaciones.
+- **Confianza implícita en la red OT:** el protocolo asume que todo nodo en la LAN es legítimo.
+
+Este ataque valida el riesgo de **manipulación de parámetros de tratamiento (Integridad)** y **control de actuadores (Disponibilidad/seguridad del proceso)**, que en el análisis 1.2 se considera de impacto alto.
+
+Las **medidas de mitigación** asociadas a esta PoC se detallan en el apartado **1.8**.
 
 ### 1.8 Medidas de mitigación (respuesta asociada al punto evaluable)
 
-Las medidas propuestas para reducir el riesgo demostrado en 1.6 (lectura no autorizada de registros y coils en Modbus TCP) se alinean con las líneas generales descritas en 1.4, aterrizándolas al caso concreto de Modbus/PLC.
+Las medidas propuestas para reducir el riesgo demostrado en **1.6** (lectura no autorizada) y **1.7** (escritura/manipulación) sobre Modbus TCP se alinean con las líneas generales descritas en 1.4, aterrizándolas al caso concreto de Modbus/PLC.
 
 - **Segmentación IT/OT y control de flujo:** limitar quién puede hablar con TCP/502 (ACL/firewall industrial, zonas y conduits).
 - **Acceso remoto vía DMZ/jump server + MFA:** evitar que un equipo “no operativo” llegue a la red de control.
