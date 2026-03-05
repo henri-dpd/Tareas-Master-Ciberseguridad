@@ -209,13 +209,13 @@ El siguiente esquema representa la topología en estrella utilizada en el simula
 
 | Dispositivo  | Función           | Dirección IP     | Software / Herramientas  |
 | :----------- | :---------------- | :--------------- | :----------------------- |
-| **Maestro**  | Supervisión SCADA | `172.16.207.10`  | QModMaster / ScadaBR     |
-| **Esclavo**  | PLC Dosificación  | `172.16.207.20`  | ModbusPal (Java)         |
+| **Maestro**  | Supervisión SCADA | `172.16.207.20`  | QModMaster / ScadaBR     |
+| **Esclavo**  | PLC Dosificación  | `172.16.207.10`  | ModbusPal (Java)         |
 | **Atacante** | Estación Kali     | `172.16.207.100` | Mbtget, Metasploit, Nmap |
 
 Notas de direccionamiento:
 
-- Reservo `172.16.207.10` y `172.16.207.20` para roles “de operación” (maestro/esclavo) y `172.16.207.100` para auditoría.
+- Reservo `172.16.207.20` para el rol de **maestro (SCADA/HMI)**, `172.16.207.10` para el **esclavo (PLC/ModbusPal)** y `172.16.207.100` para auditoría.
 - La segmentación se deja plana a propósito para la práctica; en una ETAP real lo normal es que el atacante **no** esté en la misma LAN OT sin una intrusión previa (o un acceso físico).
 
 #### C. Configuración del Mapa de Memoria (ModbusPal)
@@ -251,4 +251,84 @@ El Maestro está configurado para realizar consultas cíclicas (polling) cada 10
 
 En el laboratorio asumo que el atacante ya tiene presencia en la misma red `172.16.207.0/24` (misma LAN L2), lo que le permite observar e interactuar con el tráfico Modbus. En un escenario real, esto normalmente sería consecuencia de una fase previa (compromiso de IT con salto a OT, mala segmentación, o acceso físico a la red).
 
+### 1.6 Simulación ataque Sistemas SCADA/ICS: Lectura de Registros/Coils
 
+En esta fase, el objetivo es demostrar la **falta de confidencialidad** y de **control de acceso** en **Modbus TCP**, validando que un atacante en la misma LAN OT puede **leer** el estado del proceso (registros analógicos y coils digitales) sin credenciales.
+
+#### A. Objetivo, alcance y activos
+
+- **Atacante:** Kali Linux `172.16.207.100`.
+- **Maestro (SCADA/HMI):** `172.16.207.20`.
+- **Esclavo (PLC simulado / ModbusPal):** `172.16.207.10` (Unit ID: 1, puerto TCP/502).
+- **Alcance (lectura):** **Holding Registers** (14 registros, equivalentes a `40001–40014`) y **Coils** (12 coils, equivalentes a `00001–00012`) según el mapa definido en 1.5.
+
+#### B. Evidencia 1: Observación de tráfico con Wireshark (sniffing)
+
+Antes de lanzar consultas activas, capturé tráfico para confirmar:
+
+- Dispositivos que hablan Modbus (`172.16.207.20` ↔ `172.16.207.10`).
+- Uso del puerto **TCP/502**.
+- Funciones en claro (p. ej., **0x03 Read Holding Registers**, **0x01 Read Coils**).
+
+Esto es relevante porque Modbus TCP no cifra ni autentica: el contenido del proceso y las operaciones quedan visibles para cualquiera con acceso a la red.
+
+![Auditoría Wireshark](Auditoria-Wireshark-Simulacion.png)
+
+#### C. Evidencia 2: Lectura de Holding Registers con Metasploit
+
+Con la información anterior, leí los **Holding Registers** del PLC simulado (valores de proceso como cloro, pH, caudales, etc., según el mapa de memoria del 1.5).
+
+Comandos ejecutados en Metasploit:
+
+```bash
+use auxiliary/scanner/scada/modbusclient
+set RHOSTS 172.16.207.10
+set ACTION READ_HOLDING_REGISTERS
+set DATA_ADDRESS 0
+set NUMBER 14
+set UNIT_NUMBER 1
+run
+```
+
+La salida confirma que el atacante obtiene valores del proceso (p. ej., `1200`, `150`, `710`...), lo que supone **fuga de información operativa**.
+
+![Auditoría Metasploit - Lectura de Registros](Auditoria-Leer-Registros-Simulacion.png)
+
+#### D. Evidencia 3: Lectura de Coils con Metasploit
+
+Después repetí el procedimiento para leer el estado digital (On/Off) de bombas, válvulas y actuadores representados por coils.
+
+Comandos ejecutados en Metasploit:
+
+```bash
+set ACTION READ_COILS
+set DATA_ADDRESS 0
+set NUMBER 12
+run
+```
+
+El PLC devuelve una cadena de bits (0/1) que refleja el estado operativo de los equipos.
+
+![Auditoría Metasploit - Lectura de Coils](Auditoria-Leer-Coils-Simulacion.png)
+
+#### E. Vulnerabilidad explotada y relación con el análisis de riesgos
+
+La causa raíz es la **ausencia de seguridad por diseño** en Modbus TCP:
+
+- **Sin autenticación/autorización:** conocer IP, Unit ID y puerto es suficiente para leer memoria.
+- **Tráfico en texto claro:** facilita el descubrimiento de funciones, direcciones y valores.
+- **Confianza implícita en la red OT:** el protocolo asume que “quien llega a la red” es legítimo.
+
+Este ejercicio se alinea con los riesgos descritos en 1.2 (pérdida/engaño de monitorización y acceso no autorizado): si se puede leer el estado del proceso, es más fácil preparar ataques posteriores (p. ej., manipulación de setpoints o cambios de estado).
+
+Las **medidas de mitigación** asociadas a esta PoC se detallan en el apartado **1.8**.
+
+
+
+### 1.8 Medidas de mitigación (respuesta asociada al punto evaluable)
+
+Las medidas propuestas para reducir el riesgo demostrado en 1.6 (lectura no autorizada de registros y coils en Modbus TCP) se alinean con las líneas generales descritas en 1.4, aterrizándolas al caso concreto de Modbus/PLC.
+
+- **Segmentación IT/OT y control de flujo:** limitar quién puede hablar con TCP/502 (ACL/firewall industrial, zonas y conduits).
+- **Acceso remoto vía DMZ/jump server + MFA:** evitar que un equipo “no operativo” llegue a la red de control.
+- **Monitorización/IDS industrial y alertas:** detectar lecturas masivas o patrones anómalos de función/direcciones hacia PLC.

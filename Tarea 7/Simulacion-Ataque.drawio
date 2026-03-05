@@ -12,7 +12,7 @@
             <mxPoint x="408.96000000000004" y="100" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="cjJV-mIpe6yjBEo9BoRe-1" parent="1" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#0000FF;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.pc;" value="&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;Maestro Modbus - HMI/SCADA&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;(172.16.207.10)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-1" parent="1" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#0000FF;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.pc;" value="&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;Maestro Modbus - HMI/SCADA&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;(172.16.207.20)&lt;/font&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="80" width="110" x="630" y="10" as="geometry" />
         </mxCell>
         <mxCell id="cjJV-mIpe6yjBEo9BoRe-2" parent="1" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#FF0000;shape=mxgraph.azure.laptop;pointerEvents=1;" value="&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Atacante - Kali&lt;/font&gt;&lt;div style=&quot;color: rgb(0, 102, 204);&quot;&gt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;(172.16.207.100)&lt;/font&gt;&lt;/div&gt;" vertex="1">
