@@ -1,0 +1,91 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram name="Page-1" id="VObLhQ_hZSI328Ra8dPt">
+    <mxGraphModel dx="856" dy="513" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-5" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="270" width="410" x="220" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-10" edge="1" parent="1" source="cjJV-mIpe6yjBEo9BoRe-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#0000FF;curved=0;strokeWidth=2;entryPerimeter=0;" target="cjJV-mIpe6yjBEo9BoRe-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="408.96000000000004" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-1" parent="1" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#0000FF;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.pc;" value="&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;Maestro Modbus - HMI/SCADA&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;(172.16.X.10)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="110" x="630" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-2" parent="1" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#FF0000;shape=mxgraph.azure.laptop;pointerEvents=1;" value="&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Atacante - Kali&lt;/font&gt;&lt;div style=&quot;color: rgb(0, 102, 204);&quot;&gt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;(172.16.X.100)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="110" x="110" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;color: rgb(51, 153, 255);&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;&quot;&gt;Red OT Simplificada&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(51, 153, 255);&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;&quot;&gt;(172.16.X.0/24)&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="130" x="280" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;Monitoreo y Control Legítimo&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="180" x="450" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-16" edge="1" parent="1" source="cjJV-mIpe6yjBEo9BoRe-20" style="endArrow=classic;startArrow=classic;html=1;rounded=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;curved=0;strokeWidth=2;strokeColor=#0000FF;exitPerimeter=0;" target="cjJV-mIpe6yjBEo9BoRe-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="140" />
+              <mxPoint x="780" y="50" />
+            </Array>
+            <mxPoint x="450" y="150" as="sourcePoint" />
+            <mxPoint x="520" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;color: rgb(0, 0, 255);&quot;&gt;Monitoreo y Control Legítimo&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="180" x="460" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-20" parent="1" style="strokeColor=#ffffff;sketch=0;html=1;pointerEvents=1;dashed=0;fillColor=#3399FF;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.cisco.switches.class_4_5_switch;" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;color: rgb(51, 153, 255);&quot;&gt;Switch Industrial OT&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="90" width="69" x="391" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-29" parent="1" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/storage/Datacenter_Server_Rack.svg;" value="&lt;font style=&quot;color: rgb(0, 153, 153);&quot;&gt;Esclavo Modbus - PLC ETAP Colmenar Viejo&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 153, 153);&quot;&gt;(172.16.X.20) Unit ID: 1&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="69.06" x="630" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-30" edge="1" parent="1" source="cjJV-mIpe6yjBEo9BoRe-2" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.92;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=1;strokeColor=#FF6666;" target="cjJV-mIpe6yjBEo9BoRe-20" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="220" as="sourcePoint" />
+            <mxPoint x="440" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-33" connectable="0" parent="cjJV-mIpe6yjBEo9BoRe-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;color: rgb(255, 102, 102);&quot;&gt;Ethernet TCP por 502&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0896" y="-1" as="geometry">
+            <mxPoint x="-3" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-31" edge="1" parent="1" source="cjJV-mIpe6yjBEo9BoRe-20" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.88;exitY=0.92;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;strokeColor=#66B2FF;" target="cjJV-mIpe6yjBEo9BoRe-29" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="220" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-32" connectable="0" parent="cjJV-mIpe6yjBEo9BoRe-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;color: rgb(51, 153, 255);&quot;&gt;Ethernet TCP por 502&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1331" y="1" as="geometry">
+            <mxPoint x="23" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-34" edge="1" parent="1" source="cjJV-mIpe6yjBEo9BoRe-2" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;exitX=0.964;exitY=0.875;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.045;entryY=0.638;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#FF9999;dashed=1;dashPattern=8 4 1 4;" target="cjJV-mIpe6yjBEo9BoRe-29" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="200" />
+            </Array>
+            <mxPoint x="390" y="220" as="sourcePoint" />
+            <mxPoint x="440" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-37" connectable="0" parent="cjJV-mIpe6yjBEo9BoRe-34" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;color: rgb(255, 51, 51);&quot;&gt;Ciberataque Modbus&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.264" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-38" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="&lt;p data-path-to-node=&quot;5,0&quot;&gt;&lt;b data-path-to-node=&quot;5,0&quot; data-index-in-node=&quot;0&quot;&gt;12 COILS (Actuadores On/Off)&lt;/b&gt;&lt;/p&gt;&lt;ul data-path-to-node=&quot;5,1&quot;&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;5,1,0,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;5,1,0,0&quot; data-index-in-node=&quot;0&quot;&gt;00-01:&lt;/span&gt; Bombas Agua Bruta&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;5,1,1,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;5,1,1,0&quot; data-index-in-node=&quot;0&quot;&gt;02-05:&lt;/span&gt; Bombas Impulsión Red&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;5,1,2,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;5,1,2,0&quot; data-index-in-node=&quot;0&quot;&gt;06-09:&lt;/span&gt; Válvulas Filtrado&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;5,1,3,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;5,1,3,0&quot; data-index-in-node=&quot;0&quot;&gt;10-11:&lt;/span&gt; Motores Agitadores&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="270" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="cjJV-mIpe6yjBEo9BoRe-39" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="&lt;p data-path-to-node=&quot;7,0&quot;&gt;&lt;b data-path-to-node=&quot;7,0&quot; data-index-in-node=&quot;0&quot;&gt;14 REGISTERS (Sensores/Setpoints)&lt;/b&gt;&lt;/p&gt;&lt;ul data-path-to-node=&quot;7,1&quot;&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;7,1,0,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;7,1,0,0&quot; data-index-in-node=&quot;0&quot;&gt;40001-05:&lt;/span&gt; Calidad (Cloro, pH, Turbidez) y Caudales.&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;7,1,1,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;7,1,1,0&quot; data-index-in-node=&quot;0&quot;&gt;40006-10:&lt;/span&gt; Niveles Tanques, Presión y Temp.&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p data-path-to-node=&quot;7,1,2,0&quot;&gt;&lt;b&gt;&lt;span data-path-to-node=&quot;7,1,2,0&quot; data-index-in-node=&quot;0&quot;&gt;40011-14:&lt;/span&gt; Setpoints de Seguridad y Contadores.&lt;/b&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="130" width="300" x="490" y="330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

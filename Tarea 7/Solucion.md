@@ -187,11 +187,11 @@ Para la demostración técnica, he diseñado un laboratorio que simula (de forma
 Sea $X$ el resultado de aplicar el módulo a los **últimos 3 dígitos del DNI**.
 
 - **Fórmula:** $X = (\text{últimos 3 dígitos}) \pmod{255}$
-- **Mi valor:** últimos 3 dígitos = **___** → $X = ___$
+- **Mi valor:** últimos 3 dígitos = **462** → $X = 462 \bmod 255 = 207$
 
 Con esto, la red de trabajo queda:
 
-- **Red OT simulada:** `172.16.X.0/24`
+- **Red OT simulada:** `172.16.207.0/24`
 - **Máscara:** `255.255.255.0` (254 hosts útiles)
 - **Puerta de enlace:** no es necesaria si todo el laboratorio está en la misma LAN (si se usa NAT/Internet en la VM, se configura aparte)
 
@@ -207,15 +207,15 @@ El siguiente esquema representa la topología en estrella utilizada en el simula
 
 #### B. Direccionamiento IP y Software
 
-| Dispositivo  | Función           | Dirección IP   | Software / Herramientas  |
-| :----------- | :---------------- | :------------- | :----------------------- |
-| **Maestro**  | Supervisión SCADA | `172.16.X.10`  | QModMaster / ScadaBR     |
-| **Esclavo**  | PLC Dosificación  | `172.16.X.20`  | ModbusPal (Java)         |
-| **Atacante** | Estación Kali     | `172.16.X.100` | Mbtget, Metasploit, Nmap |
+| Dispositivo  | Función           | Dirección IP     | Software / Herramientas  |
+| :----------- | :---------------- | :--------------- | :----------------------- |
+| **Maestro**  | Supervisión SCADA | `172.16.207.10`  | QModMaster / ScadaBR     |
+| **Esclavo**  | PLC Dosificación  | `172.16.207.20`  | ModbusPal (Java)         |
+| **Atacante** | Estación Kali     | `172.16.207.100` | Mbtget, Metasploit, Nmap |
 
 Notas de direccionamiento:
 
-- Reservo `172.16.X.10` y `172.16.X.20` para roles “de operación” (maestro/esclavo) y `172.16.X.100` para auditoría.
+- Reservo `172.16.207.10` y `172.16.207.20` para roles “de operación” (maestro/esclavo) y `172.16.207.100` para auditoría.
 - La segmentación se deja plana a propósito para la práctica; en una ETAP real lo normal es que el atacante **no** esté en la misma LAN OT sin una intrusión previa (o un acceso físico).
 
 #### C. Configuración del Mapa de Memoria (ModbusPal)
@@ -247,4 +247,8 @@ Se ha configurado el esclavo (Unit ID: 1) con los siguientes registros para repr
 
 El Maestro está configurado para realizar consultas cíclicas (polling) cada 1000 ms al Esclavo (Unit ID: 1) en el puerto estándar **TCP/502**.
 
-En el laboratorio asumo que el atacante ya tiene presencia en la misma red `172.16.X.0/24` (misma LAN L2), lo que le permite observar e interactuar con el tráfico Modbus. En un escenario real, esto normalmente sería consecuencia de una fase previa (compromiso de IT con salto a OT, mala segmentación, o acceso físico a la red).
+![Simulación](Simulacion.png)
+
+En el laboratorio asumo que el atacante ya tiene presencia en la misma red `172.16.207.0/24` (misma LAN L2), lo que le permite observar e interactuar con el tráfico Modbus. En un escenario real, esto normalmente sería consecuencia de una fase previa (compromiso de IT con salto a OT, mala segmentación, o acceso físico a la red).
+
+
