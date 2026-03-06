@@ -1,0 +1,535 @@
+<!DOCTYPE html><html><head>
+      <title>Solucion</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\henri\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.20\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="introducción-a-las-infraestructuras-críticas">Introducción a las Infraestructuras Críticas </h1>
+<h2 id="1-introducción-y-selección-de-la-infraestructura">1. Introducción y Selección de la Infraestructura </h2>
+<p>Para esta tarea se ha elegido como infraestructura crítica el <strong>Canal de Isabel II</strong>, y el análisis se centra en la <strong>Estación de Tratamiento de Agua Potable (ETAP) de Colmenar Viejo</strong> (Comunidad de Madrid).</p>
+<p>El Canal de Isabel II se considera un <strong>Operador Crítico</strong> bajo la <strong>Ley 8/2011 (Ley PIC)</strong>: el suministro de agua es un servicio esencial. Una ETAP es un buen caso de estudio porque mezcla operación física (bombas, válvulas, reactivos) con sistemas <strong>OT/SCADA/PLC</strong>, y un incidente en el control puede afectar a calidad y continuidad del servicio.</p>
+<h3 id="11-marco-de-trabajo-y-criterio-de-evaluación">1.1 Marco de Trabajo y Criterio de Evaluación </h3>
+<p>Para mantenerlo manejable, se utiliza un análisis simplificado inspirado en <strong>MAGERIT</strong> y en guías de NIST (SP 800-30) para estimar probabilidad e impacto. Métrica: <strong>Riesgo = Probabilidad (P) x Impacto (I)</strong>.</p>
+<ul>
+<li><strong>Probabilidad (P):</strong> (1: Baja, 2: Media, 3: Alta).</li>
+<li><strong>Impacto (I):</strong> (1: Bajo, 2: Grave, 3: Muy Grave).</li>
+<li><strong>Valoración Final (V):</strong>
+<ul>
+<li><strong>1 - 2:</strong> Riesgo Bajo.</li>
+<li><strong>3 - 4:</strong> Riesgo Medio.</li>
+<li><strong>6 - 9:</strong> Riesgo Alto / Crítico.</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-identificación-y-evaluación-de-amenazas">1.2 Identificación y Evaluación de Amenazas </h3>
+<p>Se parte de los <strong>activos/servicios</strong> de la ETAP (proceso, red OT/SCADA/PLC, instrumentación, comunicaciones, energía, reactivos y operación) y se derivan amenazas plausibles. Para puntuar, se utiliza una escala simple:</p>
+<ul>
+<li><strong>Probabilidad (P):</strong> 1 baja, 2 media, 3 alta.</li>
+<li><strong>Impacto (I):</strong> 1 bajo, 2 grave, 3 muy grave.</li>
+<li><strong>Valoración (V):</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mi>P</mi><mo>×</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">V = P \times I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span></span></span>.</li>
+</ul>
+<p><strong>Listado simple de amenazas (con criterio por caso):</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Amenaza (Dimensión)</th>
+<th style="text-align:left">Escenario y criterio de identificación</th>
+<th style="text-align:left">Criterio aplicado (P/I)</th>
+<th style="text-align:center">P</th>
+<th style="text-align:center">I</th>
+<th style="text-align:center">Valoración</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Manipulación de parámetros de tratamiento (Integridad)</strong></td>
+<td style="text-align:left">Alteración de <em>setpoints</em> (cloración, coagulación, pH) desde SCADA/estación de ingeniería o cambios no autorizados en PLC.</td>
+<td style="text-align:left"><strong>P=2</strong> si se obtiene acceso a red OT/credenciales (operación o mantenimiento). <strong>I=3</strong> por riesgo de agua no potable y efecto directo en salud pública.</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><strong>6 (Alto)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Denegación de servicio en red OT/SCADA (Disponibilidad)</strong></td>
+<td style="text-align:left">Saturación/bloqueo de comunicaciones OT o indisponibilidad del SCADA/HMI que impide operar bombeo y proceso.</td>
+<td style="text-align:left"><strong>P=2</strong> por dependencia de comunicaciones y protocolos industriales. <strong>I=3</strong> por posible parada del proceso o incapacidad de control en tiempo real.</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><strong>6 (Alto)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Acceso no autorizado a sistemas de operación (C/I/D)</strong></td>
+<td style="text-align:left">Robo/abuso de credenciales (operadores/contratistas), acceso remoto de soporte o abuso de privilegios en estación de ingeniería/SCADA.</td>
+<td style="text-align:left"><strong>P=2</strong> por dependencia habitual de cuentas privilegiadas y terceros. <strong>I=3</strong> porque habilita cambios persistentes que afectan integridad y disponibilidad.</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><strong>6 (Alto)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pérdida/engaño de monitorización (MitM/Spoofing) (Integridad)</strong></td>
+<td style="text-align:left">Intercepción o suplantación de telemetría: el operador visualiza valores falsos (caudales, cloro residual, turbidez) y decide con información incorrecta.</td>
+<td style="text-align:left"><strong>P=2</strong> si existe punto de acceso a red OT y tráfico sin autenticación/validación fuerte. <strong>I=2</strong> por degradación operativa relevante, normalmente con verificaciones adicionales y muestreos.</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>4 (Medio)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pérdida de comunicaciones críticas (Disponibilidad)</strong></td>
+<td style="text-align:left">Caída de enlaces (fibra/radio) entre zonas del proceso o con centro de control, degradando operación y tiempos de respuesta.</td>
+<td style="text-align:left"><strong>P=2</strong> por fallos puntuales plausibles en enlaces críticos. <strong>I=2</strong> por pérdida de visibilidad/operación remota y aumento del riesgo operacional (con procedimientos manuales de contingencia).</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>4 (Medio)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Fallas físicas o averías críticas (Disponibilidad)</strong></td>
+<td style="text-align:left">Rotura/degradación de bombas, válvulas, filtros o cuadros eléctricos por fatiga, corrosión o mantenimiento insuficiente.</td>
+<td style="text-align:left"><strong>P=3</strong> por probabilidad inherente a activos físicos en operación continua. <strong>I=2</strong> por reducción de capacidad y posibles paradas parciales (suele haber redundancia parcial).</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>6 (Alto)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Interrupción del suministro eléctrico externo (Disponibilidad)</strong></td>
+<td style="text-align:left">Caída de red eléctrica; operación en modo degradado con SAI/grupos hasta restablecimiento.</td>
+<td style="text-align:left"><strong>P=1</strong> por menor frecuencia relativa y existencia de continuidad eléctrica. <strong>I=3</strong> porque un fallo prolongado o insuficiencia del respaldo puede detener el proceso.</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><strong>3 (Medio)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Desastres naturales / fenómenos climáticos (Disponibilidad)</strong></td>
+<td style="text-align:left">Inundaciones/tormentas/olas de calor con daños físicos, cortes de acceso o afectación de infraestructuras auxiliares.</td>
+<td style="text-align:left"><strong>P=1</strong> por menor frecuencia (eventos extremos). <strong>I=2</strong> por impacto operativo relevante y tiempos de recuperación no inmediatos.</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>2 (Bajo)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Falla en la cadena de suministro de reactivos (Disponibilidad)</strong></td>
+<td style="text-align:left">Escasez/retardo de reactivos (cloro, coagulantes) o incidentes logísticos que limitan el tratamiento.</td>
+<td style="text-align:left"><strong>P=1</strong> por contratos y stock de seguridad habituales. <strong>I=3</strong> porque sin reactivos críticos la potabilización se reduce drásticamente o se detiene.</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><strong>3 (Medio)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Fallas en sensores de calidad e instrumentación (Integridad)</strong></td>
+<td style="text-align:left">Lecturas erróneas o pérdida de calibración en sensores (turbidez, cloro residual, pH), afectando control automático y decisiones.</td>
+<td style="text-align:left"><strong>P=2</strong> por deriva/calibración y fallos relativamente comunes. <strong>I=2</strong> por riesgo de tratamiento inadecuado y necesidad de operación manual, normalmente con validaciones cruzadas.</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>4 (Medio)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Sequía prolongada (Disponibilidad)</strong></td>
+<td style="text-align:left">Reducción de agua bruta disponible en el sistema de embalses/cuencas que abastecen la red, afectando caudal y continuidad global.</td>
+<td style="text-align:left"><strong>P=2</strong> por recurrencia creciente de episodios de sequía. <strong>I=1</strong> a nivel de ETAP (la gestión se realiza principalmente a nivel de red/sistema y demanda).</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"><strong>2 (Bajo)</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Resumen de valoración:</strong></p>
+<ul>
+<li><strong>Alto (V=6):</strong> manipulación de parámetros de tratamiento, DoS OT/SCADA, acceso no autorizado a sistemas de operación y averías críticas.</li>
+<li><strong>Medio (V=3–4):</strong> engaño de monitorización, pérdida de comunicaciones, fallos de sensores e interrupción eléctrica/falta de reactivos.</li>
+<li><strong>Bajo (V=2):</strong> eventos extremos y sequía (impacto gestionado a nivel de sistema).</li>
+</ul>
+<p><strong>Conclusión:</strong> en una ETAP, el riesgo está dominado por escenarios que afectan a <strong>integridad del proceso</strong> y <strong>disponibilidad operativa</strong> en OT.</p>
+<h3 id="13-posibles-consecuencias-de-los-riesgos-identificados">1.3 Posibles consecuencias de los riesgos identificados </h3>
+<p>Si se materializan las amenazas con mayor riesgo (V=6), las consecuencias se notarían rápido en varias dimensiones:</p>
+<h4 id="consecuencias-sobre-la-salud-pública-integridad">Consecuencias sobre la Salud Pública (Integridad) </h4>
+<p>La <strong>manipulación de parámetros químicos</strong> es la consecuencia más crítica.</p>
+<ul>
+<li><strong>Agua fuera de especificación:</strong> por sobredosificación/subdosificación de reactivos (cloro, pH, coagulantes).</li>
+<li><strong>Riesgo sanitario:</strong> necesidad de avisos a población, restricciones de uso y controles reforzados.</li>
+</ul>
+<h4 id="consecuencias-operativas-y-técnicas-disponibilidad">Consecuencias Operativas y Técnicas (Disponibilidad) </h4>
+<p>La <strong>Denegación de Servicio (DoS)</strong> o las <strong>Fallas físicas críticas</strong> afectan la continuidad:</p>
+<ul>
+<li><strong>Paradas o degradación del proceso:</strong> pérdida de supervisión/control o necesidad de operar en manual.</li>
+<li><strong>Daños y recuperación más lenta:</strong> maniobras bruscas (bombas/válvulas) pueden provocar averías y aumentar el tiempo de restablecimiento.</li>
+</ul>
+<h4 id="consecuencias-socioeconómicas-e-interdependencias">Consecuencias Socioeconómicas e Interdependencias </h4>
+<p>Dada la interconexión entre infraestructuras críticas descrita en el sector agua:</p>
+<ul>
+<li><strong>Interdependencias:</strong> sanidad e industria/servicios dependen del suministro continuo.</li>
+<li><strong>Seguridad ciudadana:</strong> caída de presión afecta a hidrantes y respuesta ante incendios.</li>
+</ul>
+<h4 id="consecuencias-ambientales">Consecuencias Ambientales </h4>
+<p>Puede haber <strong>impacto ambiental</strong> si el incidente deriva en vertidos, tratamiento fuera de especificación o generación anómala de lodos.</p>
+<h4 id="consecuencias-legales-y-reputacionales">Consecuencias Legales y Reputacionales </h4>
+<ul>
+<li><strong>Regulatorio y reputación:</strong> sanciones, auditorías y pérdida de confianza pública.</li>
+</ul>
+<h3 id="14-medidas-de-mitigación-para-los-riesgos-identificados">1.4 Medidas de mitigación para los riesgos identificados </h3>
+<p>En OT, la mitigación tiene que ser compatible con operación continua. Con los riesgos más altos (V=6), se prioriza:</p>
+<ul>
+<li><strong>Evitar accesos no autorizados</strong> a sistemas de operación (porque habilita el resto).</li>
+<li><strong>Impedir la manipulación peligrosa de setpoints</strong> (integridad del tratamiento) incluso aunque alguien “consiga entrar”.</li>
+<li><strong>Mantener capacidad de control en modo degradado</strong> si cae la supervisión (DoS/indisponibilidad OT/SCADA).</li>
+</ul>
+<h4 id="gobernanza-y-operación">Gobernanza y operación </h4>
+<ul>
+<li><strong>Inventario OT y criticidad:</strong> qué equipos hay y qué dependencias tienen.</li>
+<li><strong>Gestión del cambio (MOC):</strong> cambios en PLC/setpoints controlados y registrados.</li>
+<li><strong>Cuentas nominativas y revisión de accesos:</strong> especialmente terceros/mantenimiento.</li>
+</ul>
+<h4 id="arquitectura-itot-y-segmentación">Arquitectura IT/OT y segmentación </h4>
+<ul>
+<li><strong>Separación IT–OT + reglas mínimas:</strong> sin rutas directas desde IT hacia PLC/SCADA.</li>
+<li><strong>DMZ industrial + jump server:</strong> acceso remoto controlado y auditable.</li>
+<li><strong>Filtrado y limitación de tráfico:</strong> reducir superficie frente a DoS/tormentas.</li>
+</ul>
+<h4 id="control-de-acceso-y-hardening">Control de acceso y hardening </h4>
+<ul>
+<li><strong>MFA y control de sesiones:</strong> especialmente para privilegios y terceros.</li>
+<li><strong>Mínimo privilegio:</strong> roles separados (operación/mantenimiento/ingeniería).</li>
+<li><strong>Hardening estaciones OT:</strong> control de USB/servicios y parcheo planificado.</li>
+</ul>
+<h4 id="integridad-del-proceso">Integridad del proceso </h4>
+<ul>
+<li><strong>Límites e interbloqueos en PLC:</strong> topes y failsafe para impedir valores peligrosos.</li>
+<li><strong>Alarmas y verificación operativa:</strong> confirmación ante lecturas incoherentes.</li>
+<li><strong>Histórico y rollback:</strong> volver rápido a configuración segura.</li>
+</ul>
+<h4 id="monitorización-y-detección">Monitorización y detección </h4>
+<ul>
+<li><strong>Monitorización industrial/IDS:</strong> alertas ante lecturas/escrituras anómalas.</li>
+<li><strong>Logs + hora consistente:</strong> facilitar análisis posterior.</li>
+<li><strong>Validación cruzada de instrumentación:</strong> detectar lecturas incoherentes.</li>
+</ul>
+<h4 id="resiliencia-y-continuidad">Resiliencia y continuidad </h4>
+<ul>
+<li><strong>Continuidad eléctrica:</strong> SAI + grupos con pruebas.</li>
+<li><strong>Mantenimiento y repuestos críticos:</strong> reducir paradas y acelerar recuperación.</li>
+<li><strong>Backups OT probados:</strong> PLC/SCADA y restauración verificada.</li>
+<li><strong>Stock y acuerdos de reactivos:</strong> evitar paradas por suministro.</li>
+<li><strong>Planes y simulacros:</strong> operación manual e incidentes.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Amenaza identificada</th>
+<th style="text-align:left">Medidas de mitigación (principal/es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Acceso no autorizado</strong></td>
+<td style="text-align:left">MFA, mínimo privilegio, cuentas nominativas, auditoría; acceso remoto vía DMZ/jump server.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Manipulación química</strong></td>
+<td style="text-align:left">Límites/interbloqueos en PLC, MOC, versionado y rollback de setpoints/recetas, alarmas por desviación.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ataque DoS / Infecciones</strong></td>
+<td style="text-align:left">Segmentación IT/OT, filtrado y reglas mínimas, reducción de “todo a todo”, operación local degradada.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ataque MitM / Spoofing</strong></td>
+<td style="text-align:left">IDS industrial, logs y sincronía horaria, validación cruzada y verificación operativa (muestreo/lab).</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Fallas en sensores</strong></td>
+<td style="text-align:left">Validación cruzada, calibración/mantenimiento y alarmas conservadoras con confirmación manual.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Corte de luz / Averías</strong></td>
+<td style="text-align:left">SAI+grupos con pruebas, mantenimiento preventivo, repuestos críticos y plan de recuperación.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Falta de reactivos</strong></td>
+<td style="text-align:left">Stock crítico con control de caducidad y acuerdos de reposición prioritaria.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Desastres / Sequía</strong></td>
+<td style="text-align:left">Planes de contingencia, operación manual, coordinación y protocolos de emergencia/gestión de demanda.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="15-diseño-y-configuración-del-escenario-de-red-simulación">1.5 Diseño y Configuración del Escenario de Red (Simulación) </h3>
+<p>Para la <strong>simulación</strong>, se ha montado un laboratorio simple del segmento <strong>OT</strong> (SCADA/PLC) de la ETAP. Según el enunciado, se utiliza direccionamiento privado de <strong>Clase B</strong> dentro de <strong>172.16.0.0/12</strong>.</p>
+<p><strong>Cálculo de red (según el enunciado):</strong><br>
+Sea <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span> el resultado de aplicar el módulo a los <strong>últimos 3 dígitos del DNI</strong>.</p>
+<ul>
+<li><strong>Fórmula:</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mo stretchy="false">(</mo><mrow><mover accent="true"><mtext>u</mtext><mo>ˊ</mo></mover><mtext>ltimos&nbsp;3&nbsp;d</mtext><mover accent="true"><mtext>ı</mtext><mo>ˊ</mo></mover><mtext>gitos</mtext></mrow><mo stretchy="false">)</mo><mspace></mspace><mspace width="0.4444em"></mspace><mo stretchy="false">(</mo><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.3333em"></mspace><mn>255</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X = (\text{últimos 3 dígitos}) \pmod{255}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord">u</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˊ</span></span></span></span></span></span></span><span class="mord">ltimos&nbsp;3&nbsp;d</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord latin_fallback">ı</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˊ</span></span></span></span></span></span></span><span class="mord">gitos</span></span><span class="mclose">)</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:0.4444em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.3333em;"></span><span class="mord">255</span><span class="mclose">)</span></span></span></span></li>
+<li><strong>Valor obtenido:</strong> últimos 3 dígitos = <strong>462</strong> → <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mn>462</mn><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>255</mn><mo>=</mo><mn>207</mn></mrow><annotation encoding="application/x-tex">X = 462 \bmod 255 = 207</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">462</span><span class="mspace" style="margin-right:0.0556em;"></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.0556em;"></span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">255</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">207</span></span></span></span></li>
+</ul>
+<p>Con esto, la red de trabajo queda:</p>
+<ul>
+<li><strong>Red OT simulada:</strong> <code>172.16.207.0/24</code></li>
+<li><strong>Máscara:</strong> <code>255.255.255.0</code> (254 hosts útiles)</li>
+<li><strong>Puerta de enlace:</strong> no necesaria si todo está en la misma LAN</li>
+</ul>
+<h4 id="esquema-gráfico-de-red">Esquema Gráfico de Red </h4>
+<p>El siguiente esquema representa la topología en estrella utilizada en el simulador:</p>
+<ul>
+<li><strong>Maestro (SCADA/HMI):</strong> Estación de supervisión que consulta el estado de la planta.</li>
+<li><strong>Esclavo (ModbusPal):</strong> Simulador de PLC industrial que gestiona los actuadores y sensores de la ETAP.</li>
+<li><strong>Atacante (Kali Linux):</strong> Máquina de auditoría desde la que se inyectará el tráfico Modbus malicioso.</li>
+</ul>
+<p><img src="Simulacion-Ataque.drawio.png" alt="Simulacion Ataque"></p>
+<h4 id="direccionamiento-ip-y-software">Direccionamiento IP y Software </h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Dispositivo</th>
+<th style="text-align:left">Función</th>
+<th style="text-align:left">Dirección IP</th>
+<th style="text-align:left">Software / Herramientas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Maestro</strong></td>
+<td style="text-align:left">Supervisión SCADA</td>
+<td style="text-align:left"><code>172.16.207.20</code></td>
+<td style="text-align:left">QModMaster / ScadaBR</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Esclavo</strong></td>
+<td style="text-align:left">PLC Dosificación</td>
+<td style="text-align:left"><code>172.16.207.10</code></td>
+<td style="text-align:left">ModbusPal (Java)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Atacante</strong></td>
+<td style="text-align:left">Estación Kali</td>
+<td style="text-align:left"><code>172.16.207.100</code></td>
+<td style="text-align:left">Mbtget, Metasploit, Nmap</td>
+</tr>
+</tbody>
+</table>
+<p>Notas de direccionamiento:</p>
+<ul>
+<li>Se reserva <code>172.16.207.20</code> para el rol de <strong>maestro (SCADA/HMI)</strong>, <code>172.16.207.10</code> para el <strong>esclavo (PLC/ModbusPal)</strong> y <code>172.16.207.100</code> para auditoría.</li>
+<li>La segmentación se deja plana a propósito para la práctica; en una ETAP real lo normal es que el atacante <strong>no</strong> esté en la misma LAN OT sin una intrusión previa (o un acceso físico).</li>
+</ul>
+<h4 id="configuración-del-mapa-de-memoria-modbuspal">Configuración del Mapa de Memoria (ModbusPal) </h4>
+<p>Se ha configurado el esclavo (Unit ID: 1) con los siguientes registros para representar el proceso de potabilización:</p>
+<p><strong>12 Coils (Salidas Digitales - On/Off):</strong></p>
+<ol>
+<li><strong>Coil 1-2:</strong> Bombas de captación de agua bruta (Embalse).</li>
+<li><strong>Coil 3-6:</strong> Bombas de impulsión a alta presión (Salida a red).</li>
+<li><strong>Coil 7-10:</strong> Válvulas de limpieza de filtros.</li>
+<li><strong>Coil 11-12:</strong> Agitadores de mezcla de reactivos químicos.</li>
+</ol>
+<p><strong>14 Holding Registers (Valores de 16 bits):</strong></p>
+<ul>
+<li><strong>40001:</strong> Concentración de Cloro Residual (mg/L x100).</li>
+<li><strong>40002:</strong> Nivel de pH (Acidez del agua).</li>
+<li><strong>40003:</strong> Turbidez (NTU).</li>
+<li><strong>40004:</strong> Caudal de entrada (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mn>3</mn></msup><mi mathvariant="normal">/</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">m^3/h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathnormal">h</span></span></span></span>).</li>
+<li><strong>40005:</strong> Caudal de salida (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mn>3</mn></msup><mi mathvariant="normal">/</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">m^3/h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathnormal">h</span></span></span></span>).</li>
+<li><strong>40006:</strong> Nivel Tanque Cloro (%).</li>
+<li><strong>40007:</strong> Nivel Tanque Coagulante (%).</li>
+<li><strong>40008:</strong> Presión tubería principal (Bar).</li>
+<li><strong>40009:</strong> Conductividad.</li>
+<li><strong>40010:</strong> Temperatura del agua.</li>
+<li><strong>40011-40014:</strong> <em>Setpoints</em> de seguridad (Límites programados por el operario).</li>
+</ul>
+<h4 id="configuración-de-comunicación">Configuración de Comunicación </h4>
+<p>El Maestro está configurado para realizar consultas cíclicas (polling) cada 1000 ms al Esclavo (Unit ID: 1) en el puerto estándar <strong>TCP/502</strong>.</p>
+<p><img src="Simulacion.png" alt="Simulación"></p>
+<p>En el laboratorio se asume al atacante en la misma LAN <code>172.16.207.0/24</code>, lo que permite observar e interactuar con Modbus.</p>
+<h3 id="16-simulación-de-ataque-a-sistemas-scadaics-lectura-de-registroscoils">1.6 Simulación de ataque a sistemas SCADA/ICS: Lectura de Registros/Coils </h3>
+<p>Objetivo: evidenciar que <strong>Modbus TCP</strong> no aporta confidencialidad ni control de acceso, permitiendo <strong>lectura</strong> de registros/coils desde la misma LAN OT.</p>
+<ul>
+<li><strong>Atacante:</strong> Kali Linux <code>172.16.207.100</code>.</li>
+<li><strong>Maestro (SCADA/HMI):</strong> <code>172.16.207.20</code>.</li>
+<li><strong>Esclavo (PLC simulado / ModbusPal):</strong> <code>172.16.207.10</code> (Unit ID: 1, puerto TCP/502).</li>
+<li><strong>Alcance (lectura):</strong> <strong>Holding Registers</strong> (14 registros, equivalentes a <code>40001–40014</code>) y <strong>Coils</strong> (12 coils, equivalentes a <code>00001–00012</code>) según el mapa definido en 1.5.</li>
+</ul>
+<h4 id="observación-de-tráfico-con-wireshark-sniffing">Observación de tráfico con Wireshark (sniffing) </h4>
+<p>Se capturó tráfico para confirmar:</p>
+<ul>
+<li>Dispositivos que hablan Modbus (<code>172.16.207.20</code> ↔ <code>172.16.207.10</code>).</li>
+<li>Uso del puerto <strong>TCP/502</strong>.</li>
+<li>Funciones en claro (p. ej., <strong>0x03 Read Holding Registers</strong>, <strong>0x01 Read Coils</strong>).</li>
+</ul>
+<p>Modbus TCP no cifra ni autentica, así que el contenido viaja en claro.</p>
+<p><img src="Auditoria-Wireshark-Simulacion.png" alt="Auditoría Wireshark"></p>
+<h4 id="lectura-de-holding-registers-con-metasploit">Lectura de Holding Registers con Metasploit </h4>
+<p>Se leyeron <strong>Holding Registers</strong> del PLC simulado (valores de proceso según el mapa del 1.5).</p>
+<p>Comandos ejecutados en Metasploit:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>use auxiliary/scanner/scada/modbusclient
+<span class="token builtin class-name">set</span> RHOSTS <span class="token number">172.16</span>.207.10
+<span class="token builtin class-name">set</span> ACTION READ_HOLDING_REGISTERS
+<span class="token builtin class-name">set</span> DATA_ADDRESS <span class="token number">0</span>
+<span class="token builtin class-name">set</span> NUMBER <span class="token number">14</span>
+<span class="token builtin class-name">set</span> UNIT_NUMBER <span class="token number">1</span>
+run
+</code></pre><p>La salida confirma que el atacante obtiene valores del proceso (p. ej., <code>1200</code>, <code>150</code>, <code>710</code>...), lo que supone <strong>fuga de información operativa</strong>.</p>
+<p><img src="Auditoria-Leer-Registros-Simulacion.png" alt="Auditoría Metasploit - Lectura de Registros"></p>
+<h4 id="lectura-de-coils-con-metasploit">Lectura de Coils con Metasploit </h4>
+<p>Se repitió el procedimiento para leer coils (estado On/Off).</p>
+<p>Comandos ejecutados en Metasploit:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token builtin class-name">set</span> ACTION READ_COILS
+<span class="token builtin class-name">set</span> DATA_ADDRESS <span class="token number">0</span>
+<span class="token builtin class-name">set</span> NUMBER <span class="token number">12</span>
+run
+</code></pre><p>El PLC devuelve una cadena de bits (0/1) que refleja el estado operativo de los equipos.</p>
+<p><img src="Auditoria-Leer-Coils-Simulacion.png" alt="Auditoría Metasploit - Lectura de Coils"></p>
+<h4 id="vulnerabilidad-explotada-y-relación-con-el-análisis-de-riesgos">Vulnerabilidad explotada y relación con el análisis de riesgos </h4>
+<p>La causa raíz es la <strong>ausencia de seguridad por diseño</strong> en Modbus TCP:</p>
+<ul>
+<li><strong>Sin autenticación/autorización:</strong> conocer IP, Unit ID y puerto es suficiente para leer memoria.</li>
+<li><strong>Tráfico en texto claro:</strong> facilita el descubrimiento de funciones, direcciones y valores.</li>
+<li><strong>Confianza implícita en la red OT:</strong> el protocolo asume que “quien llega a la red” es legítimo.</li>
+</ul>
+<p>Esto se alinea con los riesgos de 1.2 (acceso no autorizado y pérdida/engaño de monitorización) y facilita ataques posteriores.</p>
+<p>Las <strong>medidas de mitigación</strong> asociadas a este ataque se detallan en el apartado <strong>1.8</strong>.</p>
+<h3 id="17-simulación-de-ataque-a-sistemas-scadaics-modificación-de-registroscoils">1.7 Simulación de ataque a sistemas SCADA/ICS: Modificación de Registros/Coils </h3>
+<p>En esta fase se muestra el impacto en <strong>integridad</strong>: desde la misma LAN OT se pueden <strong>escribir</strong> registros y coils sin autenticación.</p>
+<ul>
+<li><strong>Atacante:</strong> Kali Linux <code>172.16.207.100</code>.</li>
+<li><strong>Maestro (SCADA/HMI):</strong> <code>172.16.207.20</code>.</li>
+<li><strong>Esclavo (PLC simulado / ModbusPal):</strong> <code>172.16.207.10</code> (Unit ID: 1, puerto TCP/502).</li>
+</ul>
+<h4 id="escritura-de-holding-registers-alteración-de-variables-de-proceso">Escritura de Holding Registers (alteración de variables de proceso) </h4>
+<p>Desde un estado normal del proceso, fuerzo cambios escribiendo directamente en memoria.</p>
+<p>Estado inicial (antes del ataque):</p>
+<p><img src="Registros-Antes-Ataque-Simulacion.png" alt="Registros antes de Ataque"></p>
+<p>Ejecución del ataque (Metasploit). Se usa <code>modbusclient</code> para sobreescribir valores en las direcciones de memoria definidas en el PLC simulado:</p>
+<p>Comandos ejecutados:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>use auxiliary/scanner/scada/modbusclient
+<span class="token builtin class-name">set</span> RHOSTS <span class="token number">172.16</span>.207.10
+<span class="token builtin class-name">set</span> UNIT_NUMBER <span class="token number">1</span>
+<span class="token builtin class-name">set</span> ACTION WRITE_REGISTER
+<span class="token builtin class-name">set</span> DATA_ADDRESS <span class="token number">2</span>
+<span class="token builtin class-name">set</span> DATA <span class="token number">1400</span>
+run
+<span class="token builtin class-name">set</span> DATA_ADDRESS <span class="token number">0</span>
+<span class="token builtin class-name">set</span> DATA <span class="token number">0</span>
+run
+</code></pre><p>Evidencia de ejecución:</p>
+<p><img src="Auditoria-Escribir-Registros-Simulacion.png" alt="Ataque - Escribir Registros"></p>
+<p>Resultado (después del ataque):</p>
+<p><img src="Registros-Despues-Ataque-Simulacion.png" alt="Registros despues de ataque"></p>
+<h4 id="escritura-de-coils-control-de-actuadores">Escritura de Coils (control de actuadores) </h4>
+<p>Además de variables analógicas, se pueden forzar salidas digitales (coils) y actuar sobre actuadores.</p>
+<p>Estado inicial (antes del ataque):</p>
+<p><img src="Coils-Antes-Ataque-Simulacion.png" alt="Coils antes de Ataque"></p>
+<p>Ejecución del ataque (Metasploit). Se mantiene la sesión del módulo y se cambia la acción a escritura de coils:</p>
+<p>Comandos ejecutados:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token builtin class-name">set</span> ACTION WRITE_COIL
+<span class="token builtin class-name">set</span> DATA_ADDRESS <span class="token number">1</span>
+<span class="token builtin class-name">set</span> DATA <span class="token number">0</span>
+run
+<span class="token builtin class-name">set</span> DATA_ADDRESS <span class="token number">2</span>
+<span class="token builtin class-name">set</span> DATA <span class="token number">0</span>
+run
+</code></pre><p>Evidencia de ejecución:</p>
+<p><img src="Auditoria-Escribir-Coils-Simulacion.png" alt="Ataque - Escribir Coils"></p>
+<p>Resultado (después del ataque):</p>
+<p><img src="Coils-Despues-Ataque-Simulacion.png" alt="Coils despues de Ataque"></p>
+<h4 id="vulnerabilidad-explotada-y-relación-con-el-análisis-de-riesgos-1">Vulnerabilidad explotada y relación con el análisis de riesgos </h4>
+<p>La causa raíz es la <strong>ausencia de seguridad por diseño en Modbus TCP</strong>:</p>
+<ul>
+<li><strong>Falta de autenticación y autorización:</strong> el PLC acepta escrituras sin verificar el origen.</li>
+<li><strong>Sin control de integridad/antireplay:</strong> no hay mecanismo criptográfico que impida modificaciones.</li>
+<li><strong>Confianza implícita en la red OT:</strong> el protocolo asume que todo nodo en la LAN es legítimo.</li>
+</ul>
+<p>Esto valida los riesgos de 1.2 asociados a <strong>manipulación del tratamiento</strong> y <strong>control de actuadores</strong>.</p>
+<p>Las <strong>medidas de mitigación</strong> asociadas a este ataque se detallan en el apartado <strong>1.8</strong>.</p>
+<h3 id="18-medidas-de-mitigación-continuación-y-detalle-técnico">1.8 Medidas de mitigación (continuación y detalle técnico) </h3>
+<p>Los ataques 1.6 (lectura) y 1.7 (escritura) muestran que <strong>Modbus TCP</strong> carece de autenticación, cifrado e integridad. La mitigación se aplica como <strong>defensa en profundidad</strong> (en línea con 1.4).</p>
+<h4 id="objetivo">Objetivo </h4>
+<ul>
+<li>Reducir exposición del PLC (segmentación y control de acceso).</li>
+<li>Limitar operaciones <strong>WRITE</strong> y reforzar integridad del proceso.</li>
+<li>Detectar lecturas/escrituras anómalas.</li>
+</ul>
+<h4 id="controles-a-nivel-de-red">Controles a nivel de red </h4>
+<ul>
+<li><strong>Segmentación:</strong> separar SCADA/PLC y evitar rutas desde redes de usuario hacia TCP/502.</li>
+<li><strong>Firewall/reglas mínimas:</strong> permitir solo orígenes necesarios hacia <code>172.16.207.10:502</code>.</li>
+<li><strong>DPI (si se dispone):</strong> limitar funciones Modbus (p. ej., permitir <code>READ</code> desde <code>172.16.207.20</code> y restringir <code>WRITE</code>).</li>
+<li><strong>Capa 2:</strong> deshabilitar puertos no usados/port-security.</li>
+</ul>
+<h4 id="controles-de-acceso-y-operación">Controles de acceso y operación </h4>
+<ul>
+<li><strong>DMZ/jump server + MFA:</strong> acceso a OT por salto controlado y auditable.</li>
+<li><strong>Cuentas y roles:</strong> mínimo privilegio y revisión periódica.</li>
+<li><strong>MOC:</strong> cambios en PLC/setpoints con registro y validación.</li>
+</ul>
+<h4 id="controles-en-plc-y-proceso">Controles en PLC y proceso </h4>
+<ul>
+<li><strong>Interbloqueos y validación en PLC:</strong> límites físicos y alarmas.</li>
+<li><strong>Hardening:</strong> restringir servicios e interfaces de programación.</li>
+<li><strong>Cifrado cuando sea viable:</strong> Modbus Security/TLS o túnel cifrado en el conduit.</li>
+</ul>
+<h4 id="monitorización">Monitorización </h4>
+<ul>
+<li><strong>Monitorización/IDS industrial:</strong> alertas por lecturas/escrituras anómalas.</li>
+<li><strong>Logs + NTP:</strong> facilitar trazabilidad y análisis.</li>
+</ul>
+<h4 id="resumen">Resumen </h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Ataque / Amenaza</th>
+<th style="text-align:left">Medida de mitigación técnica</th>
+<th style="text-align:left">Objetivo principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Sniffing (1.6)</strong></td>
+<td style="text-align:left">Segmentación + cifrado de canal (Modbus Security/TLS o túnel en conduit cuando aplique).</td>
+<td style="text-align:left"><strong>Confidencialidad</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Lectura no autorizada (1.6)</strong></td>
+<td style="text-align:left">ACL/firewall industrial (permitir solo SCADA autorizado) + control de acceso a OT (DMZ/jump).</td>
+<td style="text-align:left"><strong>Autorización</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Escritura de registros (1.7)</strong></td>
+<td style="text-align:left">DPI para bloquear <code>WRITE</code> + validación de rangos/interbloqueos en PLC.</td>
+<td style="text-align:left"><strong>Integridad</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Manipulación de coils (1.7)</strong></td>
+<td style="text-align:left">Restringir <code>WRITE_COIL</code> por origen/función + cuentas/roles y trazabilidad de cambios.</td>
+<td style="text-align:left"><strong>Integridad/Disponibilidad</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusión:</strong> la mitigación efectiva combina segmentación, control de acceso, protecciones en PLC y monitorización.</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
