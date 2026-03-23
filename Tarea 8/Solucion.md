@@ -20,7 +20,7 @@ Dada la naturaleza crítica de la disponibilidad para evitar el deterioro de pro
 
 ## 1.2 Diseño del Diagrama de Flujo de Datos (DFD)
 
-Para el diseño de la infraestructura de AgroDirecto, se ha optado por un modelo de **microsegmentación** que prioriza la disponibilidad y la protección de activos críticos. 
+Para el diseño de la infraestructura de AgroDirecto, se ha optado por un modelo de **microsegmentación** que prioriza la disponibilidad y la protección de activos críticos.
 
 ### Características Clave del Modelo
 
@@ -36,6 +36,7 @@ Para el diseño de la infraestructura de AgroDirecto, se ha optado por un modelo
 ### Componentes del Sistema
 
 #### Entidades Externas (4)
+
 El diagrama incluye **4 entidades externas** que interactúan con el sistema:
 
 1. **Agricultor:** Principal generador de contenido y proveedor de productos
@@ -44,6 +45,7 @@ El diagrama incluye **4 entidades externas** que interactúan con el sistema:
 4. **API Uber Eats:** Proveedor tercero integrado para servicios de logística y entrega
 
 #### Procesos (4)
+
 Se identifica **5 procesos críticos** que metabolizan las transacciones:
 
 1. **AgroDirecto Frontend:** Portal web/móvil para interacción de usuarios
@@ -53,6 +55,7 @@ Se identifica **5 procesos críticos** que metabolizan las transacciones:
 5. **AgroDirecto Backend:** Orquestador central de lógica de negocio
 
 #### Almacenes de Datos (3)
+
 Se preservan **3 almacenes de datos** diferenciados por criticidad:
 
 1. **Redis Database:** Caché de sesiones y datos transaccionales
@@ -60,6 +63,7 @@ Se preservan **3 almacenes de datos** diferenciados por criticidad:
 3. **File System:** Sistema de archivos para logs, documentos y contenido estático
 
 #### Flujos de Datos
+
 Todos los componentes se comunican mediante **flujos HTTPS** asegurados, garantizando confidencialidad e integridad en tránsito.
 
 ### Límites de Confianza (Trust Boundaries)
@@ -76,18 +80,67 @@ La arquitectura implementa **3 zonas de confianza diferenciadas**:
 
 ### Análisis
 
-Tras el modelado exhaustivo con la herramienta **Microsoft Threat Modeling Tool**, se han detectado **281 amenazas potenciales**. Siguiendo el criterio de criticidad y relevancia para el modelo de negocio de AgroDirecto, se han seleccionado las siguientes **6 amenazas de prioridad Alta** extraídas directamente del reporte:
+Tras el modelado exhaustivo con la herramienta **Microsoft Threat Modeling Tool**, se han detectado **281 amenazas potenciales**. Siguiendo el criterio de criticidad y relevancia para el modelo de negocio de AgroDirecto, se han seleccionado las siguientes **6 amenazas de prioridad Alta** extraídas directamente del reporte.
+
+**Nota:** El mapeo completo de técnicas MITRE ATT&CK con anotaciones detalladas se encuentra en el archivo `agrodirecto_attack_navigator.json` en formato de capa de Attack Navigator.
+
+---
+
+## Análisis de Riesgo DREAD
+
+Se ha aplicado la metodología **DREAD (Damage potential, Reproducibility, Exploitability, Affected users, Discoverability)** para cuantificar el riesgo de cada amenaza. Cada factor se califica de 1 a 3, siendo 3 el más crítico. La puntuación total máxima es 15.
+
+### Amenazas Seleccionadas para Análisis Detallado
+
+De las 281 amenazas potenciales identificadas, se han seleccionado las siguientes **6 amenazas críticas** para análisis exhaustivo:
+
+1. **Suplantación de Base de Datos Redis** [ID 17 - STRIDE: Spoofing]
+   - Riesgo de interceptación de flujos transaccionales críticos mediante técnicas MITM
+2. **Cross Site Scripting (XSS)** [ID 1 - STRIDE: Tampering]
+   - Vulnerabilidad de inyección de scripts en la capa frontend con alto potencial de explotación
+3. **Manipulación de Registros de Auditoría** [ID 249 - STRIDE: Repudiation]
+   - Riesgo de eliminación o alteración de trazabilidad forense, mitigado mediante arquitectura Zero Trust
+4. **Control de Acceso Débil a Resources Críticos** [ID 18 - STRIDE: Information Disclosure]
+   - Acceso no autorizado a información confidencial en Redis sin adecuada protección de credenciales
+5. **Denegación de Servicio en Pasarela de Pagos** [ID 73 - STRIDE: Denial of Service]
+
+   - Degradación de servicio crítico ante picos de carga sin infraestructura de escalado dinámico
+
+6. **Debilidad en Autorización SSO** [ID 11 - STRIDE: Elevation of Privilege]
+   - Vulnerabilidades en implementación OAuth2 que permiten captura y reutilización de tokens
+
+### Matriz DREAD de las 6 Amenazas
+
+| Amenaza                                         | D   | R   | E   | A   | D   | **Total** | **Riesgo** |
+| ----------------------------------------------- | --- | --- | --- | --- | --- | --------- | ---------- |
+| 1. Suplantación de Base de Datos Redis          | 3   | 2   | 2   | 3   | 1   | **11/15** | 🔴 Alto    |
+| 2. Cross Site Scripting (XSS)                   | 2   | 3   | 3   | 3   | 3   | **14/15** | 🔴 Crítico |
+| 3. Manipulación de Registros de Auditoría       | 1   | 1   | 1   | 2   | 1   | **6/15**  | 🟡 Bajo    |
+| 4. Control de Acceso Débil a Resources Críticos | 3   | 2   | 2   | 3   | 2   | **12/15** | 🔴 Alto    |
+| 5. Denegación de Servicio en Pasarela de Pagos  | 3   | 3   | 2   | 3   | 2   | **13/15** | 🔴 Crítico |
+| 6. Debilidad en Autorización SSO                | 3   | 2   | 3   | 3   | 2   | **13/15** | 🔴 Crítico |
+
+### Detalle de Puntuaciones DREAD
+
+**Leyenda:**
+
+- **D (Damage):** 1=Bajo, 2=Medio, 3=Total
+- **R (Reproducibility):** 1=Difícil, 2=Mediano, 3=Trivial
+- **E (Exploitability):** 1=Avanzado, 2=Intermedio, 3=Básico
+- **A (Affected users):** 1=Pocos, 2=Algunos, 3=Muchos
+- **D (Discoverability):** 1=Secreto, 2=Difícil, 3=Públicamente conocido
 
 ---
 
 ### Amenaza 1: Suplantación de Base de Datos Redis
 
-**ID:** 17 | **Categoría:** Spoofing | **Severidad:** 🔴 Alta
+**ID:** 17 | **Categoría:** Spoofing | **Severidad:** 🔴 Alta | **DREAD:** 11/15
 
 **Descripción Técnica:**  
 Un atacante podría suplantar la base de datos Redis, provocando la entrega de datos manipulados a la Pasarela de Pagos. Según MITRE ATT&CK (T1557), esto permite interceptar flujos críticos mediante técnicas de Adversary-in-the-Middle.
 
 **Componentes Afectados:**
+
 - Redis Database
 - Pasarela de Pagos
 
@@ -101,12 +154,13 @@ Compromiso de la integridad en las transacciones financieras y posible alteraci�
 
 ### Amenaza 2: Cross Site Scripting (XSS)
 
-**ID:** 1 | **Categoría:** Tampering | **Severidad:** 🔴 Alta
+**ID:** 1 | **Categoría:** Tampering | **Severidad:** 🔴 Alta | **DREAD:** 14/15
 
 **Descripción Técnica:**  
 El servidor web es susceptible a ataques de scripts cruzados al no sanear adecuadamente las entradas de usuarios. Se asocia con MITRE ATT&CK (T1059) para la ejecución de código malicioso en el navegador del cliente.
 
 **Componentes Afectados:**
+
 - AgroDirecto Frontend
 
 **Impacto en el Negocio:**  
@@ -119,12 +173,13 @@ Robo de sesiones de clientes o redirección a pasarelas de pago fraudulentas, af
 
 ### Amenaza 3: Manipulación de Registros de Auditoría
 
-**ID:** 249 | **Categoría:** Repudiation | **Severidad:** 🔴 Alta
+**ID:** 249 | **Categoría:** Repudiation | **Severidad:** � Baja | **DREAD:** 6/15
 
-**Descripción Técnica:**  
+**Descripción Técnica:**
 Permitir que entidades con bajos niveles de confianza escriban en los registros de auditoría genera problemas de repudio. Se vincula con MITRE ATT&CK (T1070) sobre la manipulación de indicadores de actividad.
 
 **Componentes Afectados:**
+
 - Logs del Sistema
 - Pasarela de Pagos
 - Redis Database
@@ -139,12 +194,13 @@ Imposibilidad de realizar auditorías forenses fiables tras un incidente, dejand
 
 ### Amenaza 4: Control de Acceso Débil a Resources Críticos
 
-**ID:** 18 | **Categoría:** Information Disclosure | **Severidad:** 🔴 Alta
+**ID:** 18 | **Categoría:** Information Disclosure | **Severidad:** 🔴 Alta | **DREAD:** 12/15
 
 **Descripción Técnica:**  
 Una protección de datos inadecuada en Redis podría permitir que un atacante lea información confidencial. Se relaciona con MITRE ATT&CK (T1560) para la recolección de activos de datos del negocio.
 
 **Componentes Afectados:**
+
 - Redis Database
 
 **Impacto en el Negocio:**  
@@ -157,12 +213,13 @@ Filtración de pedidos, volúmenes de stock y datos personales, incumpliendo nor
 
 ### Amenaza 5: Denegación de Servicio en Pasarela de Pagos
 
-**ID:** 73 | **Categoría:** Denial of Service | **Severidad:** 🔴 Alta
+**ID:** 73 | **Categoría:** Denial of Service | **Severidad:** 🔴 Alta | **DREAD:** 13/15
 
 **Descripción Técnica:**  
 El proceso de pagos puede detenerse o degradar su rendimiento ante picos de carga. Se asocia con MITRE ATT&CK (T1498) por agotamiento de recursos del sistema.
 
 **Componentes Afectados:**
+
 - Pasarela de Pagos
 
 **Impacto en el Negocio:**  
@@ -175,12 +232,13 @@ La caída del servicio detiene la venta de productos perecederos, provocando pé
 
 ### Amenaza 6: Debilidad en Autorización SSO
 
-**ID:** 11 | **Categoría:** Elevation of Privilege | **Severidad:** 🔴 Alta
+**ID:** 11 | **Categoría:** Elevation of Privilege | **Severidad:** 🔴 Alta | **DREAD:** 13/15
 
 **Descripción Técnica:**  
 Las implementaciones de SSO como OAuth2 son vulnerables a ataques de interceptación. Según MITRE ATT&CK (T1550), esto facilita el uso de tokens capturados para ganar acceso no autorizado.
 
 **Componentes Afectados:**
+
 - AgroDirecto Frontend (Módulo de Autenticación)
 - Servicios integrados mediante OAuth2
 

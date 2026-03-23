@@ -1,0 +1,156 @@
+{
+	"name": "AgroDirecto",
+	"versions": {
+		"attack": "18",
+		"navigator": "5.3.0",
+		"layer": "4.5"
+	},
+	"domain": "enterprise-attack",
+	"description": "Capa basada en scores de criticidad (0-100) para las 6 amenazas seleccionadas. Pondera el análisis DREAD frente al estado de mitigación real.",
+	"filters": {
+		"platforms": [
+			"Linux",
+			"Windows",
+			"IaaS",
+			"SaaS",
+			"Network",
+			"Web"
+		]
+	},
+	"sorting": 0,
+	"layout": {
+		"layout": "side",
+		"aggregateFunction": "average",
+		"showID": false,
+		"showName": true,
+		"showAggregateScores": false,
+		"countUnscored": false,
+		"expandedSubtechniques": "none"
+	},
+	"hideDisabled": false,
+	"techniques": [
+		{
+			"techniqueID": "T1557",
+			"tactic": "collection",
+			"score": 25,
+			"color": "",
+			"comment": "DREAD: 11/15 (Alto). Estado: Mitigado. El riesgo residual es bajo gracias a las zonas de confianza.",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1557",
+			"tactic": "credential-access",
+			"score": 25,
+			"color": "",
+			"comment": "DREAD: 11/15 (Alto). Estado: Mitigado. El riesgo residual es bajo gracias a las zonas de confianza.",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1059",
+			"tactic": "execution",
+			"score": 85,
+			"color": "",
+			"comment": "DREAD: 14/15 (Crítico). Estado: Mitigación perimetral (WAF). Riesgo alto por falta de refactorización.",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1070",
+			"tactic": "defense-evasion",
+			"score": 5,
+			"color": "",
+			"comment": "DREAD: 6/15 (Bajo). Estado: No Aplicable. Protegido por arquitectura Zero Trust.",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1560",
+			"tactic": "collection",
+			"score": 30,
+			"color": "",
+			"comment": "DREAD: 12/15 (Alto). Estado: Mitigado. Aislamiento de red reduce el impacto del DREAD original.",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1498",
+			"tactic": "impact",
+			"score": 90,
+			"color": "",
+			"comment": "DREAD: 13/15 (Crítico). Estado: No iniciado. Solo cuenta con rate-limiting básico.",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1550",
+			"tactic": "defense-evasion",
+			"score": 100,
+			"color": "",
+			"comment": "DREAD: 13/15 (Crítico). Estado: No iniciado. Pendiente de investigación técnica (DPoP).",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1550",
+			"tactic": "lateral-movement",
+			"score": 100,
+			"color": "",
+			"comment": "DREAD: 13/15 (Crítico). Estado: No iniciado. Pendiente de investigación técnica (DPoP).",
+			"enabled": true,
+			"metadata": [],
+			"links": [],
+			"showSubtechniques": false
+		}
+	],
+	"gradient": {
+		"colors": [
+			"#00ff04ff",
+			"#b3ff00ff",
+			"#ee6c11ff",
+			"#ff0000ff"
+		],
+		"minValue": 0,
+		"maxValue": 100
+	},
+	"legendItems": [
+		{
+			"color": "#00ff04",
+			"label": "Riesgo Residual Mínimo (Mitigado)"
+		},
+		{
+			"color": "#b3ff00",
+			"label": "Riesgo Bajo / No Aplicable"
+		},
+		{
+			"color": "#ee6c11",
+			"label": "Riesgo Significativo (Mitigación Parcial)"
+		},
+		{
+			"color": "#ff0000",
+			"label": "Riesgo Crítico (DREAD Alto + No Mitigado)"
+		}
+	],
+	"metadata": [],
+	"links": [],
+	"showTacticRowBackground": false,
+	"tacticRowBackground": "#dddddd",
+	"selectTechniquesAcrossTactics": true,
+	"selectSubtechniquesWithParent": false,
+	"selectVisibleTechniques": false
+}
