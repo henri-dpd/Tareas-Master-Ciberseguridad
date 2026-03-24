@@ -1,0 +1,380 @@
+<!DOCTYPE html><html><head>
+      <title>Solucion</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\henri\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.20\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="-modelado-de-amenazas-y-comprensión-de-adversarios">🔐 Modelado de Amenazas y Comprensión de Adversarios </h1>
+<h2 id="11-introducción">1.1 Introducción </h2>
+<p>Este proyecto analiza la arquitectura de seguridad de <strong>AgroDirecto</strong>, una plataforma de comercio electrónico (e-commerce) especializada en conectar de forma directa a agricultores ecológicos con consumidores finales. El objetivo principal de la plataforma es eliminar intermediarios en la cadena de distribución para garantizar precios justos al productor y productos de máxima frescura al cliente final.</p>
+<p><img src="AgroDirecto.png" alt="AgroDirecto"></p>
+<h3 id="pilares-de-la-infraestructura">Pilares de la Infraestructura </h3>
+<p>La infraestructura de AgroDirecto se organiza sobre un modelo <strong>Direct-to-Consumer (D2C)</strong> que integra tres pilares operacionales:</p>
+<ul>
+<li><strong>Gestión de Suministros:</strong> Portal administrativo donde los agricultores controlan inventario, precios y disponibilidad de productos.</li>
+<li><strong>Venta y Logística:</strong> Interfaz de cliente orientada a la compra, con integración vía API con proveedores de terceros (por ejemplo, Uber Eats) para la gestión de entregas.</li>
+<li><strong>Soporte:</strong> Sistema CRM centralizado para la gestión de incidencias y la atención al cliente.</li>
+</ul>
+<h3 id="importancia-de-la-seguridad-en-el-contexto">Importancia de la Seguridad en el Contexto </h3>
+<p>Dada la naturaleza crítica de la disponibilidad en las operaciones agrícolas (para evitar el deterioro de productos perecederos) y la sensibilidad de los datos financieros gestionados, la seguridad y la resiliencia del sistema representan pilares arquitectónicos fundamentales. Un incidente de seguridad no solo afecta a la confidencialidad e integridad de los datos, sino que compromete la <strong>disponibilidad</strong> del servicio, con impacto directo en la cadena de suministro y en el modelo económico de los agricultores.</p>
+<hr>
+<h2 id="12-diseño-del-diagrama-de-flujo-de-datos-dfd">1.2 Diseño del Diagrama de Flujo de Datos (DFD) </h2>
+<p>El modelado de la arquitectura de AgroDirecto se apoya en un enfoque de <strong>microsegmentación</strong> que prioriza la disponibilidad del servicio y la protección de activos críticos. A través del análisis del flujo de datos del negocio, se han identificado los componentes, procesos, almacenes y límites de confianza que constituyen la superficie de ataque de la plataforma.</p>
+<h3 id="estrategia-arquitectónica-principios-clave">Estrategia Arquitectónica: Principios Clave </h3>
+<p>La arquitectura propuesta implementa los siguientes principios de seguridad:</p>
+<ul>
+<li><strong>Separación Lógica de Portales:</strong> Los accesos de usuarios y personal de soporte se segregan mediante portales independientes para limitar la exposición a través de la capa de presentación.</li>
+<li><strong>Resiliencia de la Operación Logística:</strong> El sistema garantiza continuidad operativa en escenarios donde el e-commerce público se ve comprometido, protegiendo la entrega de productos.</li>
+<li><strong>Enclave Crítico de Seguridad:</strong> La Pasarela de Pagos y la base de datos de transacciones financieras se aíslan dentro de una zona de máxima restricción, simulando una arquitectura de subred privada.</li>
+<li><strong>Prevención del Movimiento Lateral:</strong> La implementación de límites de confianza explícitos impide la propagación de compromisos desde componentes de capa frontal hacia el enclave de procesamiento financiero.</li>
+</ul>
+<h3 id="referencia-visual-diagrama-completo">Referencia Visual: Diagrama Completo </h3>
+<p><img src="DFD.png" alt="AgroDirecto DFD"></p>
+<h3 id="especificación-de-componentes">Especificación de Componentes </h3>
+<h4 id="entidades-externas-4">Entidades Externas (4) </h4>
+<p>Se definen <strong>cuatro entidades externas</strong> que simbolizan actores y sistemas fuera del perímetro organizacional:</p>
+<ol>
+<li><strong>Agricultor:</strong> Proveedor de contenido (productos) que utiliza el portal administrativo.</li>
+<li><strong>Cliente Final:</strong> Usuario consumidor que realiza operaciones de compra mediante la interfaz pública.</li>
+<li><strong>Sistema de Soporte:</strong> Entidad externa responsable de la atención al cliente.</li>
+<li><strong>API de Logística Uber Eats:</strong> Proveedor tercero integrado para la orquestación del servicio de entrega.</li>
+</ol>
+<h4 id="procesos-del-sistema-5">Procesos del Sistema (5) </h4>
+<p>Se especifican <strong>cinco procesos críticos</strong> que implementan la lógica de negocio:</p>
+<ol>
+<li><strong>AgroDirecto Frontend:</strong> Aplicación web/móvil que implementa la capa de presentación y validación de usuario.</li>
+<li><strong>Proveedor de Autorización:</strong> Servicio centralizado de gestión de identidad basado en OAuth2 y SSO.</li>
+<li><strong>AgroDirecto CRM:</strong> Sistema de gestión de relaciones con clientes y seguimiento de incidencias.</li>
+<li><strong>Pasarela de Pagos:</strong> Componente especializado de procesamiento de transacciones financieras.</li>
+<li><strong>AgroDirecto Backend:</strong> Servicio de orquestación de lógica de negocio y coordinación de flujos de datos.</li>
+</ol>
+<h4 id="almacenes-de-datos-3">Almacenes de Datos (3) </h4>
+<p>Se definen <strong>tres almacenes de datos</strong> categorizados por su función operacional:</p>
+<ol>
+<li><strong>Redis Database:</strong> Servicio de caché en memoria para la gestión de sesiones y datos de acceso frecuente.</li>
+<li><strong>SQL Database:</strong> Base de datos persistente con información de perfiles, pedidos e historial de transacciones.</li>
+<li><strong>File System:</strong> Sistema de almacenamiento para registros de auditoría, documentación y contenido estático.</li>
+</ol>
+<h4 id="flujos-de-comunicación-asegurados">Flujos de Comunicación Asegurados </h4>
+<p>La totalidad de flujos entre componentes se implementan mediante canales HTTPS cifrados con TLS 1.3, garantizando confidencialidad e integridad en tránsito de datos.</p>
+<h3 id="límites-de-confianza-trust-boundaries">Límites de Confianza (Trust Boundaries) </h3>
+<p>La arquitectura establece <strong>tres zonas de confianza independientes</strong> que implementan segregación de responsabilidades:</p>
+<ul>
+<li><strong>Internet Explorer Boundaries:</strong> Fronteras que marcan la transición de usuarios externos (agricultores, clientes y personal de soporte) hacia el perímetro de la aplicación.</li>
+<li><strong>Complicit Trust Boundary:</strong> Zona controlada que alberga el proveedor de autorización e integraciones con terceros, limitando la exposición de credenciales.</li>
+<li><strong>Generic Trust Boundary:</strong> Enclave de máxima restricción que contiene Pasarela de Pagos, Redis y SQL Database, implementando microsegmentación que impide el movimiento lateral desde capas frontales.</li>
+</ul>
+<hr>
+<h2 id="13-identificación-y-análisis-de-amenazas">1.3 Identificación y Análisis de Amenazas </h2>
+<h3 id="metodología-aplicada">Metodología Aplicada </h3>
+<p>El análisis de amenazas de AgroDirecto se basa en el método <strong>STRIDE</strong> (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege), una metodología estándar en la industria para el análisis de riesgos en sistemas. Mediante la herramienta profesional <strong>Microsoft Threat Modeling Tool</strong>, se realizó un modelado exhaustivo de la arquitectura que resultó en la identificación de <strong>281 amenazas potenciales</strong>.</p>
+<p>De este conjunto de amenazas, se han seleccionado las <strong>6 amenazas más críticas</strong> para un análisis en profundidad, aplicando criterios de impacto en el modelo de negocio, probabilidad de explotación y criticidad de los componentes afectados.</p>
+<p><strong>Nota:</strong> El mapeo completo de técnicas MITRE ATT&amp;CK con anotaciones detalladas se encuentra disponible en el archivo <code>agrodirecto_attack_navigator.json</code>, que utiliza el formato estándar de capas de Attack Navigator para la visualización de técnicas de ataque en el contexto del sistema.</p>
+<h3 id="evaluación-de-riesgo-mediante-dread">Evaluación de Riesgo mediante DREAD </h3>
+<p>Se ha aplicado el framework <strong>DREAD</strong> para cuantificar el riesgo relativo de cada amenaza seleccionada:</p>
+<ul>
+<li><strong>D (Damage Potential):</strong> Magnitud del daño potencial (1=Mínimo, 2=Moderado, 3=Total).</li>
+<li><strong>R (Reproducibility):</strong> Facilidad para reproducir el ataque (1=Muy difícil, 2=Mediano, 3=Trivial).</li>
+<li><strong>E (Exploitability):</strong> Facilidad técnica para explotar la vulnerabilidad (1=Requiere conocimiento avanzado, 2=Técnica intermedia, 3=Trivial).</li>
+<li><strong>A (Affected Users):</strong> Número y proporción de usuarios impactados (1=Pocos, 2=Significativo, 3=Todos/Muchos).</li>
+<li><strong>D (Discoverability):</strong> Facilidad para descubrir la vulnerabilidad (1=Extremadamente difícil, 2=Difícil, 3=Trivial/Pública).</li>
+</ul>
+<p>La puntuación total de riesgo se calcula como suma de estos cinco factores, alcanzando un máximo de 15 puntos.</p>
+<h3 id="amenazas-seleccionadas-para-análisis">Amenazas Seleccionadas para Análisis </h3>
+<p>De las 281 amenazas identificadas por Microsoft Threat Modeling Tool, se han seleccionado las siguientes <strong>seis amenazas de máxima prioridad</strong>:</p>
+<ol>
+<li><strong>Suplantación de Base de Datos Redis</strong> [ID 17 - STRIDE: Spoofing]</li>
+<li><strong>Cross-Site Scripting (XSS)</strong> [ID 1 - STRIDE: Tampering]</li>
+<li><strong>Manipulación de Registros de Auditoría</strong> [ID 249 - STRIDE: Repudiation]</li>
+<li><strong>Control de Acceso Débil a Recursos Críticos</strong> [ID 18 - STRIDE: Information Disclosure]</li>
+<li><strong>Denegación de Servicio en Pasarela de Pagos</strong> [ID 73 - STRIDE: Denial of Service]</li>
+<li><strong>Debilidad en Autorización SSO</strong> [ID 11 - STRIDE: Elevation of Privilege]</li>
+</ol>
+<h3 id="matriz-cuantitativa-dread">Matriz Cuantitativa DREAD </h3>
+<table>
+<thead>
+<tr>
+<th>Amenaza</th>
+<th>D</th>
+<th>R</th>
+<th>E</th>
+<th>A</th>
+<th>D</th>
+<th><strong>Total/15</strong></th>
+<th><strong>Nivel</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Suplantación Redis</strong></td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td><strong>11</strong></td>
+<td>🔴 Alto</td>
+</tr>
+<tr>
+<td><strong>2. Cross-Site Scripting</strong></td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td><strong>14</strong></td>
+<td>🔴🔴 Crítico</td>
+</tr>
+<tr>
+<td><strong>3. Manipulación Auditoría</strong></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td><strong>6</strong></td>
+<td>🟡 Bajo</td>
+</tr>
+<tr>
+<td><strong>4. Control Acceso Débil</strong></td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td><strong>12</strong></td>
+<td>🔴 Alto</td>
+</tr>
+<tr>
+<td><strong>5. DoS Pagos</strong></td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td><strong>13</strong></td>
+<td>🔴🔴 Crítico</td>
+</tr>
+<tr>
+<td><strong>6. Debilidad SSO</strong></td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td><strong>13</strong></td>
+<td>🔴🔴 Crítico</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="amenaza-1-suplantación-de-base-de-datos-redis">Amenaza 1: Suplantación de Base de Datos Redis </h3>
+<p><strong>ID:</strong> 17 | <strong>Categoría STRIDE:</strong> Spoofing | <strong>Severidad:</strong> 🔴 Alto | <strong>DREAD:</strong> 11/15</p>
+<p><strong>Descripción Técnica:</strong><br>
+Un atacante en posición de intermediario de red podría suplantar la identidad de la base de datos Redis, provocando la interceptación y modificación de datos transaccionales en tránsito. Esta vulnerabilidad corresponde a MITRE ATT&amp;CK técnica T1557 (Adversary-in-the-Middle), que describe la capacidad de interceptar comunicaciones sin cifrar o con autenticación deficiente.</p>
+<p><strong>Componentes del Sistema Afectados:</strong></p>
+<ul>
+<li>Base de Datos Redis (almacenamiento de caché)</li>
+<li>Pasarela de Pagos (consumidor de datos de Redis)</li>
+</ul>
+<p><strong>Impacto Empresarial:</strong><br>
+La suplantación de Redis podría comprometer la integridad de sesiones de usuario y datos de transacciones financieras, resultando en pérdida de confianza de los agricultores, alteración de registros de ventas y posible incumplimiento de normativas PCI-DSS.</p>
+<p><strong>Estado del Riesgo:</strong> ✅ <strong>Mitigado</strong><br>
+<strong>Fundamentación de Mitigación:</strong> Este riesgo se ha neutralizado mediante la implementación de una arquitectura de Zero Trust que establece zonas de confianza diferenciadas. La base de datos Redis se encuentra aislada en un enclave seguro con acceso restringido exclusivamente a procesos autorizados, impidiendo la suplantación incluso en escenarios de compromiso de red.</p>
+<hr>
+<h3 id="amenaza-2-cross-site-scripting-xss">Amenaza 2: Cross-Site Scripting (XSS) </h3>
+<p><strong>ID:</strong> 1 | <strong>Categoría STRIDE:</strong> Tampering | <strong>Severidad:</strong> 🔴 <strong>Crítico</strong> | <strong>DREAD:</strong> 14/15</p>
+<p><strong>Descripción Técnica:</strong><br>
+La aplicación web (AgroDirecto Frontend) es susceptible a ataques de inyección de código JavaScript malicioso en el contexto del navegador del cliente, resultado de una validación insuficiente de entradas de usuario. Esta vulnerabilidad se alinea con MITRE ATT&amp;CK técnica T1059 (Command and Scripting Interpreter), permitiendo la ejecución arbitraria de scripts en el contexto de la sesión del usuario.</p>
+<p><strong>Componentes del Sistema Afectados:</strong></p>
+<ul>
+<li>AgroDirecto Frontend (aplicación web/móvil)</li>
+<li>Sesiones de usuarios autenticados</li>
+<li>Datos de navegación del cliente</li>
+</ul>
+<p><strong>Impacto Empresarial:</strong><br>
+Un atacante podría capturar tokens de sesión de agricultores o clientes, robar credenciales, redirigir a pasarelas de pago fraudulentas o modificar información de pedidos. El impacto directo sería la erosión de la confianza en la plataforma, la exposición a responsabilidad legal por violación de RGPD y privacidad, y la pérdida económica de los usuarios.</p>
+<p><strong>Estado del Riesgo:</strong> ⏳ <strong>Parcialmente Mitigado</strong><br>
+<strong>Fundamentación de Mitigación:</strong> Aunque se ha implementado un WAF (Web Application Firewall) como línea defensiva perimetral para detener payloads XSS conocidos, esta solución es incompleta debido a técnicas de evasión. Una corrección completa requeriría refactorización del código frontend y backend para sanitización de inputs en origen.</p>
+<hr>
+<h3 id="amenaza-3-manipulación-de-registros-de-auditoría">Amenaza 3: Manipulación de Registros de Auditoría </h3>
+<p><strong>ID:</strong> 249 | <strong>Categoría STRIDE:</strong> Repudiation | <strong>Severidad:</strong> 🟡 <strong>Bajo</strong> | <strong>DREAD:</strong> 6/15</p>
+<p><strong>Descripción Técnica:</strong><br>
+Entidades con bajo nivel de confianza podrían modificar, eliminar o falsificar registros de auditoría del sistema, imposibilitando la reconstrucción forense de eventos. Esta vulnerabilidad corresponde a MITRE ATT&amp;CK técnica T1070 (Indicator Removal on Host), que describe la manipulación de evidencia digital para eludir responsabilidad.</p>
+<p><strong>Componentes del Sistema Afectados:</strong></p>
+<ul>
+<li>Registros de auditoría del sistema (logs)</li>
+<li>Pasarela de Pagos (auditoría de transacciones)</li>
+<li>Base de Datos Redis (auditoría de acceso)</li>
+</ul>
+<p><strong>Impacto Empresarial:</strong><br>
+La imposibilidad de realizar auditorías forenses fiables después de un incidente de seguridad deja a la organización en una posición vulnerable ante: (a) disputas financieras con clientes, (b) incumplimiento de normativas de retención de registros (RGPD, SOX), (c) incapacidad de detectar patrones de fraude repetitivos y (d) responsabilidad legal agravada.</p>
+<p><strong>Estado del Riesgo:</strong> ✅ <strong>Mitigado</strong><br>
+<strong>Fundamentación de Mitigación:</strong> Se ha implementado una arquitectura de Zero Trust con enclave restringido que limita el acceso a escritura de logs exclusivamente a componentes de alta confianza (Pasarela de Pagos, Backend). Esta segregación reduce el riesgo de manipulación a escenarios donde el propio backend está comprometido, un vector de ataque de complejidad muy elevada.</p>
+<hr>
+<h3 id="amenaza-4-control-de-acceso-débil-a-recursos-críticos">Amenaza 4: Control de Acceso Débil a Recursos Críticos </h3>
+<p><strong>ID:</strong> 18 | <strong>Categoría STRIDE:</strong> Information Disclosure | <strong>Severidad:</strong> 🔴 <strong>Alto</strong> | <strong>DREAD:</strong> 12/15</p>
+<p><strong>Descripción Técnica:</strong><br>
+La base de datos Redis, que alberga datos sensibles de sesiones y transacciones, podría ser accesible a través de credenciales débiles o sin autenticación, permitiendo a un atacante leer información confidencial en la memoria. Esta vulnerabilidad se corresponde con MITRE ATT&amp;CK técnica T1560 (Archive Collected Data) y T1041 (Exfiltration Over C2 Channel).</p>
+<p><strong>Componentes del Sistema Afectados:</strong></p>
+<ul>
+<li>Base de Datos Redis</li>
+<li>Datos de sesiones de usuario</li>
+<li>Información de inventario de productos</li>
+<li>Registros de transacciones</li>
+</ul>
+<p><strong>Impacto Empresarial:</strong><br>
+La exfiltración de datos sensibles resultaría en: (a) violación de privacidad de datos personales de usuarios (RGPD), (b) exposición de información competitiva (precios, volúmenes de ventas), (c) robo de credenciales que facilita escalación de privilegios, y (d) daño reputacional irreversible.</p>
+<p><strong>Estado del Riesgo:</strong> ✅ <strong>Mitigado</strong><br>
+<strong>Fundamentación de Mitigación:</strong> Se han implementado zonas de confianza mediante segmentación de red que aísla Redis dentro de un enclave de máxima restricción. El acceso es exclusivamente a través de procesos autorizados (Pasarela de Pagos, Backend) con autenticación de cliente mediante certificados X.509, y se han habilitado ACLs a nivel de Redis 6.0+.</p>
+<hr>
+<h3 id="amenaza-5-denegación-de-servicio-en-pasarela-de-pagos">Amenaza 5: Denegación de Servicio en Pasarela de Pagos </h3>
+<p><strong>ID:</strong> 73 | <strong>Categoría STRIDE:</strong> Denial of Service | <strong>Severidad:</strong> 🔴 <strong>Crítico</strong> | <strong>DREAD:</strong> 13/15</p>
+<p><strong>Descripción Técnica:</strong><br>
+La Pasarela de Pagos podría saturarse y detenerse su operación cuando enfrenta picos de tráfico no esperados, ya sea mediante ataques DDoS deliberados o cargas legítimas no previstas. Esta vulnerabilidad corresponde a MITRE ATT&amp;CK técnica T1498 (Network Denial of Service), que describe ataques de consumo de recursos a nivel de aplicación.</p>
+<p><strong>Componentes del Sistema Afectados:</strong></p>
+<ul>
+<li>Pasarela de Pagos (proceso crítico)</li>
+<li>Infraestructura de cómputo (servidores web)</li>
+<li>Capacidad de procesamiento agregada</li>
+</ul>
+<p><strong>Impacto Empresarial:</strong><br>
+Dado que AgroDirecto maneja productos perecederos con ciclos de venta de 24-72 horas, una caída de la Pasarela de Pagos genera un impacto en cascada: (a) detención de la venta de productos, (b) deterioro de mercancía no vendida, (c) pérdida económica directa para agricultores, (d) erosión irreversible de la confianza en la plataforma y (e) ventaja competitiva comprometida frente a competidores.</p>
+<p><strong>Estado del Riesgo:</strong> ⏳ <strong>No Iniciado</strong><br>
+<strong>Fundamentación de Mitigación:</strong> Aunque la infraestructura actual incluye rate limiting básico en servidor, se carece de escalado dinámico debido a restricciones presupuestarias. La corrección requeriría inversión en infraestructura elástica (grupos de auto-escalado) y servicios de protección DDoS, con proyección de implementación en la próxima fase de desarrollo.</p>
+<hr>
+<h3 id="amenaza-6-debilidad-en-autorización-sso">Amenaza 6: Debilidad en Autorización SSO </h3>
+<p><strong>ID:</strong> 11 | <strong>Categoría STRIDE:</strong> Elevation of Privilege | <strong>Severidad:</strong> 🔴 <strong>Crítico</strong> | <strong>DREAD:</strong> 13/15</p>
+<p><strong>Descripción Técnica:</strong><br>
+Las implementaciones de OAuth2 y Single Sign-On (SSO) en AgroDirecto son vulnerables a ataques de interceptación y reutilización de tokens de acceso. Un atacante podría capturar un token durante su tránsito en red no cifrada, en memoria del cliente, o mediante inyección de código XSS, y posteriormente reutilizarlo para ganar acceso no autorizado. Esta vulnerabilidad corresponde a MITRE ATT&amp;CK técnica T1550 (Use Alternate Authentication Material).</p>
+<p><strong>Componentes del Sistema Afectados:</strong></p>
+<ul>
+<li>AgroDirecto Frontend (módulo de autenticación)</li>
+<li>Proveedor de Autorización (servicio OAuth2)</li>
+<li>Todos los servicios integrados mediante tokens SSO</li>
+</ul>
+<p><strong>Impacto Empresarial:</strong><br>
+Un atacante en posesión de un token robado podría: (a) suplantar la identidad de un usuario legítimo, (b) obtener privilegios administrativos si el token es de un administrador, (c) manipular precios globales de productos, (d) acceder a estados financieros y reportes de ventas, y (e) realizar transacciones fraudulentas. Este escenario representa el riesgo máximo de compromiso de confidencialidad y integridad.</p>
+<p><strong>Estado del Riesgo:</strong> ⏳ <strong>No Iniciado</strong><br>
+<strong>Fundamentación de Mitigación:</strong> La corrección requeriría implementar OAuth2 con extensión DPoP (RFC 9449), que vincula criptográficamente cada token a la clave privada del cliente, imposibilitando su reutilización desde otro contexto. Adicionalmente, se requeriría rotación automática de tokens con TTL muy cortos (15 minutos). Este trabajo está actualmente en fase de especificación de requisitos.</p>
+<hr>
+<h2 id="14-propuesta-de-medidas-mitigadoras">1.4 Propuesta de Medidas Mitigadoras </h2>
+<p>A partir del análisis STRIDE y DREAD previamente realizado, se presenta un conjunto de medidas mitigadoras técnicas y procedimentales diseñadas específicamente para reducir el riesgo residual de las seis amenazas críticas identificadas. Cada medida se ha evaluado considerando su factibilidad técnica, coste de implementación y alineamiento con la arquitectura existente de AgroDirecto, procurando proporcionar soluciones realistas y alcanzables dentro de un horizonte temporal de 3-6 meses.</p>
+<h3 id="matriz-de-mitigaciones-propuestas-por-amenaza">Matriz de Mitigaciones Propuestas por Amenaza </h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Amenaza</th>
+<th>Medida de Mitigación</th>
+<th>Tipo</th>
+<th>Fundamentación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>17</strong></td>
+<td><strong>Suplantación de Base de Datos Redis</strong></td>
+<td>Implementar <strong>TLS/SSL para conexiones Redis</strong> con autenticación de cliente mediante certificados X.509. Además, habilitar <strong>ACLs (Access Control Lists) nativas de Redis 6.0+</strong> para restringir operaciones por rol.</td>
+<td>Técnica</td>
+<td>Elimina la posibilidad de acceso no autenticado y la modificación de datos en tránsito. Los certificados digitales vinculan la identidad del cliente a su clave privada, imposibilitando la suplantación incluso si el atacante captura el tráfico.</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Cross Site Scripting (XSS)</strong></td>
+<td>Implementación de una <strong>Content Security Policy (CSP) de nivel 3</strong> con directivas <code>script-src 'self'</code> y desinfectado (sanitization) de todos los inputs en el backend mediante librerías como <strong>DOMPurify</strong> o <strong>OWASP Java Encoder</strong>.</td>
+<td>Técnica</td>
+<td>Aunque el WAF actual filtra ataques conocidos, una CSP estricta previene la ejecución no autorizada de scripts inline, eliminando el riesgo residual incluso ante evasión de WAF. La sanitización en backend garantiza que los datos almacenados nunca contengan código malicioso.</td>
+</tr>
+<tr>
+<td><strong>249</strong></td>
+<td><strong>Manipulación de Registros de Auditoría</strong></td>
+<td>Configurar un sistema de <strong>logging inmutable</strong> mediante un SIEM on-premise (por ejemplo, <strong>ELK Stack</strong> o <strong>Graylog</strong>) con retención extendida (&gt;1 año) y almacenamiento en un repositorio WORM (Write Once Read Many) local o NAS con protección contra borrado. Implementar <strong>firmas digitales HMAC-SHA256</strong> en cada entrada de log.</td>
+<td>Procedimental</td>
+<td>Crea una pista de auditoría criptográficamente vinculada a una timeline interna, imposibilitando alteraciones retroactivas. Cumple con requisitos de trazabilidad forense y puede usarse como evidencia en litigios.</td>
+</tr>
+<tr>
+<td><strong>18</strong></td>
+<td><strong>Control de Acceso Débil a Recursos Críticos</strong></td>
+<td>Aplicar el <strong>Principio de Menor Privilegio (PoLP)</strong> mediante <strong>controles de acceso basados en roles (RBAC)</strong> en el sistema operativo y firewall, limitando el acceso a Redis solo a procesos y usuarios específicos. Implementar <strong>Redis Sentinel</strong> para failover automático y <strong>cifrado en reposo</strong> usando LUKS o BitLocker.</td>
+<td>Técnica</td>
+<td>Segmenta el acceso de modo que solo la Pasarela de Pagos y el Backend pueden leer y escribir en Redis. Incluso si un atacante compromete una aplicación cliente, no podrá acceder a datos de otros segmentos. El cifrado en reposo protege contra el acceso físico al almacenamiento.</td>
+</tr>
+<tr>
+<td><strong>73</strong></td>
+<td><strong>Denegación de Servicio en Pasarela de Pagos</strong></td>
+<td>Desplegar <strong>clúster de servidores físicos o virtuales</strong> con balanceador de carga (por ejemplo, <strong>HAProxy</strong> o <strong>NGINX</strong>) configurado para escalar horizontalmente entre 2-10 instancias según CPU/red. Implementar <strong>firewall perimetral con reglas anti-DDoS</strong> y configurar <strong>rate limiting dinámico</strong> con límites por IP cliente (ej. 100 req/min por sesión autenticada).</td>
+<td>Técnica</td>
+<td>El escalado automático absorbe picos de tráfico legítimos e ilegítimos, manteniendo la disponibilidad. El firewall perimetral y el balanceador de carga proporcionan protección DDoS de capa 3/4. El rate limiting frena ataques de fuerza bruta sin ser agresivo con usuarios legítimos.</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td><strong>Debilidad en Autorización SSO</strong></td>
+<td>Implementar <strong>OAuth 2.0 con DPoP (Demonstrating Proof-of-Possession)</strong> según RFC 9449, donde cada token de acceso está criptográficamente ligado a la clave privada del cliente. Añadir <strong>rotación automática de tokens</strong> (TTL=15min) y <strong>refresh token binding</strong>.</td>
+<td>Técnica</td>
+<td>DPoP imposibilita reutilizar tokens interceptados desde otro cliente, pues el atacante carecería de la clave privada para firmar las peticiones. La rotación de tokens reduce la ventana de exposición en caso de compromiso. Cumple con estándares OWASP y NIST.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="principios-de-diseño-de-mitigaciones">Principios de Diseño de Mitigaciones </h3>
+<p>El enfoque propuesto se fundamenta en los siguientes principios estratégicos:</p>
+<ol>
+<li>
+<p><strong>Prioridad en Mitigaciones Técnicas sobre Compensatorias:</strong> Se ha privilegiado el remedio en origen (eliminación de vulnerabilidades) sobre medidas de detección y respuesta, bajo el supuesto de que AgroDirecto posee capacidad técnica y presupuestaria para implementar cambios arquitectónicos.</p>
+</li>
+<li>
+<p><strong>Alineamiento con Zero Trust:</strong> Las mitigaciones refuerzan una arquitectura de Zero Trust explícita, donde cada componente requiere autenticación y autorización granular, sin confiar en perímetros únicos.</p>
+</li>
+<li>
+<p><strong>Escalado Temporal Realista:</strong> Cada medida se ha acotado a ser implementable en un horizonte de 3-6 meses sin introducir interrupciones operacionales críticas.</p>
+</li>
+<li>
+<p><strong>Proporcionalidad Riesgo-Coste:</strong> Se han priorizado las seis amenazas según su puntuación DREAD, enfocándose primero en XSS (DREAD 14/15) y DoS (DREAD 13/15), que afectan la continuidad del negocio.</p>
+</li>
+</ol>
+<hr>
+<h2 id="15-reflexión-final-y-análisis-del-riesgo">1.5 Reflexión Final y Análisis del Riesgo </h2>
+<p>Este análisis permite trasladar conceptos teóricos a un escenario creíble de negocio, donde la seguridad no se limita a proteger activos técnicos, sino que también condiciona la continuidad del servicio, la confianza del usuario y la sostenibilidad operativa de la plataforma.</p>
+<h3 id="principales-riesgos-detectados">Principales Riesgos Detectados </h3>
+<p>Del universo de <strong>281 amenazas identificadas</strong>, las seis priorizadas muestran un panorama de riesgos con impacto técnico y empresarial claro. El riesgo más crítico, con <strong>DREAD 14/15</strong>, es el <strong>Cross-Site Scripting (XSS)</strong> en el frontend, por su capacidad para comprometer sesiones y facilitar el robo de credenciales o redirecciones fraudulentas. Le siguen la <strong>denegación de servicio en la pasarela de pagos</strong> y la <strong>debilidad en la autorización SSO</strong>, ambas con <strong>13/15</strong>, por su potencial para interrumpir operaciones o permitir accesos indebidos.</p>
+<p>Estos riesgos, además, pueden encadenarse. Un XSS inicial podría facilitar el compromiso de tokens de sesión y agravar el impacto sobre otros componentes sensibles. También destacan el <strong>control de acceso débil</strong> sobre Redis (<strong>12/15</strong>) y la <strong>suplantación de bases de datos</strong> (<strong>11/15</strong>) por su efecto sobre la confidencialidad e integridad de la información, mientras que la <strong>manipulación de registros de auditoría</strong> (<strong>6/15</strong>) sigue siendo relevante por su impacto en trazabilidad y cumplimiento.</p>
+<h3 id="elementos-críticos-de-la-arquitectura">Elementos Críticos de la Arquitectura </h3>
+<p>La arquitectura de AgroDirecto se apoya en una <strong>microsegmentación con zonas de confianza diferenciadas</strong>, lo que refuerza la defensa en profundidad. Entre los elementos más críticos destacan la <strong>pasarela de pagos</strong>, aislada en un enclave de máxima restricción por su impacto directo en la operativa del negocio; la <strong>base de datos Redis</strong> y la <strong>SQL Database</strong>, por almacenar información sensible; y el <strong>proveedor de autorización</strong>, por concentrar funciones de identidad y acceso.</p>
+<p>El <strong>frontend</strong> también representa un punto expuesto por su interacción directa con el usuario. A esto se suma la dependencia de servicios de terceros, como la API logística. En este contexto, la <strong>disponibilidad</strong> resulta clave, ya que una caída prolongada podría traducirse en pérdidas económicas inmediatas y fallos en la cadena de suministro.</p>
+<h3 id="límites-del-análisis-realizado-y-posibles-mejoras">Límites del Análisis Realizado y Posibles Mejoras </h3>
+<p>Este análisis, aunque útil en su aplicación de <strong>STRIDE</strong> y <strong>DREAD</strong>, tiene límites propios de un modelado estático basado en un DFD. No cubre con el mismo nivel de detalle riesgos dinámicos, como vulnerabilidades en dependencias, ingeniería social o la capacidad real de detección y respuesta ante incidentes.</p>
+<p>Como mejora, sería recomendable complementar este trabajo con <strong>penetration testing</strong>, ejercicios de <strong>red teaming</strong>, revisión de dependencias mediante <strong>SBOM</strong> y una evaluación más específica de riesgos asociados a terceros. También sería útil incorporar un proceso continuo de <strong>threat intelligence</strong> para adaptar el análisis a la evolución del entorno de amenazas y ajustar la infraestructura de forma proactiva. Estas mejoras no solo reducirían la superficie de ataque, sino que también alinearían AgroDirecto con estándares como <strong>NIST</strong> y <strong>OWASP</strong>.</p>
+<h3 id="conclusiones-finales">Conclusiones Finales </h3>
+<p>En conjunto, el documento constituye una base útil para entender la exposición de AgroDirecto y priorizar medidas de mejora. Más allá del plano técnico, el trabajo refleja que la seguridad de la plataforma afecta de forma directa a quienes dependen de ella, por lo que el modelado de amenazas debe entenderse como una herramienta práctica para razonar riesgos y tomar decisiones con criterio.</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

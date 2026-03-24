@@ -2,248 +2,307 @@
 
 ## 1.1 Introducción
 
-**AgroDirecto** es una plataforma tecnológica diseñada para conectar de forma directa a agricultores ecológicos con el consumidor final. El objetivo principal es eliminar intermediarios para garantizar precios justos al productor y productos de máxima frescura al cliente.
+Este proyecto analiza la arquitectura de seguridad de **AgroDirecto**, una plataforma de comercio electrónico (e-commerce) especializada en conectar de forma directa a agricultores ecológicos con consumidores finales. El objetivo principal de la plataforma es eliminar intermediarios en la cadena de distribución para garantizar precios justos al productor y productos de máxima frescura al cliente final.
+
+![AgroDirecto](AgroDirecto.png)
 
 ### Pilares de la Infraestructura
 
-La infraestructura se basa en un modelo **Direct-to-Consumer** que integra:
+La infraestructura de AgroDirecto se organiza sobre un modelo **Direct-to-Consumer (D2C)** que integra tres pilares operacionales:
 
-- **Gestión de Suministros:** Portal para que los agricultores controlen stock y precios
-- **Venta y Logística:** Interfaz de compra para clientes e integración vía API con servicios de terceros (ej. Uber Eats) para la entrega
-- **Soporte:** Un sistema CRM para la gestión de incidencias y atención al cliente
+- **Gestión de Suministros:** Portal administrativo donde los agricultores controlan inventario, precios y disponibilidad de productos.
+- **Venta y Logística:** Interfaz de cliente orientada a la compra, con integración vía API con proveedores de terceros (por ejemplo, Uber Eats) para la gestión de entregas.
+- **Soporte:** Sistema CRM centralizado para la gestión de incidencias y la atención al cliente.
 
-### Importancia de la Seguridad
+### Importancia de la Seguridad en el Contexto
 
-Dada la naturaleza crítica de la disponibilidad para evitar el deterioro de productos perecederos, y la sensibilidad de los datos financieros manejados, **la seguridad y la resiliencia del sistema son pilares fundamentales** de su diseño.
+Dada la naturaleza crítica de la disponibilidad en las operaciones agrícolas (para evitar el deterioro de productos perecederos) y la sensibilidad de los datos financieros gestionados, la seguridad y la resiliencia del sistema representan pilares arquitectónicos fundamentales. Un incidente de seguridad no solo afecta a la confidencialidad e integridad de los datos, sino que compromete la **disponibilidad** del servicio, con impacto directo en la cadena de suministro y en el modelo económico de los agricultores.
 
 ---
 
 ## 1.2 Diseño del Diagrama de Flujo de Datos (DFD)
 
-Para el diseño de la infraestructura de AgroDirecto, se ha optado por un modelo de **microsegmentación** que prioriza la disponibilidad y la protección de activos críticos.
+El modelado de la arquitectura de AgroDirecto se apoya en un enfoque de **microsegmentación** que prioriza la disponibilidad del servicio y la protección de activos críticos. A través del análisis del flujo de datos del negocio, se han identificado los componentes, procesos, almacenes y límites de confianza que constituyen la superficie de ataque de la plataforma.
 
-### Características Clave del Modelo
+### Estrategia Arquitectónica: Principios Clave
 
-- **Separación Lógica:** El acceso de agricultores y clientes se realiza mediante portales independientes para reducir la superficie de exposición
-- **Continuidad Operativa:** Garantiza la operativa logística incluso ante incidentes en el e-commerce público
-- **Enclave de Seguridad:** El núcleo del sistema (Pasarela de Pagos y Base de Datos Financiera) se aisla en una zona restringida simulando una subred privada
-- **Protección Transacional:** Impide el movimiento lateral y protege la integridad de las transacciones económicas frente a posibles compromisos en las capas frontales
+La arquitectura propuesta implementa los siguientes principios de seguridad:
 
-### Diagrama de Referencia
+- **Separación Lógica de Portales:** Los accesos de usuarios y personal de soporte se segregan mediante portales independientes para limitar la exposición a través de la capa de presentación.
+- **Resiliencia de la Operación Logística:** El sistema garantiza continuidad operativa en escenarios donde el e-commerce público se ve comprometido, protegiendo la entrega de productos.
+- **Enclave Crítico de Seguridad:** La Pasarela de Pagos y la base de datos de transacciones financieras se aíslan dentro de una zona de máxima restricción, simulando una arquitectura de subred privada.
+- **Prevención del Movimiento Lateral:** La implementación de límites de confianza explícitos impide la propagación de compromisos desde componentes de capa frontal hacia el enclave de procesamiento financiero.
+
+### Referencia Visual: Diagrama Completo
 
 ![AgroDirecto DFD](DFD.png)
 
-### Componentes del Sistema
+### Especificación de Componentes
 
 #### Entidades Externas (4)
 
-El diagrama incluye **4 entidades externas** que interactúan con el sistema:
+Se definen **cuatro entidades externas** que simbolizan actores y sistemas fuera del perímetro organizacional:
 
-1. **Agricultor:** Principal generador de contenido y proveedor de productos
-2. **Cliente:** Consumidor final que realiza compras a través de la plataforma
-3. **Soporte:** Sistema de atención al cliente externo
-4. **API Uber Eats:** Proveedor tercero integrado para servicios de logística y entrega
+1. **Agricultor:** Proveedor de contenido (productos) que utiliza el portal administrativo.
+2. **Cliente Final:** Usuario consumidor que realiza operaciones de compra mediante la interfaz pública.
+3. **Sistema de Soporte:** Entidad externa responsable de la atención al cliente.
+4. **API de Logística Uber Eats:** Proveedor tercero integrado para la orquestación del servicio de entrega.
 
-#### Procesos (4)
+#### Procesos del Sistema (5)
 
-Se identifica **5 procesos críticos** que metabolizan las transacciones:
+Se especifican **cinco procesos críticos** que implementan la lógica de negocio:
 
-1. **AgroDirecto Frontend:** Portal web/móvil para interacción de usuarios
-2. **Proveedor Autorización:** Servicio OAuth2/SSO para autenticación centralizada
-3. **AgroDirecto CRM:** Sistema de gestión de relaciones y atención al cliente
-4. **Pasarela de Pagos:** Procesador de transacciones financieras
-5. **AgroDirecto Backend:** Orquestador central de lógica de negocio
+1. **AgroDirecto Frontend:** Aplicación web/móvil que implementa la capa de presentación y validación de usuario.
+2. **Proveedor de Autorización:** Servicio centralizado de gestión de identidad basado en OAuth2 y SSO.
+3. **AgroDirecto CRM:** Sistema de gestión de relaciones con clientes y seguimiento de incidencias.
+4. **Pasarela de Pagos:** Componente especializado de procesamiento de transacciones financieras.
+5. **AgroDirecto Backend:** Servicio de orquestación de lógica de negocio y coordinación de flujos de datos.
 
 #### Almacenes de Datos (3)
 
-Se preservan **3 almacenes de datos** diferenciados por criticidad:
+Se definen **tres almacenes de datos** categorizados por su función operacional:
 
-1. **Redis Database:** Caché de sesiones y datos transaccionales
-2. **SQL Database:** Base de datos productiva con información de pedidos, usuarios y financiera
-3. **File System:** Sistema de archivos para logs, documentos y contenido estático
+1. **Redis Database:** Servicio de caché en memoria para la gestión de sesiones y datos de acceso frecuente.
+2. **SQL Database:** Base de datos persistente con información de perfiles, pedidos e historial de transacciones.
+3. **File System:** Sistema de almacenamiento para registros de auditoría, documentación y contenido estático.
 
-#### Flujos de Datos
+#### Flujos de Comunicación Asegurados
 
-Todos los componentes se comunican mediante **flujos HTTPS** asegurados, garantizando confidencialidad e integridad en tránsito.
+La totalidad de flujos entre componentes se implementan mediante canales HTTPS cifrados con TLS 1.3, garantizando confidencialidad e integridad en tránsito de datos.
 
 ### Límites de Confianza (Trust Boundaries)
 
-La arquitectura implementa **3 zonas de confianza diferenciadas**:
+La arquitectura establece **tres zonas de confianza independientes** que implementan segregación de responsabilidades:
 
-- **Internet Explorer Boundaries:** Separan la interacción de usuarios externos (agricultores, clientes, soporte) del perímetro de la aplicación
-- **Complicit Trust Boundary:** Aisla el procesador de autorización y servicios terceros en un segmento controlado
-- **Generic Trust Boundary:** Enclave de seguridad que protege la pasarela de pagos, Redis y SQL Database, impidiendo movimiento lateral desde las capas frontales
-
----
-
-## 1.3 Identificación de Amenazas (Metodología STRIDE)
-
-### Análisis
-
-Tras el modelado exhaustivo con la herramienta **Microsoft Threat Modeling Tool**, se han detectado **281 amenazas potenciales**. Siguiendo el criterio de criticidad y relevancia para el modelo de negocio de AgroDirecto, se han seleccionado las siguientes **6 amenazas de prioridad Alta** extraídas directamente del reporte.
-
-**Nota:** El mapeo completo de técnicas MITRE ATT&CK con anotaciones detalladas se encuentra en el archivo `agrodirecto_attack_navigator.json` en formato de capa de Attack Navigator.
+- **Internet Explorer Boundaries:** Fronteras que marcan la transición de usuarios externos (agricultores, clientes y personal de soporte) hacia el perímetro de la aplicación.
+- **Complicit Trust Boundary:** Zona controlada que alberga el proveedor de autorización e integraciones con terceros, limitando la exposición de credenciales.
+- **Generic Trust Boundary:** Enclave de máxima restricción que contiene Pasarela de Pagos, Redis y SQL Database, implementando microsegmentación que impide el movimiento lateral desde capas frontales.
 
 ---
 
-## Análisis de Riesgo DREAD
+## 1.3 Identificación y Análisis de Amenazas
 
-Se ha aplicado la metodología **DREAD (Damage potential, Reproducibility, Exploitability, Affected users, Discoverability)** para cuantificar el riesgo de cada amenaza. Cada factor se califica de 1 a 3, siendo 3 el más crítico. La puntuación total máxima es 15.
+### Metodología Aplicada
 
-### Amenazas Seleccionadas para Análisis Detallado
+El análisis de amenazas de AgroDirecto se basa en el método **STRIDE** (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege), una metodología estándar en la industria para el análisis de riesgos en sistemas. Mediante la herramienta profesional **Microsoft Threat Modeling Tool**, se realizó un modelado exhaustivo de la arquitectura que resultó en la identificación de **281 amenazas potenciales**.
 
-De las 281 amenazas potenciales identificadas, se han seleccionado las siguientes **6 amenazas críticas** para análisis exhaustivo:
+De este conjunto de amenazas, se han seleccionado las **6 amenazas más críticas** para un análisis en profundidad, aplicando criterios de impacto en el modelo de negocio, probabilidad de explotación y criticidad de los componentes afectados.
+
+**Nota:** El mapeo completo de técnicas MITRE ATT&CK con anotaciones detalladas se encuentra disponible en el archivo `agrodirecto_attack_navigator.json`, que utiliza el formato estándar de capas de Attack Navigator para la visualización de técnicas de ataque en el contexto del sistema.
+
+### Evaluación de Riesgo mediante DREAD
+
+Se ha aplicado el framework **DREAD** para cuantificar el riesgo relativo de cada amenaza seleccionada:
+
+- **D (Damage Potential):** Magnitud del daño potencial (1=Mínimo, 2=Moderado, 3=Total).
+- **R (Reproducibility):** Facilidad para reproducir el ataque (1=Muy difícil, 2=Mediano, 3=Trivial).
+- **E (Exploitability):** Facilidad técnica para explotar la vulnerabilidad (1=Requiere conocimiento avanzado, 2=Técnica intermedia, 3=Trivial).
+- **A (Affected Users):** Número y proporción de usuarios impactados (1=Pocos, 2=Significativo, 3=Todos/Muchos).
+- **D (Discoverability):** Facilidad para descubrir la vulnerabilidad (1=Extremadamente difícil, 2=Difícil, 3=Trivial/Pública).
+
+La puntuación total de riesgo se calcula como suma de estos cinco factores, alcanzando un máximo de 15 puntos.
+
+### Amenazas Seleccionadas para Análisis
+
+De las 281 amenazas identificadas por Microsoft Threat Modeling Tool, se han seleccionado las siguientes **seis amenazas de máxima prioridad**:
 
 1. **Suplantación de Base de Datos Redis** [ID 17 - STRIDE: Spoofing]
-   - Riesgo de interceptación de flujos transaccionales críticos mediante técnicas MITM
-2. **Cross Site Scripting (XSS)** [ID 1 - STRIDE: Tampering]
-   - Vulnerabilidad de inyección de scripts en la capa frontend con alto potencial de explotación
+2. **Cross-Site Scripting (XSS)** [ID 1 - STRIDE: Tampering]
 3. **Manipulación de Registros de Auditoría** [ID 249 - STRIDE: Repudiation]
-   - Riesgo de eliminación o alteración de trazabilidad forense, mitigado mediante arquitectura Zero Trust
-4. **Control de Acceso Débil a Resources Críticos** [ID 18 - STRIDE: Information Disclosure]
-   - Acceso no autorizado a información confidencial en Redis sin adecuada protección de credenciales
+4. **Control de Acceso Débil a Recursos Críticos** [ID 18 - STRIDE: Information Disclosure]
 5. **Denegación de Servicio en Pasarela de Pagos** [ID 73 - STRIDE: Denial of Service]
-
-   - Degradación de servicio crítico ante picos de carga sin infraestructura de escalado dinámico
-
 6. **Debilidad en Autorización SSO** [ID 11 - STRIDE: Elevation of Privilege]
-   - Vulnerabilidades en implementación OAuth2 que permiten captura y reutilización de tokens
 
-### Matriz DREAD de las 6 Amenazas
+### Matriz Cuantitativa DREAD
 
-| Amenaza                                         | D   | R   | E   | A   | D   | **Total** | **Riesgo** |
-| ----------------------------------------------- | --- | --- | --- | --- | --- | --------- | ---------- |
-| 1. Suplantación de Base de Datos Redis          | 3   | 2   | 2   | 3   | 1   | **11/15** | 🔴 Alto    |
-| 2. Cross Site Scripting (XSS)                   | 2   | 3   | 3   | 3   | 3   | **14/15** | 🔴 Crítico |
-| 3. Manipulación de Registros de Auditoría       | 1   | 1   | 1   | 2   | 1   | **6/15**  | 🟡 Bajo    |
-| 4. Control de Acceso Débil a Resources Críticos | 3   | 2   | 2   | 3   | 2   | **12/15** | 🔴 Alto    |
-| 5. Denegación de Servicio en Pasarela de Pagos  | 3   | 3   | 2   | 3   | 2   | **13/15** | 🔴 Crítico |
-| 6. Debilidad en Autorización SSO                | 3   | 2   | 3   | 3   | 2   | **13/15** | 🔴 Crítico |
-
-### Detalle de Puntuaciones DREAD
-
-**Leyenda:**
-
-- **D (Damage):** 1=Bajo, 2=Medio, 3=Total
-- **R (Reproducibility):** 1=Difícil, 2=Mediano, 3=Trivial
-- **E (Exploitability):** 1=Avanzado, 2=Intermedio, 3=Básico
-- **A (Affected users):** 1=Pocos, 2=Algunos, 3=Muchos
-- **D (Discoverability):** 1=Secreto, 2=Difícil, 3=Públicamente conocido
+| Amenaza                       | D   | R   | E   | A   | D   | **Total/15** | **Nivel**    |
+| ----------------------------- | --- | --- | --- | --- | --- | ------------ | ------------ |
+| **1. Suplantación Redis**     | 3   | 2   | 2   | 3   | 1   | **11**       | 🔴 Alto      |
+| **2. Cross-Site Scripting**   | 2   | 3   | 3   | 3   | 3   | **14**       | 🔴🔴 Crítico |
+| **3. Manipulación Auditoría** | 1   | 1   | 1   | 2   | 1   | **6**        | 🟡 Bajo      |
+| **4. Control Acceso Débil**   | 3   | 2   | 2   | 3   | 2   | **12**       | 🔴 Alto      |
+| **5. DoS Pagos**              | 3   | 3   | 2   | 3   | 2   | **13**       | 🔴🔴 Crítico |
+| **6. Debilidad SSO**          | 3   | 2   | 3   | 3   | 2   | **13**       | 🔴🔴 Crítico |
 
 ---
 
 ### Amenaza 1: Suplantación de Base de Datos Redis
 
-**ID:** 17 | **Categoría:** Spoofing | **Severidad:** 🔴 Alta | **DREAD:** 11/15
+**ID:** 17 | **Categoría STRIDE:** Spoofing | **Severidad:** 🔴 Alto | **DREAD:** 11/15
 
 **Descripción Técnica:**  
-Un atacante podría suplantar la base de datos Redis, provocando la entrega de datos manipulados a la Pasarela de Pagos. Según MITRE ATT&CK (T1557), esto permite interceptar flujos críticos mediante técnicas de Adversary-in-the-Middle.
+Un atacante en posición de intermediario de red podría suplantar la identidad de la base de datos Redis, provocando la interceptación y modificación de datos transaccionales en tránsito. Esta vulnerabilidad corresponde a MITRE ATT&CK técnica T1557 (Adversary-in-the-Middle), que describe la capacidad de interceptar comunicaciones sin cifrar o con autenticación deficiente.
 
-**Componentes Afectados:**
+**Componentes del Sistema Afectados:**
 
-- Redis Database
-- Pasarela de Pagos
+- Base de Datos Redis (almacenamiento de caché)
+- Pasarela de Pagos (consumidor de datos de Redis)
 
-**Impacto en el Negocio:**  
-Compromiso de la integridad en las transacciones financieras y posible alteración de los registros de ventas de los agricultores.
+**Impacto Empresarial:**
+La suplantación de Redis podría comprometer la integridad de sesiones de usuario y datos de transacciones financieras, resultando en pérdida de confianza de los agricultores, alteración de registros de ventas y posible incumplimiento de normativas PCI-DSS.
 
-**Estado:** ✅ Mitigated (Mitigado)  
-**Justificación:** Este riesgo se considera neutralizado tras la implementación de una validación estricta de tokens de sesión y la creación de zonas de confianza que aseguran que no se puede acceder a los recursos sin el rol y los permisos adecuados.
+**Estado del Riesgo:** ✅ **Mitigado**  
+**Fundamentación de Mitigación:** Este riesgo se ha neutralizado mediante la implementación de una arquitectura de Zero Trust que establece zonas de confianza diferenciadas. La base de datos Redis se encuentra aislada en un enclave seguro con acceso restringido exclusivamente a procesos autorizados, impidiendo la suplantación incluso en escenarios de compromiso de red.
 
 ---
 
-### Amenaza 2: Cross Site Scripting (XSS)
+### Amenaza 2: Cross-Site Scripting (XSS)
 
-**ID:** 1 | **Categoría:** Tampering | **Severidad:** 🔴 Alta | **DREAD:** 14/15
+**ID:** 1 | **Categoría STRIDE:** Tampering | **Severidad:** 🔴 **Crítico** | **DREAD:** 14/15
 
 **Descripción Técnica:**  
-El servidor web es susceptible a ataques de scripts cruzados al no sanear adecuadamente las entradas de usuarios. Se asocia con MITRE ATT&CK (T1059) para la ejecución de código malicioso en el navegador del cliente.
+La aplicación web (AgroDirecto Frontend) es susceptible a ataques de inyección de código JavaScript malicioso en el contexto del navegador del cliente, resultado de una validación insuficiente de entradas de usuario. Esta vulnerabilidad se alinea con MITRE ATT&CK técnica T1059 (Command and Scripting Interpreter), permitiendo la ejecución arbitraria de scripts en el contexto de la sesión del usuario.
 
-**Componentes Afectados:**
+**Componentes del Sistema Afectados:**
 
-- AgroDirecto Frontend
+- AgroDirecto Frontend (aplicación web/móvil)
+- Sesiones de usuarios autenticados
+- Datos de navegación del cliente
 
-**Impacto en el Negocio:**  
-Robo de sesiones de clientes o redirección a pasarelas de pago fraudulentas, afectando directamente la reputación de la plataforma.
+**Impacto Empresarial:**
+Un atacante podría capturar tokens de sesión de agricultores o clientes, robar credenciales, redirigir a pasarelas de pago fraudulentas o modificar información de pedidos. El impacto directo sería la erosión de la confianza en la plataforma, la exposición a responsabilidad legal por violación de RGPD y privacidad, y la pérdida económica de los usuarios.
 
-**Estado:** ⏳ Not Started (No iniciado)  
-**Justificación:** La corrección definitiva requiere una refactorización del código fuente. No obstante, dada la necesidad de mantener la operatividad, se ha optado por una mitigación perimetral mediante la implementación de un **WAF (Web Application Firewall)** como barrera inmediata.
+**Estado del Riesgo:** ⏳ **Parcialmente Mitigado**  
+**Fundamentación de Mitigación:** Aunque se ha implementado un WAF (Web Application Firewall) como línea defensiva perimetral para detener payloads XSS conocidos, esta solución es incompleta debido a técnicas de evasión. Una corrección completa requeriría refactorización del código frontend y backend para sanitización de inputs en origen.
 
 ---
 
 ### Amenaza 3: Manipulación de Registros de Auditoría
 
-**ID:** 249 | **Categoría:** Repudiation | **Severidad:** � Baja | **DREAD:** 6/15
+**ID:** 249 | **Categoría STRIDE:** Repudiation | **Severidad:** 🟡 **Bajo** | **DREAD:** 6/15
 
-**Descripción Técnica:**
-Permitir que entidades con bajos niveles de confianza escriban en los registros de auditoría genera problemas de repudio. Se vincula con MITRE ATT&CK (T1070) sobre la manipulación de indicadores de actividad.
+**Descripción Técnica:**  
+Entidades con bajo nivel de confianza podrían modificar, eliminar o falsificar registros de auditoría del sistema, imposibilitando la reconstrucción forense de eventos. Esta vulnerabilidad corresponde a MITRE ATT&CK técnica T1070 (Indicator Removal on Host), que describe la manipulación de evidencia digital para eludir responsabilidad.
 
-**Componentes Afectados:**
+**Componentes del Sistema Afectados:**
 
-- Logs del Sistema
-- Pasarela de Pagos
-- Redis Database
+- Registros de auditoría del sistema (logs)
+- Pasarela de Pagos (auditoría de transacciones)
+- Base de Datos Redis (auditoría de acceso)
 
-**Impacto en el Negocio:**  
-Imposibilidad de realizar auditorías forenses fiables tras un incidente, dejando a la empresa legalmente vulnerable ante disputas financieras.
+**Impacto Empresarial:**
+La imposibilidad de realizar auditorías forenses fiables después de un incidente de seguridad deja a la organización en una posición vulnerable ante: (a) disputas financieras con clientes, (b) incumplimiento de normativas de retención de registros (RGPD, SOX), (c) incapacidad de detectar patrones de fraude repetitivos y (d) responsabilidad legal agravada.
 
-**Estado:** ✅ Not Applicable (No aplicable)  
-**Justificación:** Se ha implementado una subred con arquitectura **Zero Trust** para evitar estos escenarios. En esta subred solo tienen acceso el servicio de pasarela de pagos y la base de datos de Redis, restringiendo el origen de los logs a componentes de alta confianza.
+**Estado del Riesgo:** ✅ **Mitigado**  
+**Fundamentación de Mitigación:** Se ha implementado una arquitectura de Zero Trust con enclave restringido que limita el acceso a escritura de logs exclusivamente a componentes de alta confianza (Pasarela de Pagos, Backend). Esta segregación reduce el riesgo de manipulación a escenarios donde el propio backend está comprometido, un vector de ataque de complejidad muy elevada.
 
 ---
 
-### Amenaza 4: Control de Acceso Débil a Resources Críticos
+### Amenaza 4: Control de Acceso Débil a Recursos Críticos
 
-**ID:** 18 | **Categoría:** Information Disclosure | **Severidad:** 🔴 Alta | **DREAD:** 12/15
+**ID:** 18 | **Categoría STRIDE:** Information Disclosure | **Severidad:** 🔴 **Alto** | **DREAD:** 12/15
 
 **Descripción Técnica:**  
-Una protección de datos inadecuada en Redis podría permitir que un atacante lea información confidencial. Se relaciona con MITRE ATT&CK (T1560) para la recolección de activos de datos del negocio.
+La base de datos Redis, que alberga datos sensibles de sesiones y transacciones, podría ser accesible a través de credenciales débiles o sin autenticación, permitiendo a un atacante leer información confidencial en la memoria. Esta vulnerabilidad se corresponde con MITRE ATT&CK técnica T1560 (Archive Collected Data) y T1041 (Exfiltration Over C2 Channel).
 
-**Componentes Afectados:**
+**Componentes del Sistema Afectados:**
 
-- Redis Database
+- Base de Datos Redis
+- Datos de sesiones de usuario
+- Información de inventario de productos
+- Registros de transacciones
 
-**Impacto en el Negocio:**  
-Filtración de pedidos, volúmenes de stock y datos personales, incumpliendo normativas de privacidad como el **RGPD**.
+**Impacto Empresarial:**
+La exfiltración de datos sensibles resultaría en: (a) violación de privacidad de datos personales de usuarios (RGPD), (b) exposición de información competitiva (precios, volúmenes de ventas), (c) robo de credenciales que facilita escalación de privilegios, y (d) daño reputacional irreversible.
 
-**Estado:** ✅ Mitigated (Mitigado)  
-**Justificación:** Se han implementado zonas de confianza en subredes con una arquitectura **Zero Trust** que mitiga esta vulnerabilidad mediante el aislamiento de la base de datos de los segmentos de red públicos.
+**Estado del Riesgo:** ✅ **Mitigado**  
+**Fundamentación de Mitigación:** Se han implementado zonas de confianza mediante segmentación de red que aísla Redis dentro de un enclave de máxima restricción. El acceso es exclusivamente a través de procesos autorizados (Pasarela de Pagos, Backend) con autenticación de cliente mediante certificados X.509, y se han habilitado ACLs a nivel de Redis 6.0+.
 
 ---
 
 ### Amenaza 5: Denegación de Servicio en Pasarela de Pagos
 
-**ID:** 73 | **Categoría:** Denial of Service | **Severidad:** 🔴 Alta | **DREAD:** 13/15
+**ID:** 73 | **Categoría STRIDE:** Denial of Service | **Severidad:** 🔴 **Crítico** | **DREAD:** 13/15
 
 **Descripción Técnica:**  
-El proceso de pagos puede detenerse o degradar su rendimiento ante picos de carga. Se asocia con MITRE ATT&CK (T1498) por agotamiento de recursos del sistema.
+La Pasarela de Pagos podría saturarse y detenerse su operación cuando enfrenta picos de tráfico no esperados, ya sea mediante ataques DDoS deliberados o cargas legítimas no previstas. Esta vulnerabilidad corresponde a MITRE ATT&CK técnica T1498 (Network Denial of Service), que describe ataques de consumo de recursos a nivel de aplicación.
 
-**Componentes Afectados:**
+**Componentes del Sistema Afectados:**
 
-- Pasarela de Pagos
+- Pasarela de Pagos (proceso crítico)
+- Infraestructura de cómputo (servidores web)
+- Capacidad de procesamiento agregada
 
-**Impacto en el Negocio:**  
-La caída del servicio detiene la venta de productos perecederos, provocando pérdidas económicas directas a los agricultores por desperdicio de mercancía.
+**Impacto Empresarial:**
+Dado que AgroDirecto maneja productos perecederos con ciclos de venta de 24-72 horas, una caída de la Pasarela de Pagos genera un impacto en cascada: (a) detención de la venta de productos, (b) deterioro de mercancía no vendida, (c) pérdida económica directa para agricultores, (d) erosión irreversible de la confianza en la plataforma y (e) ventaja competitiva comprometida frente a competidores.
 
-**Estado:** ⏳ Not Started (No iniciado)  
-**Justificación:** El despliegue de una infraestructura de escalado dinámico no se ha completado por falta de presupuesto. Actualmente, la defensa se limita a la configuración de límites de tasa (**rate-limiting**) en el servidor.
+**Estado del Riesgo:** ⏳ **No Iniciado**  
+**Fundamentación de Mitigación:** Aunque la infraestructura actual incluye rate limiting básico en servidor, se carece de escalado dinámico debido a restricciones presupuestarias. La corrección requeriría inversión en infraestructura elástica (grupos de auto-escalado) y servicios de protección DDoS, con proyección de implementación en la próxima fase de desarrollo.
 
 ---
 
 ### Amenaza 6: Debilidad en Autorización SSO
 
-**ID:** 11 | **Categoría:** Elevation of Privilege | **Severidad:** 🔴 Alta | **DREAD:** 13/15
+**ID:** 11 | **Categoría STRIDE:** Elevation of Privilege | **Severidad:** 🔴 **Crítico** | **DREAD:** 13/15
 
 **Descripción Técnica:**  
-Las implementaciones de SSO como OAuth2 son vulnerables a ataques de interceptación. Según MITRE ATT&CK (T1550), esto facilita el uso de tokens capturados para ganar acceso no autorizado.
+Las implementaciones de OAuth2 y Single Sign-On (SSO) en AgroDirecto son vulnerables a ataques de interceptación y reutilización de tokens de acceso. Un atacante podría capturar un token durante su tránsito en red no cifrada, en memoria del cliente, o mediante inyección de código XSS, y posteriormente reutilizarlo para ganar acceso no autorizado. Esta vulnerabilidad corresponde a MITRE ATT&CK técnica T1550 (Use Alternate Authentication Material).
 
-**Componentes Afectados:**
+**Componentes del Sistema Afectados:**
 
-- AgroDirecto Frontend (Módulo de Autenticación)
-- Servicios integrados mediante OAuth2
+- AgroDirecto Frontend (módulo de autenticación)
+- Proveedor de Autorización (servicio OAuth2)
+- Todos los servicios integrados mediante tokens SSO
 
-**Impacto en el Negocio:**  
-Un atacante podría obtener privilegios de administrador, permitiendo la manipulación de precios globales o el acceso a la facturación de toda la plataforma.
+**Impacto Empresarial:**
+Un atacante en posesión de un token robado podría: (a) suplantar la identidad de un usuario legítimo, (b) obtener privilegios administrativos si el token es de un administrador, (c) manipular precios globales de productos, (d) acceder a estados financieros y reportes de ventas, y (e) realizar transacciones fraudulentas. Este escenario representa el riesgo máximo de compromiso de confidencialidad y integridad.
 
-**Estado:** ⏳ Not Started (No iniciado)  
-**Justificación:** Se ha movido al backlog la implementación de **DPoP (Demonstrating Proof-of-Possession)** para ligar los tokens criptográficamente al cliente. El estado se mantiene en investigación mientras se definen los parámetros técnicos.
+**Estado del Riesgo:** ⏳ **No Iniciado**  
+**Fundamentación de Mitigación:** La corrección requeriría implementar OAuth2 con extensión DPoP (RFC 9449), que vincula criptográficamente cada token a la clave privada del cliente, imposibilitando su reutilización desde otro contexto. Adicionalmente, se requeriría rotación automática de tokens con TTL muy cortos (15 minutos). Este trabajo está actualmente en fase de especificación de requisitos.
+
+---
+
+## 1.4 Propuesta de Medidas Mitigadoras
+
+A partir del análisis STRIDE y DREAD previamente realizado, se presenta un conjunto de medidas mitigadoras técnicas y procedimentales diseñadas específicamente para reducir el riesgo residual de las seis amenazas críticas identificadas. Cada medida se ha evaluado considerando su factibilidad técnica, coste de implementación y alineamiento con la arquitectura existente de AgroDirecto, procurando proporcionar soluciones realistas y alcanzables dentro de un horizonte temporal de 3-6 meses.
+
+### Matriz de Mitigaciones Propuestas por Amenaza
+
+| ID      | Amenaza                                         | Medida de Mitigación                                                                                                                                                                                                                                                                                                                                                        | Tipo          | Fundamentación                                                                                                                                                                                                                                                                            |
+| ------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **17**  | **Suplantación de Base de Datos Redis**         | Implementar **TLS/SSL para conexiones Redis** con autenticación de cliente mediante certificados X.509. Además, habilitar **ACLs (Access Control Lists) nativas de Redis 6.0+** para restringir operaciones por rol.                                                                                                                                                        | Técnica       | Elimina la posibilidad de acceso no autenticado y la modificación de datos en tránsito. Los certificados digitales vinculan la identidad del cliente a su clave privada, imposibilitando la suplantación incluso si el atacante captura el tráfico.                                       |
+| **1**   | **Cross Site Scripting (XSS)**                  | Implementación de una **Content Security Policy (CSP) de nivel 3** con directivas `script-src 'self'` y desinfectado (sanitization) de todos los inputs en el backend mediante librerías como **DOMPurify** o **OWASP Java Encoder**.                                                                                                                                       | Técnica       | Aunque el WAF actual filtra ataques conocidos, una CSP estricta previene la ejecución no autorizada de scripts inline, eliminando el riesgo residual incluso ante evasión de WAF. La sanitización en backend garantiza que los datos almacenados nunca contengan código malicioso.        |
+| **249** | **Manipulación de Registros de Auditoría**      | Configurar un sistema de **logging inmutable** mediante un SIEM on-premise (por ejemplo, **ELK Stack** o **Graylog**) con retención extendida (>1 año) y almacenamiento en un repositorio WORM (Write Once Read Many) local o NAS con protección contra borrado. Implementar **firmas digitales HMAC-SHA256** en cada entrada de log.                                       | Procedimental | Crea una pista de auditoría criptográficamente vinculada a una timeline interna, imposibilitando alteraciones retroactivas. Cumple con requisitos de trazabilidad forense y puede usarse como evidencia en litigios.                                                                      |
+| **18**  | **Control de Acceso Débil a Recursos Críticos** | Aplicar el **Principio de Menor Privilegio (PoLP)** mediante **controles de acceso basados en roles (RBAC)** en el sistema operativo y firewall, limitando el acceso a Redis solo a procesos y usuarios específicos. Implementar **Redis Sentinel** para failover automático y **cifrado en reposo** usando LUKS o BitLocker.                                               | Técnica       | Segmenta el acceso de modo que solo la Pasarela de Pagos y el Backend pueden leer y escribir en Redis. Incluso si un atacante compromete una aplicación cliente, no podrá acceder a datos de otros segmentos. El cifrado en reposo protege contra el acceso físico al almacenamiento.     |
+| **73**  | **Denegación de Servicio en Pasarela de Pagos** | Desplegar **clúster de servidores físicos o virtuales** con balanceador de carga (por ejemplo, **HAProxy** o **NGINX**) configurado para escalar horizontalmente entre 2-10 instancias según CPU/red. Implementar **firewall perimetral con reglas anti-DDoS** y configurar **rate limiting dinámico** con límites por IP cliente (ej. 100 req/min por sesión autenticada). | Técnica       | El escalado automático absorbe picos de tráfico legítimos e ilegítimos, manteniendo la disponibilidad. El firewall perimetral y el balanceador de carga proporcionan protección DDoS de capa 3/4. El rate limiting frena ataques de fuerza bruta sin ser agresivo con usuarios legítimos. |
+| **11**  | **Debilidad en Autorización SSO**               | Implementar **OAuth 2.0 con DPoP (Demonstrating Proof-of-Possession)** según RFC 9449, donde cada token de acceso está criptográficamente ligado a la clave privada del cliente. Añadir **rotación automática de tokens** (TTL=15min) y **refresh token binding**.                                                                                                          | Técnica       | DPoP imposibilita reutilizar tokens interceptados desde otro cliente, pues el atacante carecería de la clave privada para firmar las peticiones. La rotación de tokens reduce la ventana de exposición en caso de compromiso. Cumple con estándares OWASP y NIST.                         |
+
+### Principios de Diseño de Mitigaciones
+
+El enfoque propuesto se fundamenta en los siguientes principios estratégicos:
+
+1. **Prioridad en Mitigaciones Técnicas sobre Compensatorias:** Se ha privilegiado el remedio en origen (eliminación de vulnerabilidades) sobre medidas de detección y respuesta, bajo el supuesto de que AgroDirecto posee capacidad técnica y presupuestaria para implementar cambios arquitectónicos.
+
+2. **Alineamiento con Zero Trust:** Las mitigaciones refuerzan una arquitectura de Zero Trust explícita, donde cada componente requiere autenticación y autorización granular, sin confiar en perímetros únicos.
+
+3. **Escalado Temporal Realista:** Cada medida se ha acotado a ser implementable en un horizonte de 3-6 meses sin introducir interrupciones operacionales críticas.
+
+4. **Proporcionalidad Riesgo-Coste:** Se han priorizado las seis amenazas según su puntuación DREAD, enfocándose primero en XSS (DREAD 14/15) y DoS (DREAD 13/15), que afectan la continuidad del negocio.
+
+---
+
+## 1.5 Reflexión Final y Análisis del Riesgo
+
+Este análisis permite trasladar conceptos teóricos a un escenario creíble de negocio, donde la seguridad no se limita a proteger activos técnicos, sino que también condiciona la continuidad del servicio, la confianza del usuario y la sostenibilidad operativa de la plataforma.
+
+### Principales Riesgos Detectados
+
+Del universo de **281 amenazas identificadas**, las seis priorizadas muestran un panorama de riesgos con impacto técnico y empresarial claro. El riesgo más crítico, con **DREAD 14/15**, es el **Cross-Site Scripting (XSS)** en el frontend, por su capacidad para comprometer sesiones y facilitar el robo de credenciales o redirecciones fraudulentas. Le siguen la **denegación de servicio en la pasarela de pagos** y la **debilidad en la autorización SSO**, ambas con **13/15**, por su potencial para interrumpir operaciones o permitir accesos indebidos.
+
+Estos riesgos, además, pueden encadenarse. Un XSS inicial podría facilitar el compromiso de tokens de sesión y agravar el impacto sobre otros componentes sensibles. También destacan el **control de acceso débil** sobre Redis (**12/15**) y la **suplantación de bases de datos** (**11/15**) por su efecto sobre la confidencialidad e integridad de la información, mientras que la **manipulación de registros de auditoría** (**6/15**) sigue siendo relevante por su impacto en trazabilidad y cumplimiento.
+
+### Elementos Críticos de la Arquitectura
+
+La arquitectura de AgroDirecto se apoya en una **microsegmentación con zonas de confianza diferenciadas**, lo que refuerza la defensa en profundidad. Entre los elementos más críticos destacan la **pasarela de pagos**, aislada en un enclave de máxima restricción por su impacto directo en la operativa del negocio; la **base de datos Redis** y la **SQL Database**, por almacenar información sensible; y el **proveedor de autorización**, por concentrar funciones de identidad y acceso.
+
+El **frontend** también representa un punto expuesto por su interacción directa con el usuario. A esto se suma la dependencia de servicios de terceros, como la API logística. En este contexto, la **disponibilidad** resulta clave, ya que una caída prolongada podría traducirse en pérdidas económicas inmediatas y fallos en la cadena de suministro.
+
+### Límites del Análisis Realizado y Posibles Mejoras
+
+Este análisis, aunque útil en su aplicación de **STRIDE** y **DREAD**, tiene límites propios de un modelado estático basado en un DFD. No cubre con el mismo nivel de detalle riesgos dinámicos, como vulnerabilidades en dependencias, ingeniería social o la capacidad real de detección y respuesta ante incidentes.
+
+Como mejora, sería recomendable complementar este trabajo con **penetration testing**, ejercicios de **red teaming**, revisión de dependencias mediante **SBOM** y una evaluación más específica de riesgos asociados a terceros. También sería útil incorporar un proceso continuo de **threat intelligence** para adaptar el análisis a la evolución del entorno de amenazas y ajustar la infraestructura de forma proactiva. Estas mejoras no solo reducirían la superficie de ataque, sino que también alinearían AgroDirecto con estándares como **NIST** y **OWASP**.
+
+### Conclusiones Finales
+
+En conjunto, el documento constituye una base útil para entender la exposición de AgroDirecto y priorizar medidas de mejora. Más allá del plano técnico, el trabajo refleja que la seguridad de la plataforma afecta de forma directa a quienes dependen de ella, por lo que el modelado de amenazas debe entenderse como una herramienta práctica para razonar riesgos y tomar decisiones con criterio.
