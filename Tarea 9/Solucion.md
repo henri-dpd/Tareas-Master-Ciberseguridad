@@ -53,7 +53,9 @@ Como no podemos cortar Internet por completo, mi prioridad sería frenar el movi
 
 **Restricción estricta del tráfico saliente**: Configuraría el firewall perimetral para permitir únicamente los destinos imprescindibles para la operación. El objetivo no es "bloquear IPs desconocidas" de forma genérica, sino reducir la superficie de salida para dificultar la comunicación con C2, la exfiltración y la descarga de nuevas herramientas.
 
-**Validación de backups y activación del plan de comunicación**: Detendría cualquier restauración hasta confirmar que las copias son limpias y utilizables. En paralelo, activaría el plan de comunicación con dirección, personal técnico, equipo legal y autoridades competentes para que la crisis se gestione con criterios técnicos, regulatorios y reputacionales coherentes.
+**Validación de backups**: Detendría cualquier restauración hasta confirmar que las copias son limpias, íntegras y utilizables. Restaurar demasiado pronto puede reintroducir el problema o dificultar la investigación.
+
+**Activación del plan de comunicación**: Pondría en marcha el plan de comunicación con dirección, personal técnico, equipo legal y autoridades competentes para que la crisis se gestione con criterios técnicos, regulatorios y reputacionales coherentes.
 
 ## 2. Tarea 2
 
