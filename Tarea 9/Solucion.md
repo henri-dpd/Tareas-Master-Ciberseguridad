@@ -83,7 +83,7 @@ id: 9b1deb4d-5b4a-4c3b-9b1d-123456789abc
 status: experimental
 description: |
     Detecta inicios de sesión de tipo red (3) o RDP (10) en controladores de dominio
-    realizados fuera del horario de operación estándar (08:00 a 19:00).
+    realizados fuera del horario de operación estándar (08:00 a 18:59).
 author: Henri Daniel Peña Dequero
 date: 2026/04/13
 logsource:
@@ -118,7 +118,7 @@ falsepositives:
 level: high
 ```
 
-La detección se basa en el evento 4624 de Windows, que registra inicios de sesión exitosos, y filtra los tipos de logon 3 y 10, correspondientes a accesos de red y RDP. Se centra en los controladores de dominio porque son activos especialmente críticos y cualquier acceso no autorizado a ellos puede comprometer al resto de la infraestructura. Además, se define como horario habitual el intervalo entre las 08:00 y las 19:00 para reducir ruido y destacar accesos fuera de esa franja, que resultan menos comunes y, por tanto, más sospechosos. Aun así, la regla puede generar falsos positivos en casos de mantenimiento o administración autorizada fuera de horario.
+La detección se basa en el evento 4624 de Windows, que registra inicios de sesión exitosos, y filtra los tipos de logon 3 y 10, correspondientes a accesos de red y RDP. Se centra en los controladores de dominio porque son activos especialmente críticos y cualquier acceso no autorizado a ellos puede comprometer al resto de la infraestructura. Además, se define como horario habitual el intervalo entre las 08:00 y las 18:59 para reducir ruido y destacar accesos fuera de esa franja, que resultan menos comunes y, por tanto, más sospechosos. Aun así, la regla puede generar falsos positivos en casos de mantenimiento o administración autorizada fuera de horario.
 
 ## 2.3 Análisis de la muestra maliciosa
 
@@ -128,8 +128,8 @@ Se ha realizado la búsqueda en VirusTotal.
 
 **Pregunta 1**: Tras analizar el hash en VirusTotal, se observan comunicaciones con varias IP, entre ellas 185.106.92.54 y 82.115.223.40 por el puerto 8041. También aparece tráfico hacia 64.233.181.94 por el puerto 443 y resoluciones DNS para los dominios bazarunet.com, tiguanin.com y greshunka.com. Los dos primeros indicadores son los que encajan mejor con infraestructura sospechosa vista en la muestra; en cambio, una conexión aislada por 443 a una IP pública no debe etiquetarse automáticamente como C2 sin más contexto.
 
-**Pregunta 2**: Con la información disponible, la muestra puede relacionarse con Badger, el agente asociado a Brute Ratel C4 (BRc4). Brute Ratel es una herramienta comercial de red teaming que, según MITRE ATT&CK, también ha sido utilizada en campañas maliciosas reales. Además, el uso de DLL Side-Loading o de técnicas similares de carga de DLL encaja con comportamientos documentados para este tipo de herramienta, ya que permite ejecutar código malicioso apoyándose en binarios legítimos.
+**Pregunta 2**: Con la información disponible, la muestra puede asociarse de forma razonable con Brute Ratel C4. VirusTotal muestra etiquetas como `brutel` y `bruteratel`, además de varias detecciones que apuntan en esa misma dirección. Según MITRE ATT&CK, Brute Ratel C4 es el framework, mientras que Badger es el agente que puede desplegar. Por eso, con la evidencia disponible sí puede hablarse de una relación general con Brute Ratel C4, pero no sería prudente afirmar que se trata específicamente de Badger sin más soporte adicional.
 
 **Pregunta 3**: El uso de Brute Ratel se ha visto en campañas de actores avanzados, incluso grupos APT. Sin embargo, no sería correcto atribuir esta muestra a un actor concreto solo por esa coincidencia, porque se trata de una herramienta reutilizable y no exclusiva de un único grupo. Por tanto, con la evidencia disponible, lo correcto es dejar la atribución abierta.
 
-**Pregunta 4**: Un vector de entrada plausible, y además documentado en campañas que emplean herramientas de este tipo, es el spear phishing mediante correos con adjuntos como ISO, LNK o ZIP. A partir de ahí, la infección puede apoyarse en técnicas de DLL Side-Loading para ejecutar el malware aprovechando binarios legítimos. De cara al análisis forense, revisaría el correo del usuario afectado, las descargas recientes y la ejecución de procesos en rutas temporales para reconstruir el origen del compromiso.
+**Pregunta 4**: Un vector de entrada plausible sería que el usuario ejecutara un script o instalador malicioso, probablemente recibido por phishing o descargado desde un enlace. Esta posibilidad encaja bastante bien con los `Execution Parents` que aparecen en VirusTotal, donde se observan `JavaScript`, `Windows Installer` y nombres como `Document-19-45-15.js`. Además, en el análisis dinámico se ve que la DLL acaba ejecutándose mediante `rundll32.exe`, lo que apunta a una cadena de infección en la que un artefacto inicial termina lanzando la biblioteca maliciosa. De cara al análisis forense, revisaría el correo del usuario afectado, el historial de descargas, la ejecución reciente de scripts o instaladores y la creación de archivos en rutas temporales para intentar reconstruir el origen del compromiso.
