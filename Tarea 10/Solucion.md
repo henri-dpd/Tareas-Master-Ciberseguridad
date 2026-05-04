@@ -2,7 +2,7 @@
 
 ## Ram
 
-Comenzado análisis 2026-04-27 - 15:20:00, hash SHA256 del file `ram.raw`: `A0AD93B20CD9294F9D49947E87675C12159E3D96AE0D3C5A547F232630B0B240`.
+Comenzado análisis 2026-04-27 - 13:20:00 (UTC), hash SHA256 del file `ram.raw`: `A0AD93B20CD9294F9D49947E87675C12159E3D96AE0D3C5A547F232630B0B240`.
 
 Comandos ejecutados con volatility:
 
@@ -89,7 +89,7 @@ Sugerencia: Si ya vas a pasar al disco, no olvides mencionar en tu informe que l
 
 ## FTK Imager
 
-Iniciado el analisis a las 2026-04-29 - 20:40:00 de la imagen `IE11-Win7-VMWare-disk1-002.vmdk` con un hash: `60919A3ADC8450FA7E720EE68F6815D2179673C21C1844F198D7E45B38497068`
+Iniciado el analisis a las 2026-04-29 - 18:40:00 (UTC) de la imagen `IE11-Win7-VMWare-disk1-002.vmdk` con un hash: `60919A3ADC8450FA7E720EE68F6815D2179673C21C1844F198D7E45B38497068`
 
 Otros comandos ejecutados para leer los lnk que tenemos en user > IEUser > AppData > Microsoft > Windows > Roaming > Recent
 
@@ -122,7 +122,7 @@ Justificación Técnica:
 
 Artefacto: Archivos .pf extraídos de la carpeta Prefetch.
 
-Hallazgo: La existencia de archivos como HMAILSERVER.EXE-[HASH].pf, THUNDERBIRD.EXE-[HASH].pf y, crucialmente, KEY.EXE-[HASH].pf.
+Hallazgo: La existencia de archivos como HMAILSERVER.EXE-59392E89.pf, THUNDERBIRD.EXE-EDED9AF7.pf y, crucialmente, KEY.EXE-A7310F00.pf.
 
 Trazabilidad: Estos archivos demuestran no solo que el software estaba en el disco, sino que se ejecutó. El análisis de los archivos Prefetch permite determinar la fecha y hora de la última ejecución y el número de veces que se abrieron, vinculando el malware key.exe directamente con la actividad del sistema.
 
@@ -168,3 +168,59 @@ Análisis de la $MFT: El registro de estos archivos en el CSV de la MFT muestra 
 "El análisis forense del disco revela una intrusión planificada iniciada el 19/03/2021. El usuario IEUser instaló herramientas de correo y oficina para preparar la salida de datos. Mediante la ejecución de un código malicioso denominado key.exe (cuya ejecución está certificada por los archivos Prefetch localizados), el atacante procedió a capturar credenciales y acceder al documento Plan_de_cuentas.xls. Tras exfiltrar la información a través de un túnel SSH, se procedió al borrado de los ejecutables y documentos, rastro que ha sido recuperado mediante el análisis de la MFT y los archivos LNK."
 
 Nota sobre DumpIt: Eliminado de la narrativa del ataque. Se asume como la herramienta técnica utilizada exclusivamente para la adquisición forense de la memoria RAM previa al análisis del disco.
+
+---
+
+### Kape
+
+Extraccion de !BasicCollection, !SANS_Triage, WebBrowsers y LNKFilesAndJumpLists, ademas se hace un parser con el module !EZParser.
+
+Comandos usados en kape:
+
+```bash
+.\kape.exe --tsource E: --tdest "D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape\Targets" --tflush --target !BasicCollection,!SANS_Triage,WebBrowsers,LNKFilesAndJumpLists --mdest "D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape\Modules" --mflush --module !EZParser --mef csv --gui
+
+# Herramienta amcache
+ .\AmcacheParser.exe -f "D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape\Targets\E\Windows\AppCompat\Programs\Amcache.hve" --csv "D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape"
+```
+
+link virus total del malware key.exe: `https://www.virustotal.com/gui/file/d3e05795d760d7ee9d935cae5a3b9f71c064b27788054ab2f8b5d090314dceb4/detection`
+
+---
+
+Informe Forense Integral: Análisis del Compromiso "Key.exe"
+
+1. Vector de Entrada e Identificación del Malware
+   Origen Externo: Mediante el análisis de la $MFT, se confirmó que los archivos sospechosos poseían el identificador .Zone.Identifier=3, lo que prueba técnicamente que fueron descargados de internet.
+
+Naturaleza de la Amenaza: El análisis de Amcache permitió obtener el hash SHA-1 de key.exe, el cual arrojó 42 detecciones positivas en VirusTotal. Se identifica como un Troyano/Keylogger basado en Python diseñado para el robo de credenciales.
+
+2. Evidencias de Ejecución y Persistencia
+   Ejecución Recurrente: El artefacto Prefetch (PECmd) registró un total de 8 ejecuciones de key.exe.
+
+Monitoreo del Atacante: Se detectó la ejecución del Administrador de Tareas (taskmgr.exe) en la misma ventana de tiempo, sugiriendo que el atacante o el malware vigilaban los procesos del sistema.
+
+Persistencia por Replicación: Se localizaron copias del malware en rutas críticas del sistema: C:\Windows\System32\key.exe y C:\Windows\SysWOW64\key.exe, una técnica para dificultar la desinfección y ocultarse entre procesos legítimos.
+
+Análisis de Registro: Tras interrogar las colmenas NTUSER.DAT y SOFTWARE con WRR, se descartó el uso de las llaves Run estándar, lo que confirma que el malware utiliza métodos de persistencia más avanzados o manuales para evadir herramientas de seguridad básicas.
+
+3. Actividad del Usuario e Interacción con Datos
+   Atribución de Sesión: A través de WinLogonView, se identificaron múltiples sesiones interactivas (Logon Type 2) del usuario IEUser durante los días 19 y 23 de marzo de 2021.
+
+Acceso a Información Sensible: El análisis de archivos LNK (LECmd) demostró de forma irrefutable que se abrieron documentos financieros críticos:
+
+CLIENTES DEL BANCO.xls.
+
+Plan_de_cuentas.xls.
+
+Estado de cuenta bancario.xls.
+
+4. Maniobras Anti-Forense (Destrucción de Pruebas)
+   Borrado Selectivo: El análisis de la $MFT reveló que los documentos financieros mencionados fueron eliminados del sistema el 23/03/2021 a las 23:08:59.
+
+Intencionalidad: El borrado ocurrió justo después de las últimas ejecuciones del malware y el acceso a los datos, confirmando un intento deliberado de ocultar el rastro de la exfiltración de información.
+
+Conclusión Final
+La investigación demuestra un ataque dirigido exitoso. El atacante logró introducir un keylogger mediante descarga directa, obtuvo persistencia en directorios del sistema, accedió a la base de datos de clientes y estados bancarios, y finalmente ejecutó tareas de limpieza eliminando los archivos comprometidos para frustrar la respuesta ante incidentes.
+
+Este análisis exhaustivo, basado en la correlación de Prefetch, LNK, MFT, Registry, Logs de inicio de sesión y Amcache, proporciona una cadena de custodia y evidencia completa para el caso.
