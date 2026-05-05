@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Informe Tarea Forense</title>
+  <style>
+    :root {
+      --text: #1f1f1f;
+      --muted: #5f5f5f;
+      --line: #d7d7d7;
+      --paper: #ffffff;
+      --accent: #163a5f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: #f2f2f2;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(210mm, 100%);
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 16mm 20mm;
+      background: var(--paper);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
+    }
+
+    h1, h2, h3 {
+      color: var(--accent);
+      line-height: 1.25;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 22pt;
+      margin-top: 0;
+      margin-bottom: 0.4em;
+      text-transform: none;
+    }
+
+    h2 {
+      font-size: 15.5pt;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.18em;
+    }
+
+    h3 {
+      font-size: 12.5pt;
+    }
+
+    p {
+      margin: 0 0 0.9em;
+      text-align: justify;
+      text-justify: inter-word;
+      orphans: 3;
+      widows: 3;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 1.2em 0;
+    }
+
+    ul, ol {
+      margin: 0 0 1em 1.35em;
+    }
+
+    li {
+      margin-bottom: 0.35em;
+      text-align: justify;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.92em;
+      background: #f5f7fa;
+      padding: 0.08em 0.28em;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: #f5f7fa;
+      border: 1px solid #e4e8ee;
+      padding: 0.9em;
+      overflow-x: auto;
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0 1.2em;
+      font-size: 0.96em;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.48em 0.58em;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef3f8;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1em auto 0.35em;
+      border: 1px solid #d9dee5;
+    }
+
+    .caption {
+      font-size: 0.95em;
+      color: var(--muted);
+      text-align: justify;
+      margin-bottom: 1.1em;
+    }
+
+    .figure-reference {
+      font-size: 0.95em;
+      color: var(--muted);
+      font-style: italic;
+      margin: 0.35em 0 1.05em;
+    }
+
+    .figure-reference a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(22, 58, 95, 0.35);
+    }
+
+    .annex-list {
+      margin-top: 1.2em;
+    }
+
+    .annex-figure {
+      margin: 0 0 1.8em;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .annex-figure img {
+      margin-top: 0;
+    }
+
+    .annex-figure figcaption {
+      font-size: 0.95em;
+      color: var(--muted);
+      text-align: justify;
+      margin-top: 0.35em;
+    }
+
+    .document-meta {
+      list-style: none;
+      margin: 0.9em 0 1.35em;
+      padding: 0.95em 1.15em;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .document-meta li {
+      margin-bottom: 0.42em;
+      text-align: left;
+    }
+
+    .document-meta li:last-child {
+      margin-bottom: 0;
+    }
+
+    .document-meta strong {
+      color: var(--accent);
+    }
+
+    .page-break {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    @page {
+      size: A4;
+      margin: 16mm;
+    }
+
+    @media print {
+      body { background: #ffffff; }
+
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      img, table, pre {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .annex-figure {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      h2, h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      .caption {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Informe Forense "Caso Murciélago"</h1>
+<h2>Análisis de Memoria, Disco y Triaje</h2>
+<ul class="document-meta">
+<li><strong>Asignatura:</strong> Introducción a la práctica forense</li>
+<li><strong>Caso:</strong> análisis correlado de memoria RAM, imagen de disco y triaje forense</li>
+<li><strong>Sistema analizado:</strong> IEWIN7 - Windows 7 SP1 x64</li>
+<li><strong>Usuario principal observado:</strong> IEUser</li>
+<li><strong>Evidencias originales:</strong> EV-01 (<code>ram-001.raw</code>) y EV-02 (<code>IE11-Win7-VMWare-disk1-002.vmdk</code>)</li>
+<li><strong>Fecha de redacción:</strong> 2026-05-05 UTC</li>
+<li><strong>Criterio de elaboración:</strong> documento estructurado conforme a los campos mínimos del temario y a la referencia a UNE 197010:2015 señalada en la documentación de la asignatura y en la aclaración del profesor</li>
+</ul>
+<hr>
+<h2>Índice de contenidos</h2>
+<ol>
+<li>Resumen ejecutivo</li>
+<li>Línea de tiempo</li>
+<li>MITRE ATT&amp;CK</li>
+<li>TTPs observadas</li>
+<li>Descripción del incidente y alcance</li>
+<li>Dispositivos proporcionados y cadena de custodia</li>
+<li>Trabajos realizados</li>
+<li>Hallazgos principales</li>
+<li>IOCs</li>
+<li>Conclusiones</li>
+<li>Recomendaciones y plan de acción</li>
+</ol>
+<hr>
+<h2>Índice de figuras</h2>
+<ol>
+<li>Figura 1. Verificación inicial de integridad de las evidencias EV-01 y EV-02.</li>
+<li>Figura 2. Perfil y hora de referencia de la imagen RAM.</li>
+<li>Figura 3. Extracción de hashes locales desde memoria.</li>
+<li>Figura 4. Resolución del hash NTLM recuperado.</li>
+<li>Figura 5. Procesos y líneas de comando observadas en RAM.</li>
+<li>Figura 6. Actividad de consola recuperada en memoria.</li>
+<li>Figura 7. Conectividad y puertos observados en memoria.</li>
+<li>Figura 8. Carpeta con documentación sensible y archivo confesional.</li>
+<li>Figura 9. Descargas y herramientas preparatorias localizadas en el disco.</li>
+<li>Figura 10. Accesos recientes a documentos financieros.</li>
+<li>Figura 11. Evidencia de ejecución en Prefetch.</li>
+<li>Figura 12. Configuración de adquisición lógica con KAPE.</li>
+<li>Figura 13. Correlación entre Amcache y reputación externa del malware.</li>
+<li>Figura 14. Borrado de los documentos financieros desde la papelera.</li>
+<li>Figura 15. Revisión de persistencia simple en <code>NTUSER.DAT</code>.</li>
+<li>Figura 16. Revisión de persistencia simple en <code>SOFTWARE</code>.</li>
+<li>Figura 17. Historial WebCache con navegación externa y referencias locales del caso.</li>
+<li>Figura 18. Detalle de navegación recuperada con referencia a <code>mls-software.com/opensshd.html</code>.</li>
+</ol>
+<hr>
+<h2>1. Resumen ejecutivo</h2>
+<p>El análisis conjunto de la memoria RAM <code>ram-001.raw</code> y de la imagen de disco <code>IE11-Win7-VMWare-disk1-002.vmdk</code> permitió reconstruir un incidente con indicios consistentes de compromiso del sistema <code>IEWIN7</code>, uso de herramientas de acceso remoto y manipulación de documentación sensible almacenada en el perfil del usuario <code>IEUser</code>.</p>
+<p>En la memoria se aislaron tres hallazgos especialmente relevantes. Por un lado, se recuperaron credenciales locales válidas a partir del volcado de hashes SAM, obteniéndose para <code>IEUser</code> el hash NTLM <code>fc525c9683e8fe067095ba2ddc971889</code>, cuya resolución en fuentes abiertas devolvió la contraseña <code>Passw0rd!</code>. Por otro, se localizó en ejecución el binario <code>key.exe</code>, compatible con una herramienta de captura de credenciales. A ello se sumó la presencia de procesos y servicios aptos para acceso remoto o salida de información, entre ellos <code>sshd.exe</code> y <code>hMailServer.exe</code>, además de una conexión cerrada hacia la IP pública <code>200.228.36.6</code>.</p>
+<p>La revisión del disco y el triaje posterior confirmaron que no se trató de una actuación improvisada. Desde el 2021-03-19 UTC quedaron rastros de instaladores y componentes asociados a <code>hMailServer</code>, <code>Thunderbird</code>, <code>LibreOffice</code> y <code>OpenSSH</code>. Los artefactos <code>LNK</code>, <code>AutomaticDestinations</code>, <code>Prefetch</code>, <code>Amcache</code>, <code>MFT</code>, <code>Recycle Bin</code> y distintos eventos del sistema permitieron relacionar esa preparación con el acceso a documentos financieros concretos, en especial <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code>, ambos ubicados en <code>C:\Users\IEUser\Documents\Documentacion empresa</code> y eliminados después de su apertura el 2021-03-23 UTC.</p>
+<p>También quedaron indicios claros de actividad anti-forense. En memoria se recuperó el uso de consola para ejecutar <code>ipconfig</code>, desplazarse al escritorio y borrar <code>HashMyFiles.cfg</code>. Además, el análisis de <code>Prefetch</code> mostró la ejecución de <code>HASHMYFILES.EXE</code> desde el escritorio e incluyó la referencia directa a <code>HASHMYFILES.CFG</code>, lo que encaja con esa secuencia de consulta y eliminación. En el disco, la presencia de <code>flag2.txt</code> en la misma carpeta de la documentación sensible reforzó que el objetivo principal eran archivos con extensión <code>.xls</code>.</p>
+<p>En conjunto, la evidencia apunta a una preparación previa del entorno, a la ejecución reiterada de un binario compatible con keylogger, al acceso a documentación sensible y al borrado posterior de ficheros para reducir la huella local. El informe mantiene separadas las fases de memoria, disco y triaje para facilitar la lectura, aunque las tres forman parte del mismo hilo de compromiso.</p>
+<hr>
+<h2 class="page-break">2. Línea de tiempo</h2>
+<p><strong>Nota metodológica:</strong> en este informe todas las marcas temporales se expresan en UTC. Cuando una salida no aportaba una referencia temporal suficiente por sí sola, sólo se integró en la cronología después de comprobar su coherencia con artefactos de memoria y ejecución que sí correlacionaban en UTC, como <code>KEY.EXE</code> entre <code>pslist</code> y <code>Prefetch</code>, o <code>hMailServer.exe</code> entre memoria, <code>Prefetch</code> y <code>System.evtx</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Fecha y hora (UTC)</th>
+<th>Fuente</th>
+<th>Evento observado</th>
+<th>Relevancia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021-03-19 09:13:08 UTC</td>
+<td><code>System.evtx</code></td>
+<td>Instalación del servicio <code>hMailServer</code> con inicio automático.</td>
+<td>Señala preparación previa del entorno para comunicación o posible salida de datos.</td>
+</tr>
+<tr>
+<td>2021-03-19 10:18:14 UTC</td>
+<td><code>LECmd</code> / <code>AutomaticDestinations</code></td>
+<td>Aparición de <code>Plan_de_cuentas.xls</code> en <code>C:\Users\IEUser\Documents\Documentacion empresa</code>.</td>
+<td>Ubica uno de los documentos sensibles trabajados durante el incidente.</td>
+</tr>
+<tr>
+<td>2021-03-19 10:19:04 UTC</td>
+<td><code>LECmd</code> / <code>AutomaticDestinations</code></td>
+<td>Aparición de <code>CLIENTES DEL BANCO.xls</code> en la misma carpeta.</td>
+<td>Confirma un segundo documento financiero sensible dentro del mismo conjunto documental.</td>
+</tr>
+<tr>
+<td>2021-03-19 10:38:37 UTC</td>
+<td><code>Amcache ShortCuts</code></td>
+<td>Creación de accesos directos asociados a <code>hMailServer</code>.</td>
+<td>Refuerza que la herramienta quedó instalada y operativa desde esa fecha.</td>
+</tr>
+<tr>
+<td>2021-03-20 11:32:49 UTC</td>
+<td><code>Amcache UnassociatedFileEntries</code></td>
+<td>Registro de <code>C:\Users\IEUser\Desktop\key.exe</code>.</td>
+<td>Primer rastro sólido del malware en el host.</td>
+</tr>
+<tr>
+<td>2021-03-23 17:28:39 UTC - 17:29:58 UTC</td>
+<td><code>Prefetch</code></td>
+<td>Ejecución de <code>HASHMYFILES.EXE</code> desde el escritorio, con referencia a <code>HASHMYFILES.CFG</code>.</td>
+<td>Encaja con la posterior eliminación manual del fichero de configuración.</td>
+</tr>
+<tr>
+<td>2021-03-23 19:08:10 UTC</td>
+<td><code>Prefetch</code></td>
+<td>Octava ejecución registrada de <code>KEY.EXE</code>.</td>
+<td>Demuestra actividad reiterada del binario malicioso.</td>
+</tr>
+<tr>
+<td>2021-03-23 19:24:35 UTC</td>
+<td><code>Volatility imageinfo</code></td>
+<td>Hora de referencia de la captura de memoria RAM.</td>
+<td>Fija el estado del host durante la fase activa del incidente.</td>
+</tr>
+<tr>
+<td>2021-03-23 19:24:35 UTC aprox.</td>
+<td><code>Volatility consoles</code></td>
+<td>Actividad de consola residente en memoria con <code>ipconfig</code>, <code>cd Desktop</code> y <code>del HashMyFiles.cfg</code>.</td>
+<td>Muestra reconocimiento básico de red y borrado selectivo de rastro.</td>
+</tr>
+<tr>
+<td>2021-03-23 22:48:34 UTC - 22:49:18 UTC</td>
+<td><code>Prefetch</code> / <code>System.evtx</code></td>
+<td>Nueva actividad de <code>hMailServer</code>.</td>
+<td>Indica que el servicio siguió operativo en la misma jornada del incidente.</td>
+</tr>
+<tr>
+<td>2021-03-23 23:07:55 UTC</td>
+<td><code>LECmd</code> / <code>AutomaticDestinations</code></td>
+<td>Apertura reciente de <code>CLIENTES DEL BANCO.xls</code>.</td>
+<td>Prueba de acceso al contenido antes del borrado.</td>
+</tr>
+<tr>
+<td>2021-03-23 23:08:31 UTC</td>
+<td><code>LECmd</code> / <code>AutomaticDestinations</code></td>
+<td>Apertura reciente de <code>Plan_de_cuentas.xls</code>.</td>
+<td>Sitúa el acceso al otro documento crítico inmediatamente antes de su eliminación.</td>
+</tr>
+<tr>
+<td>2021-03-23 23:08:59 UTC</td>
+<td><code>RBCmd</code></td>
+<td>Eliminación de <code>CLIENTES DEL BANCO.xls</code> y <code>Plan_de_cuentas.xls</code> en la papelera del usuario.</td>
+<td>Evidencia directa de borrado posterior al acceso.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>3. MITRE ATT&amp;CK</h2>
+<table>
+<thead>
+<tr>
+<th>Táctica</th>
+<th>Técnica</th>
+<th>Nombre</th>
+<th>Evidencia observada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discovery</td>
+<td>T1016</td>
+<td>System Network Configuration Discovery</td>
+<td>En memoria se recuperó el comando <code>ipconfig</code> desde consola.</td>
+</tr>
+<tr>
+<td>Command and Control / Ingress</td>
+<td>T1105</td>
+<td>Ingress Tool Transfer</td>
+<td>La revisión de MFT y artefactos asociados mostró binarios descargados con rastro de origen externo y presencia de instaladores en <code>Downloads</code>.</td>
+</tr>
+<tr>
+<td>Credential Access</td>
+<td>T1056.001</td>
+<td>Keylogging</td>
+<td><code>key.exe</code> fue identificado como binario sospechoso, con ejecución repetida y clasificación de tipo keylogger en VirusTotal.</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>T1005</td>
+<td>Data from Local System</td>
+<td>Los artefactos <code>LNK</code> y <code>AutomaticDestinations</code> evidenciaron acceso a <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code>.</td>
+</tr>
+<tr>
+<td>Lateral Movement / Remote Services</td>
+<td>T1021.004</td>
+<td>SSH</td>
+<td>Se observó <code>sshd.exe</code> en memoria, regla de firewall asociada y puerto 22 abierto.</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td>T1070.004</td>
+<td>File Deletion</td>
+<td>Se documentó el borrado de <code>HashMyFiles.cfg</code> y la eliminación de los documentos <code>.xls</code> del caso.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>4. TTPs observadas</h2>
+<p>La secuencia técnica recuperada permite distinguir cuatro momentos bien diferenciados.</p>
+<p><strong>Preparación del entorno.</strong> El 2021-03-19 UTC quedaron instalados o disponibles componentes que no forman parte del uso habitual de un puesto de trabajo orientado a ofimática básica: <code>hMailServer</code>, <code>Thunderbird</code>, <code>LibreOffice</code> y <code>OpenSSH</code>. Esta combinación sugiere que el equipo fue acondicionado con antelación para abrir, preparar y eventualmente mover información.</p>
+<p><strong>Ejecución de malware orientado a captura.</strong> El binario <code>key.exe</code> aparece en escritorio, queda registrado en <code>Amcache</code>, dispone de <code>Prefetch</code> propio y acumuló ocho ejecuciones. La evidencia externa aportada mediante VirusTotal lo clasifica como artefacto malicioso de tipo keylogger/troyano. No se observó persistencia simple mediante claves <code>Run</code>, por lo que el mecanismo exacto de arranque no quedó totalmente resuelto con el material revisado.</p>
+<p><strong>Acceso y tratamiento de información sensible.</strong> Los documentos financieros de la carpeta <code>Documentacion empresa</code> fueron abiertos en fechas muy concretas y después eliminados. <code>flag2.txt</code>, localizado en la misma ruta, contiene un mensaje explícito indicando que los archivos filtrados eran <code>.xls</code>, lo que encaja con los dos documentos recuperados por nombre y con la actividad reciente de LibreOffice Calc.</p>
+<p><strong>Borrado selectivo y reducción de huella.</strong> El incidente incluyó acciones coherentes con anti-forense: eliminación de <code>HashMyFiles.cfg</code>, borrado de los dos <code>.xls</code> y desaparición de binarios o ficheros asociados a la actividad. La secuencia no elimina el rastro pericial, pero sí demuestra intención de dificultar la reconstrucción posterior.</p>
+<p>En cuanto a exfiltración, la evidencia permite afirmar que el sistema contaba con <code>OpenSSH</code> activo, <code>hMailServer</code> operativo y al menos una conexión cerrada hacia <code>200.228.36.6</code>. Eso sostiene un escenario técnicamente viable de salida de información, aunque con la evidencia disponible no se recuperó el destinatario final exacto ni el contenido transmitido por correo.</p>
+<hr>
+<h2>5. Descripción del incidente y alcance</h2>
+<p>Se investigó un sistema Windows 7 asociado al usuario <code>IEUser</code>, identificado como <code>IEWIN7</code>, con el objetivo de reconstruir un posible escenario de fuga de información. El trabajo se organizó en dos grandes bloques conectados entre sí: primero, el análisis de la memoria RAM para fijar el estado vivo del equipo; después, el examen de la imagen de disco, completado con triaje y con parsers de Eric Zimmerman para ordenar y correlacionar los artefactos recuperados.</p>
+<p>El escenario reconstruido muestra una actuación planificada. Días antes del momento crítico quedaron instaladas o disponibles varias herramientas de soporte para abrir documentos, mantener acceso remoto y preparar posibles canales de comunicación. Más adelante apareció implantado <code>key.exe</code>, que fue ejecutado en repetidas ocasiones. Ya en la fase activa del incidente se localizaron credenciales válidas del usuario local, actividad de consola con borrado de rastro, servicios de red operativos y acceso a documentos financieros concretos.</p>
+<p>El análisis de memoria aportó la fotografía del sistema en funcionamiento: procesos, cuentas, consola, servicios y conectividad. El análisis de disco y el triaje añadieron la perspectiva histórica: cuándo se preparó el entorno, qué documentos se abrieron, qué se intentó borrar y qué artefactos quedaron como rastro. Aunque la práctica planteaba frentes distintos, ambos terminaron convergiendo en una misma narrativa técnica y por eso se integran en un único informe.</p>
+<p><strong>Alcance del análisis.</strong> Este informe se limita a las dos evidencias originales facilitadas, <code>ram-001.raw</code> y <code>IE11-Win7-VMWare-disk1-002.vmdk</code>, así como a los artefactos derivados obtenidos a partir de ellas durante el proceso pericial. No se dispuso de capturas completas de tráfico, telemetría EDR, registros de proxy, exportaciones de buzones ni evidencia directa del extremo remoto <code>200.228.36.6</code>. Por ello, el informe acredita con solidez la preparación del entorno, la ejecución del malware, el acceso a los documentos y el borrado posterior, pero no permite atribuir con certeza absoluta el mecanismo final de exfiltración ni el destinatario último de los datos.</p>
+<hr>
+<h2>6. Dispositivos proporcionados y cadena de custodia</h2>
+<h3>6.1 Evidencias originales analizadas</h3>
+<table>
+<thead>
+<tr>
+<th>ID de evidencia</th>
+<th>Descripción</th>
+<th>Identificador / hash</th>
+<th>Observaciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EV-01</td>
+<td>Volcado de memoria <code>ram-001.raw</code></td>
+<td>SHA-256 <code>A0AD93B20CD9294F9D49947E87675C12159E3D96AE0D3C5A547F232630B0B240</code></td>
+<td>Evidencia utilizada para el análisis de estado en vivo mediante Volatility.</td>
+</tr>
+<tr>
+<td>EV-02</td>
+<td>Imagen de disco <code>IE11-Win7-VMWare-disk1-002.vmdk</code></td>
+<td>SHA-256 <code>60919A3ADC8450FA7E720EE68F6815D2179673C21C1844F198D7E45B38497068</code></td>
+<td>Evidencia utilizada para análisis lógico con FTK Imager, montaje y triage con KAPE.</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2 Criterio temporal, trazabilidad y preservación</h3>
+<p>El análisis se documentó mediante capturas de pantalla, exportaciones de <code>FTK Imager</code>, colecciones <code>Targets</code> de <code>KAPE</code>, salidas parseadas en <code>Modules</code>, CSV de apoyo, ficheros de log y otros productos derivados preservados dentro de <code>Tarea 10\Evidencias</code>. A efectos de cadena de custodia, todas las horas del presente apartado se expresan en UTC. La fijación temporal se apoyó en marcas preservadas de los propios ficheros del expediente y en la correlación cruzada entre artefactos de memoria, disco y triage.</p>
+<p>La coherencia de esta fijación se contrastó de forma cruzada con referencias preservadas del expediente, entre ellas <code>volatility-imageinfo.png</code> (<code>2026-04-27 17:00:57 UTC</code>), <code>kape_triage.png</code> (<code>2026-04-30 22:19:35 UTC</code>) y <code>kape_triage_lecmd_output.png</code> (<code>2026-05-02 10:05:54 UTC</code>). Cuando una captura no muestra el reloj, se empleó la marca temporal del archivo preservado correspondiente en <code>Evidencias</code>, ya fuera PNG, CSV, TXT o artefacto extraído, por resultar coherente con esas referencias y con la secuencia general de trabajo.</p>
+<p>La primera actuación que se hace constar formalmente en esta cadena de custodia es la fijación hash de las dos evidencias originales, documentada el 2026-04-27 01:10:00 UTC. A partir de ese momento, el trabajo posterior se realizó sobre copias de trabajo, salidas de herramientas y artefactos derivados generados en carpetas controladas del caso. Esos productos derivados no sustituyen la evidencia de origen, sino que materializan su examen técnico y dejan constancia reproducible de cada actuación pericial.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-1">Figura 1</a> en el Anexo de figuras.</p>
+<p>La secuencia fechada aplicada fue la siguiente:</p>
+<ol>
+<li><code>2026-04-27 01:10:00 UTC</code>: verificación de integridad mediante SHA-256 de <code>ram-001.raw</code> y de la imagen <code>vmdk</code>.</li>
+<li><code>2026-04-27 15:56:43 UTC</code> a <code>2026-04-27 17:00:57 UTC</code>: explotación analítica de <code>EV-01</code> con <code>Volatility 2.6</code>, documentando procesos, líneas de comando, consola, hashes locales, conectividad y perfil de memoria.</li>
+<li><code>2026-04-29 19:07:58 UTC</code> a <code>2026-04-29 20:18:01 UTC</code>: revisión controlada de <code>EV-02</code> con <code>FTK Imager</code>, incluyendo rutas de usuario, <code>Downloads</code>, <code>.ssh</code>, <code>Recent</code>, <code>Documents</code> y <code>Documentacion empresa</code>.</li>
+<li><code>2026-04-30 22:19:35 UTC</code>: montaje lógico de la imagen <code>vmdk</code> con Arsenal Image Mounter y preparación de la extracción con <code>KAPE</code>.</li>
+<li><code>2026-05-02 09:49:58 UTC</code> a <code>2026-05-02 11:34:30 UTC</code>: revisión de productos derivados estructurados con <code>MFTECmd</code>, <code>PECmd</code>, <code>LECmd</code>, <code>RBCmd</code>, <code>WinLogOnView</code>, <code>Windows Registry Recovery</code>, <code>BrowsingHistoryView</code> y <code>Amcache</code>.</li>
+<li><code>2026-05-05 21:46:55 UTC</code> a <code>2026-05-05 21:47:35 UTC</code>: recuperación final de historial relevante desde <code>WebCacheV01.dat</code> y preservación de capturas complementarias.</li>
+</ol>
+<h3>6.3 Actuaciones formales de cadena de custodia</h3>
+<p>La siguiente tabla se presenta en orden metodológico de custodia. Por ello, la fijación hash de <code>EV-01</code> y <code>EV-02</code> figura en primer lugar como acto formal de aseguramiento y precede a cualquier explotación analítica posterior del caso.</p>
+<table>
+<thead>
+<tr>
+<th>Fecha y hora (UTC)</th>
+<th>Actuación formal de custodia</th>
+<th>Evidencia o fuente afectada</th>
+<th>Producto derivado o soporte preservado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-04-27 01:10:00</td>
+<td>Cálculo y preservación de los hashes SHA-256 de las evidencias originales <code>EV-01</code> y <code>EV-02</code>, fijando su identificación inicial antes del inicio del trabajo analítico.</td>
+<td>EV-01 / EV-02</td>
+<td><code>ram_image_hashes.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 15:56:43 a 2026-04-27 17:00:57</td>
+<td>Explotación analítica de <code>EV-01</code> con <code>Volatility 2.6</code>, documentando <code>pslist</code>, <code>cmdline</code>, <code>consoles</code>, <code>hashdump</code>, <code>netscan</code> e <code>imageinfo</code> como base técnica del análisis de memoria.</td>
+<td>EV-01</td>
+<td><code>volatility-pslist.png</code>, <code>volatility-cmdline.png</code>, <code>volatility-cmdline-2.png</code>, <code>volatility-consoles.png</code>, <code>volatility-consoles-2.png</code>, <code>volatility-hashdump.png</code>, <code>volatility-netscan.png</code>, <code>volatility-netscan-2.png</code>, <code>volatility-imageinfo.png</code></td>
+</tr>
+<tr>
+<td>2026-04-29 19:07:58</td>
+<td>Apertura controlada de <code>EV-02</code> en <code>FTK Imager</code> y comienzo de la revisión manual de rutas relevantes del sistema y del perfil de usuario.</td>
+<td>EV-02</td>
+<td>Repositorio <code>FTK Imager\</code> con <code>$MFT</code>, <code>config\</code>, <code>Prefetch\</code>, <code>Recicle Bin\</code>, <code>Roaming_Microsoft_Windows_Recent\</code>, <code>webCache\</code>, <code>LECmd - output.txt</code>, <code>mft_borrados_resumen.csv</code> y soporte visual <code>ftk_imager_public_downloads.png</code></td>
+</tr>
+<tr>
+<td>2026-04-29 19:15:09</td>
+<td>Continuación de la revisión manual de <code>EV-02</code>, documentando <code>.ssh</code>, <code>Downloads</code>, <code>Documentacion empresa</code>, <code>Recent</code>, <code>Documents</code> y el perfil de usuario exportado.</td>
+<td>EV-02</td>
+<td><code>FTK Imager\IEUser\NTUSER.DAT</code>, <code>FTK Imager\webCache\WebCacheV01.dat</code> y soportes <code>ftk_imager_ieuser_ssh.png</code>, <code>ftk_imager_ieuser_downloads.png</code>, <code>ftk_imager_ieuser_documentacion_documentacion_empresa.png</code>, <code>ftk_imager_ieuser_microsoft_windows_recent.png</code>, <code>ftk_imager_ieuser_documentacion.png</code></td>
+</tr>
+<tr>
+<td>2026-04-30 22:19:35</td>
+<td>Montaje lógico de la imagen <code>vmdk</code> con Arsenal Image Mounter y preparación de la extracción estructurada con <code>KAPE</code>.</td>
+<td>EV-02</td>
+<td>Repositorio <code>Triage_Kape\Targets\</code>, repositorio <code>Triage_Kape\Modules\</code>, <code>2026-04-30T21_31_09_5712827_ConsoleLog.txt</code> y soporte visual <code>kape_triage.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 09:49:58</td>
+<td>Revisión de productos derivados generados a partir de <code>EV-02</code> mediante <code>MFTECmd</code>, <code>PECmd</code>, <code>LECmd</code>, <code>RBCmd</code>, <code>WinLogOnView</code>, <code>WRR</code>, <code>BrowsingHistoryView</code> y contraste de <code>Amcache</code>.</td>
+<td>Derivados de EV-02</td>
+<td><code>Triage_Kape\Modules\ProgramExecution\20260430221711_PECmd_Output.csv</code>, <code>Triage_Kape\Modules\EventLogs\20260430221700_EvtxECmd_Output.csv</code>, <code>Triage_Kape\Modules\Registry\DFIRBatch_RECmdConsoleLog.txt</code>, <code>Triage_Kape\20260502132241_Amcache_*.csv</code>, <code>Triage_Kape\20260502132416_Amcache_*.csv</code>, más soportes <code>kape_triage_mftecmd_output.png</code>, <code>kape_triage_pecmd_output.png</code>, <code>kape_triage_lecmd_output.png</code>, <code>kape_triage_rbcmd_output.png</code>, <code>kape_triage_mftecmd_output_2.png</code>, <code>winlog_on_view.png</code>, <code>browsing_history_view_config.png</code>, <code>browsing_history_view_no_result.png</code>, <code>wrr_ntuserdat.png</code>, <code>wrr_software.png</code>, <code>amcache_parser_virus_total_key.exe_malware_family.png</code>, <code>amcache_parser_virus_total_key.exe_malware_family_2.png</code></td>
+</tr>
+<tr>
+<td>2026-05-05 21:46:55</td>
+<td>Recuperación final de historial relevante desde <code>WebCacheV01.dat</code> y preservación de capturas complementarias del resultado.</td>
+<td>Derivados de EV-02</td>
+<td><code>FTK Imager\webCache\WebCacheV01.dat</code>, <code>FTK Imager\webCache\V01.log</code>, <code>FTK Imager\webCache\V01.chk</code> y soportes <code>browsing_history_view_web_cache.png</code>, <code>browsing_history_view_web_cache_2.png</code></td>
+</tr>
+</tbody>
+</table>
+<p>Este registro resume la secuencia formal de aseguramiento y explotación de las evidencias originales. En él, el primer acto consignado es la fijación hash de <code>EV-01</code> y <code>EV-02</code>, pero también se integra expresamente el bloque de análisis de memoria RAM con sus fechas y horas UTC dentro de la propia cadena de custodia.</p>
+<h3>6.4 Registro fechado de productos de trabajo preservados</h3>
+<table>
+<thead>
+<tr>
+<th>Fecha y hora (UTC)</th>
+<th>Actuación documentada</th>
+<th>Evidencia o fuente afectada</th>
+<th>Producto derivado o soporte preservado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-04-27 15:56:43</td>
+<td>Documentación inicial del listado de procesos activos en memoria.</td>
+<td>EV-01</td>
+<td><code>volatility-pslist.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:01:47</td>
+<td>Primera captura de <code>cmdline</code> para fijar procesos y parámetros relevantes en RAM.</td>
+<td>EV-01</td>
+<td><code>volatility-cmdline.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:02:55</td>
+<td>Captura complementaria de <code>cmdline</code>, con foco en <code>key.exe</code>, <code>sshd.exe</code> y <code>hMailServer.exe</code>.</td>
+<td>EV-01</td>
+<td><code>volatility-cmdline-2.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:04:21</td>
+<td>Preservación de la salida <code>consoles</code> con los comandos <code>ipconfig</code>, <code>cd Desktop</code> y <code>del HashMyFiles.cfg</code>.</td>
+<td>EV-01</td>
+<td><code>volatility-consoles.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:05:34</td>
+<td>Captura complementaria de <code>consoles</code> para completar el contexto de actividad manual en RAM.</td>
+<td>EV-01</td>
+<td><code>volatility-consoles-2.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:08:41</td>
+<td>Extracción y documentación de hashes locales mediante <code>hashdump</code>.</td>
+<td>EV-01</td>
+<td><code>volatility-hashdump.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:17:53</td>
+<td>Contraste externo del hash NTLM recuperado para verificar su resolución textual.</td>
+<td>Derivado de EV-01</td>
+<td><code>hashes.com-password.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:48:25</td>
+<td>Segunda comprobación externa del mismo hash NTLM en una fuente independiente.</td>
+<td>Derivado de EV-01</td>
+<td><code>crackstation.net-password.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:56:59</td>
+<td>Preservación inicial de la salida <code>netscan</code> para fijar puertos, procesos de red y conexión externa.</td>
+<td>EV-01</td>
+<td><code>volatility-netscan.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 16:57:32</td>
+<td>Captura complementaria de <code>netscan</code> para completar las filas de conectividad observadas.</td>
+<td>EV-01</td>
+<td><code>volatility-netscan-2.png</code></td>
+</tr>
+<tr>
+<td>2026-04-27 17:00:57</td>
+<td>Documentación del perfil sugerido y de la hora de referencia de la memoria mediante <code>imageinfo</code>.</td>
+<td>EV-01</td>
+<td><code>volatility-imageinfo.png</code></td>
+</tr>
+<tr>
+<td>2026-04-29 18:37:36</td>
+<td>Revisión en FTK Imager de rutas vinculadas a <code>sshd-server</code> y elementos asociados a papelera.</td>
+<td>EV-02</td>
+<td><code>ftk_imager_sshd_server_recycle.png</code></td>
+</tr>
+<tr>
+<td>2026-04-29 18:51:05</td>
+<td>Revisión en FTK Imager de rutas relacionadas con <code>sshd-server</code> y accesos de usuario.</td>
+<td>EV-02</td>
+<td><code>ftk_imager_sshd_server_send_to.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 09:49:58</td>
+<td>Revisión de la salida de <code>MFTECmd</code> para documentar huellas del sistema de archivos.</td>
+<td>Derivado de EV-02</td>
+<td><code>kape_triage_mftecmd_output.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 09:51:36</td>
+<td>Revisión de la salida de <code>PECmd</code> para confirmar ejecuciones históricas en <code>Prefetch</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>kape_triage_pecmd_output.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 10:05:54</td>
+<td>Revisión de la salida de <code>LECmd</code> y <code>AutomaticDestinations</code> para documentar accesos a documentos.</td>
+<td>Derivado de EV-02</td>
+<td><code>kape_triage_lecmd_output.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 10:14:38</td>
+<td>Revisión de la salida de <code>RBCmd</code> para documentar la eliminación de los <code>.xls</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>kape_triage_rbcmd_output.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 10:37:18</td>
+<td>Segunda revisión de <code>MFTECmd</code> para completar la correlación del sistema de archivos.</td>
+<td>Derivado de EV-02</td>
+<td><code>kape_triage_mftecmd_output_2.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 10:51:31</td>
+<td>Consulta de eventos de sesión y actividad de cuentas mediante <code>WinLogOnView</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>winlog_on_view.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 11:00:32</td>
+<td>Configuración de <code>BrowsingHistoryView</code> para el examen de <code>WebCacheV01.dat</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>browsing_history_view_config.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 11:02:48</td>
+<td>Primer intento de recuperación de historial web, documentado sin resultados utilizables.</td>
+<td>Derivado de EV-02</td>
+<td><code>browsing_history_view_no_result.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 11:18:24</td>
+<td>Revisión de la colmena <code>NTUSER.DAT</code> con Windows Registry Recovery.</td>
+<td>Derivado de EV-02</td>
+<td><code>wrr_ntuserdat.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 11:18:56</td>
+<td>Revisión de la colmena <code>SOFTWARE</code> con Windows Registry Recovery.</td>
+<td>Derivado de EV-02</td>
+<td><code>wrr_software.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 11:30:05</td>
+<td>Contraste de <code>Amcache</code> con reputación externa del binario <code>key.exe</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>amcache_parser_virus_total_key.exe_malware_family.png</code></td>
+</tr>
+<tr>
+<td>2026-05-02 11:34:30</td>
+<td>Captura complementaria del contraste <code>Amcache</code> / reputación externa para preservar el contexto completo.</td>
+<td>Derivado de EV-02</td>
+<td><code>amcache_parser_virus_total_key.exe_malware_family_2.png</code></td>
+</tr>
+<tr>
+<td>2026-05-05 21:46:55</td>
+<td>Recuperación efectiva de historial relevante desde <code>WebCacheV01.dat</code> mediante <code>BrowsingHistoryView</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>browsing_history_view_web_cache.png</code></td>
+</tr>
+<tr>
+<td>2026-05-05 21:47:35</td>
+<td>Captura complementaria del historial web recuperado, incluyendo referencia a <code>mls-software.com/opensshd.html</code>.</td>
+<td>Derivado de EV-02</td>
+<td><code>browsing_history_view_web_cache_2.png</code></td>
+</tr>
+</tbody>
+</table>
+<p>Este segundo registro incorpora, también con fecha y hora UTC explícitas, cada salida analítica, captura o artefacto preservado en el expediente técnico. Así se evita que la datación quede sólo sugerida por una imagen y se integra expresamente en el cuerpo del informe la existencia de colecciones extraídas, CSV parseados, hives de registro, logs y repositorios completos de trabajo.</p>
+<h3>6.5 Repositorios y artefactos derivados preservados</h3>
+<table>
+<thead>
+<tr>
+<th>Repositorio o conjunto preservado</th>
+<th>Contenido conservado</th>
+<th>Función dentro de la cadena de custodia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Evidencias\FTK Imager\</code></td>
+<td>Exportaciones manuales del examen lógico: <code>$MFT</code>, <code>config\</code>, <code>IEUser\NTUSER.DAT</code>, <code>Prefetch\</code>, <code>Recicle Bin\</code>, <code>Roaming_Microsoft_Windows_Recent\</code>, <code>webCache\</code>, <code>LECmd - output.txt</code>, <code>mft_borrados_resumen.csv</code>.</td>
+<td>Preserva el subconjunto de artefactos de disco seleccionados durante la revisión manual con FTK Imager.</td>
+</tr>
+<tr>
+<td><code>Evidencias\Triage_Kape\Targets\</code></td>
+<td>Colección bruta de artefactos extraídos por KAPE: ficheros <code>.pf</code>, <code>.lnk</code>, <code>.automaticDestinations-ms</code>, <code>.customDestinations-ms</code>, colmenas <code>SAM</code>, <code>SECURITY</code>, <code>SOFTWARE</code>, <code>SYSTEM</code>, <code>NTUSER.DAT</code>, eventos <code>.evtx</code>, trazas <code>.etl</code>, <code>WebCacheV01.dat</code>, tareas programadas y repositorio WMI.</td>
+<td>Conserva la extracción estructurada de artefactos originales derivados de <code>EV-02</code> sobre la que se apoyó el parseo posterior.</td>
+</tr>
+<tr>
+<td><code>Evidencias\Triage_Kape\Modules\</code> y CSV <code>Amcache_*</code></td>
+<td>Resultados parseados por familia: <code>ProgramExecution</code>, <code>EventLogs</code>, <code>Registry</code>, <code>FileDeletion</code>, <code>FileFolderAccess</code>, <code>FileSystem</code>, <code>SRUMDatabase</code>, <code>SUMDatabase</code>, <code>SQLDatabases</code>, además de CSV de <code>Amcache</code> y <code>ConsoleLog.txt</code>.</td>
+<td>Preserva los resultados de análisis ya normalizados y reutilizables para correlación cronológica y búsqueda selectiva.</td>
+</tr>
+<tr>
+<td>Capturas y soportes visuales <code>*.png</code></td>
+<td>Evidencia visual de salidas relevantes de Volatility, FTK Imager, KAPE, WRR, BrowsingHistoryView y contraste externo de hashes y reputación.</td>
+<td>Sirve como apoyo visual del expediente, pero no agota por sí sola el conjunto de productos derivados preservados.</td>
+</tr>
+</tbody>
+</table>
+<h3>6.6 Artefactos analizados dentro del alcance</h3>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Artefactos principales</th>
+<th>Finalidad dentro del análisis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memoria RAM</td>
+<td><code>imageinfo</code>, <code>pslist</code>, <code>cmdline</code>, <code>consoles</code>, <code>hashdump</code>, <code>netscan</code></td>
+<td>Estado en vivo del sistema, procesos, consola, credenciales y conectividad.</td>
+</tr>
+<tr>
+<td>Imagen de disco</td>
+<td><code>Prefetch</code>, <code>Recent</code>, <code>.ssh</code>, <code>Downloads</code>, <code>Documents</code>, <code>$Recycle.Bin</code>, <code>$MFT</code></td>
+<td>Ejecución histórica, acceso a documentos, preparación del entorno, borrado y persistencia potencial.</td>
+</tr>
+<tr>
+<td>Triaje</td>
+<td><code>LECmd</code>, <code>PECmd</code>, <code>RBCmd</code>, <code>AmcacheParser</code>, <code>WRR</code>, <code>WinLogOnView</code>, <code>EvtxECmd</code></td>
+<td>Correlación temporal, reputación de binarios, eventos y evidencias estructuradas.</td>
+</tr>
+</tbody>
+</table>
+<p>Esta cadena de custodia se apoya en tres principios: identificación inequívoca de cada evidencia mediante hash, separación entre evidencia original y productos derivados de análisis, y trazabilidad temporal de las herramientas empleadas en cada fase. En consecuencia, las capturas incorporadas al informe no actúan como prueba aislada, sino como un subconjunto visual de un expediente más amplio que también conserva exportaciones de FTK Imager, colecciones <code>Targets</code> de KAPE, salidas <code>Modules</code>, CSV parseados, hives de registro, eventos y artefactos de sistema fechados dentro del caso.</p>
+<p>Debe quedar expresamente aclarado que herramientas como <code>Magnet RAM Capture</code>, <code>DumpIt</code> o elementos del maletín forense del analista pertenecen a la fase de adquisición de evidencia. Por tanto, cuando aparecen en disco, en memoria o en artefactos de ejecución, no deben atribuirse por defecto al atacante. En este caso se consideraron parte de la operativa forense y no de la cadena de acciones maliciosas.</p>
+<hr>
+<h2 class="page-break">7. Trabajos realizados</h2>
+<h3>7.1 Bloque 1: análisis de memoria RAM</h3>
+<p>Sobre <code>EV-01</code> se ejecutaron los plugins <code>imageinfo</code>, <code>pslist</code>, <code>cmdline</code>, <code>consoles</code>, <code>hashdump</code> y <code>netscan</code> de <code>Volatility 2.6</code>. El objetivo fue fijar el perfil correcto de la imagen, identificar procesos activos, recuperar línea de comandos, extraer actividad de consola, analizar conexiones de red y obtener credenciales locales.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-2">Figura 2</a> en el Anexo de figuras.</p>
+<p>El perfil sugerido y empleado fue <code>Win7SP1x64</code>, compatible con el sistema observado. La extracción de hashes SAM devolvió varias cuentas locales, entre ellas <code>IEUser</code> y <code>Administrator</code>, con el mismo hash NTLM <code>fc525c9683e8fe067095ba2ddc971889</code>. La resolución de dicho hash en fuentes abiertas permitió obtener la contraseña <code>Passw0rd!</code>.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-3">Figura 3</a> en el Anexo de figuras.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-4">Figura 4</a> en el Anexo de figuras.</p>
+<p>En <code>pslist</code> y <code>cmdline</code> aparecieron, entre otros, <code>key.exe</code>, <code>sshd.exe</code>, <code>hMailServer.exe</code>, <code>cygrunsrv.exe</code> y <code>cmd.exe</code>. Esa combinación fue relevante porque unió un binario sospechoso de captura de credenciales con un servicio SSH y con un servidor de correo local operando en el mismo host. <code>netscan</code> reforzó el hallazgo al mostrar el puerto 22 abierto por <code>sshd.exe</code>, los puertos 25, 110, 143 y 587 vinculados a <code>hMailServer.exe</code>, y una conexión cerrada hacia la IP pública <code>200.228.36.6</code>.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-5">Figura 5</a> en el Anexo de figuras.</p>
+<p>El plugin <code>consoles</code> resultó determinante para documentar la actividad manual en consola. En él se recuperaron los comandos <code>ipconfig</code>, <code>cd Desktop</code> y <code>del HashMyFiles.cfg</code>. El primero situó la IP local <code>192.168.65.135</code>; los otros dos evidenciaron acceso directo al escritorio del usuario y eliminación selectiva del fichero de configuración de <code>HashMyFiles</code>.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-6">Figura 6</a> en el Anexo de figuras.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-7">Figura 7</a> en el Anexo de figuras.</p>
+<h3>7.2 Bloque 2: análisis de la imagen de disco con FTK Imager</h3>
+<p>Sobre <code>EV-02</code> se revisaron manualmente rutas relevantes del perfil de <code>IEUser</code>, en especial <code>Desktop</code>, <code>Documents</code>, <code>Downloads</code>, <code>AppData\Roaming\Microsoft\Windows\Recent</code>, <code>.ssh</code> y <code>Windows\Prefetch</code>. Este bloque permitió dar contexto histórico y material a lo que en RAM sólo aparecía como fotografía instantánea.</p>
+<p>En <code>Documents\Documentacion empresa</code> se encontró <code>flag2.txt</code>, cuyo contenido indicaba literalmente que los archivos filtrados eran <code>.xls</code>. En esa misma ruta y en artefactos asociados aparecieron los nombres <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code>, ambos coherentes con documentación financiera. La carpeta <code>Downloads</code> mostró presencia de instaladores de <code>hMailServer</code>, <code>Thunderbird</code> y <code>LibreOffice</code>, además de una carpeta <code>malware</code> ligada al binario sospechoso.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-8">Figura 8</a> en el Anexo de figuras.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-9">Figura 9</a> en el Anexo de figuras.</p>
+<p>La revisión de accesos recientes con <code>LECmd</code> permitió vincular de forma precisa esos documentos con el usuario. Los accesos directos <code>Plan_de_cuentas.xls.lnk</code> y <code>CLIENTES DEL BANCO.xls.lnk</code> apuntaban a <code>C:\Users\IEUser\Documents\Documentacion empresa\</code>. Esto no sólo ubicó los archivos, sino que demostró que fueron abiertos en la jornada del 2021-03-23 UTC.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-10">Figura 10</a> en el Anexo de figuras.</p>
+<p>En <code>Prefetch</code> se localizaron entradas especialmente relevantes: <code>KEY.EXE-A7310F00.pf</code>, <code>HASHMYFILES.EXE-0F3E8D9C.pf</code> y <code>HMAILSERVER.EXE-59392E89.pf</code>. Estas evidencias permitieron afirmar ejecución real y no mera presencia en disco. En particular, el <code>Prefetch</code> de <code>KEY.EXE</code> registró ocho ejecuciones, mientras que el de <code>HASHMYFILES.EXE</code> incluyó como recurso cargado la ruta <code>\Users\IEUser\Desktop\HASHMYFILES.CFG</code>, lo que conectó de forma directa con el borrado recuperado en memoria.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-11">Figura 11</a> en el Anexo de figuras.</p>
+<h3>7.3 Bloque 3: triage con KAPE y parsers de Eric Zimmerman</h3>
+<p>En una tercera fase se montó lógicamente la imagen y se ejecutó <code>KAPE</code> con los targets <code>!BasicCollection</code>, <code>!SANS_Triage</code>, <code>WebBrowsers</code> y <code>LNKFilesAndJumpLists</code>, aplicando después el módulo <code>!EZParser</code>. Esta fase se utilizó para obtener artefactos de forma estructurada y acelerar la correlación.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-12">Figura 12</a> en el Anexo de figuras.</p>
+<p>El parser de <code>Amcache</code> devolvió una entrada para <code>c:\users\ieuser\desktop\key.exe</code>, con tamaño aproximado de 6,43 MB y hash SHA-1 <code>8ff90488fc3afd7fa7b7a4201890f9d0c4c27ed7</code>. Con esa referencia se contrastó el binario en VirusTotal, donde figuró con múltiples detecciones como malware de tipo keylogger/troyano.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-13">Figura 13</a> en el Anexo de figuras.</p>
+<p><code>PECmd</code> confirmó la ejecución repetida de <code>KEY.EXE</code> y la ejecución de <code>HASHMYFILES.EXE</code> y <code>HMAILSERVER.EXE</code>. <code>LECmd</code> y <code>AutomaticDestinations</code> confirmaron accesos recientes a <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code>. <code>RBCmd</code> demostró que ambos documentos fueron eliminados el 2021-03-23 a las 23:08:59 UTC. Los eventos del sistema y del firewall reforzaron la actividad de <code>hMailServer</code> y la presencia de reglas relacionadas con <code>sshd.exe</code>.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-14">Figura 14</a> en el Anexo de figuras.</p>
+<p>Adicionalmente se revisaron colmenas de registro (<code>NTUSER.DAT</code> y <code>SOFTWARE</code>) con el fin de localizar persistencia simple mediante claves <code>Run</code>. No se observó un mecanismo concluyente en esas rutas estándar, por lo que se descartó esa vía concreta sin cerrar la posibilidad de otra persistencia más opaca o manual.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-15">Figura 15</a> en el Anexo de figuras.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-16">Figura 16</a> en el Anexo de figuras.</p>
+<p>Como contraste adicional del bloque <code>WebBrowsers</code>, se revisó <code>WebCacheV01.dat</code> con <code>BrowsingHistoryView</code>. Esa revisión no permitió atribuir con certeza la descarga de <code>key.exe</code>, pero sí recuperar navegación coherente con la preparación del entorno y con el trabajo sobre artefactos del caso. Entre las entradas visibles figura la URL <code>http://www.mls-software.com/opensshd.html</code>, además de referencias locales a rutas y ficheros del entorno de <code>IEUser</code>, como <code>flag2.txt</code>. Estas marcas se emplean aquí como apoyo contextual y no se incorporan a la línea de tiempo principal en UTC.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-17">Figura 17</a> en el Anexo de figuras.</p>
+<p class="figure-reference">Referencia visual: vease la <a href="#figura-18">Figura 18</a> en el Anexo de figuras.</p>
+<h3>7.4 Comandos utilizados</h3>
+<p>Con el fin de dejar trazabilidad técnica suficiente del trabajo reproducible, se incorporan a continuación los comandos efectivamente documentados durante la práctica en <code>Solucion.md</code>. Se mantienen como referencia operativa del análisis sobre memoria, disco y triage.</p>
+<p><strong>Volatility 2.6 sobre <code>EV-01</code>.</strong></p>
+<pre><code class="language-bash">.\volatility_2.6.exe -f 'D:\Master\Curso\Documentacion\15 - Documentación introducción a la práctica forense\Tarea\ram-001.raw' imageinfo
+.\volatility_2.6.exe -f 'D:\Master\Curso\Documentacion\15 - Documentación introducción a la práctica forense\Tarea\ram-001.raw' --profile=Win7SP1x64 pslist
+.\volatility_2.6.exe -f 'D:\Master\Curso\Documentacion\15 - Documentación introducción a la práctica forense\Tarea\ram-001.raw' --profile=Win7SP1x64 cmdline
+.\volatility_2.6.exe -f 'D:\Master\Curso\Documentacion\15 - Documentación introducción a la práctica forense\Tarea\ram-001.raw' --profile=Win7SP1x64 consoles
+.\volatility_2.6.exe -f 'D:\Master\Curso\Documentacion\15 - Documentación introducción a la práctica forense\Tarea\ram-001.raw' --profile=Win7SP1x64 hashdump
+.\volatility_2.6.exe -f 'D:\Master\Curso\Documentacion\15 - Documentación introducción a la práctica forense\Tarea\ram-001.raw' --profile=Win7SP1x64 netscan
+</code></pre>
+<p><strong>Procesado complementario de artefactos de disco.</strong></p>
+<pre><code class="language-bash">.\LECmd.exe -d 'D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\FTK Imager\Roaming_Microsoft_Windows_Recent' --all &gt; output.txt
+.\MFTECmd.exe -f 'D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\FTK Imager\$MFT' --csv 'D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\FTK Imager' --csvf analisis_mft.csv --re &quot;Users\\IEUser&quot;
+Select-String -Path &quot;.\analisis_mft.csv&quot; -Pattern &quot;,True,&quot; | Select-Object -First 500 &gt; mft_borrados_resumen.csv
+</code></pre>
+<p><strong>Adquisición lógica y parseo estructurado con <code>KAPE</code> y <code>AmcacheParser</code>.</strong></p>
+<pre><code class="language-bash">.\kape.exe --tsource E: --tdest &quot;D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape\Targets&quot; --tflush --target !BasicCollection,!SANS_Triage,WebBrowsers,LNKFilesAndJumpLists --mdest &quot;D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape\Modules&quot; --mflush --module !EZParser --mef csv --gui
+.\AmcacheParser.exe -f &quot;D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape\Targets\E\Windows\AppCompat\Programs\Amcache.hve&quot; --csv &quot;D:\Master\Curso\Tareas\Tareas Master Ciberseguridad\Tarea 10\Evidencias\Triage_Kape&quot;
+</code></pre>
+<p>Estos comandos no sustituyen la descripción analítica de los apartados anteriores, pero sí la refuerzan al dejar constancia explícita de la secuencia técnica aplicada sobre cada conjunto de artefactos.</p>
+<hr>
+<h2 class="page-break">8. Hallazgos principales</h2>
+<h3>8.1 Recuperación de credenciales locales</h3>
+<p>Se recuperó el hash NTLM de <code>IEUser</code> y se resolvió como <code>Passw0rd!</code>. El mismo valor apareció asociado a <code>Administrator</code>, lo que evidencia una debilidad importante en la gestión de credenciales y eleva el impacto potencial del incidente. No se trata sólo de un hallazgo técnico: obliga a considerar comprometidas ambas cuentas locales y a tratarlas como tales en cualquier medida de contención.</p>
+<h3>8.2 Ejecución de un binario malicioso compatible con keylogger</h3>
+<p><code>key.exe</code> apareció activo en memoria, quedó registrado en <code>Amcache</code> y generó su propio <code>Prefetch</code>, acumulando ocho ejecuciones. La evidencia contrastada en VirusTotal lo clasificó como malware con capacidad de robo de credenciales. La consistencia entre memoria, disco y reputación externa convierte este punto en uno de los hallazgos más sólidos de toda la investigación.</p>
+<h3>8.3 Disponibilidad de acceso remoto y servicios auxiliares</h3>
+<p>En el momento del análisis estaban presentes <code>sshd.exe</code> y <code>hMailServer.exe</code>. <code>netscan</code> mostró el puerto 22 y los puertos 25, 110, 143 y 587, mientras que el triaje localizó reglas de firewall y eventos del sistema coherentes con ambos servicios. Esto, por sí mismo, no demuestra cada transferencia que pudo haberse realizado, pero sí deja claro que el equipo disponía de medios técnicos suficientes para comunicación remota y posible salida de información.</p>
+<h3>8.4 Acceso a documentación financiera concreta</h3>
+<p>La revisión del historial web almacenado en <code>WebCacheV01.dat</code> añadió contexto útil, aunque no definitivo, sobre la preparación del entorno. En concreto, <code>BrowsingHistoryView</code> recuperó una visita a <code>http://www.mls-software.com/opensshd.html</code> y varias referencias locales a archivos del perfil de <code>IEUser</code>. Este hallazgo no basta para afirmar por sí solo la descarga de <code>key.exe</code>, pero sí refuerza que el navegador dejó rastro tanto de componentes vinculados a <code>OpenSSH</code> como de archivos relevantes del caso.</p>
+<h3>8.5 Acceso a documentación financiera concreta</h3>
+<p>Los documentos <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code> quedaron reflejados en <code>LNK</code>, <code>AutomaticDestinations</code> y <code>RBCmd</code>. Ambos estaban ubicados en <code>C:\Users\IEUser\Documents\Documentacion empresa</code>. La actividad reciente indica que fueron abiertos el 2021-03-23 UTC y eliminados inmediatamente después. <code>flag2.txt</code>, hallado en la misma carpeta, reforzó el enfoque del actor al mencionar expresamente que los archivos filtrados eran <code>.xls</code>.</p>
+<h3>8.6 Borrado selectivo de rastro</h3>
+<p>La acción <code>del HashMyFiles.cfg</code> fue recuperada en la consola en memoria. Además, <code>Prefetch</code> mostró la ejecución previa de <code>HASHMYFILES.EXE</code> y la existencia del propio <code>HASHMYFILES.CFG</code> en el escritorio del usuario. En paralelo, <code>RBCmd</code> y los artefactos de acceso reciente demostraron el borrado de los dos documentos financieros inmediatamente después de su apertura. Esta secuencia es compatible con una maniobra deliberada para reducir evidencia visible en el sistema. De forma más concreta, el borrado de <code>HashMyFiles.cfg</code> eliminó la traza de configuración inmediata dejada por esa utilidad; con la evidencia disponible no puede determinarse qué elementos concretos fueron consultados desde <code>HashMyFiles</code>, pero sí que se intentó suprimir ese rastro local después de usarla.</p>
+<h3>8.7 Relación entre memoria y disco</h3>
+<p>La principal fortaleza del caso no está en un artefacto aislado, sino en la forma en que varias fuentes distintas apuntan a la misma secuencia. La memoria mostró <code>key.exe</code>, la actividad de consola, los servicios de red y la conexión externa. El disco permitió entender de dónde venían esos elementos, qué documentos resultaron de interés y qué se intentó borrar después. El triaje, a su vez, ordenó la secuencia temporal y añadió hashes, eventos y accesos recientes. Esa convergencia es lo que da solidez al informe.</p>
+<hr>
+<h2>9. IOCs</h2>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>IOC</th>
+<th>Fuente</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equipo</td>
+<td><code>IEWIN7</code></td>
+<td><code>Volatility</code>, artefactos de triage</td>
+<td>Host comprometido bajo análisis.</td>
+</tr>
+<tr>
+<td>Usuario</td>
+<td><code>IEUser</code></td>
+<td>Memoria, disco, eventos</td>
+<td>Usuario principal vinculado a los documentos y al escritorio afectado.</td>
+</tr>
+<tr>
+<td>Credencial</td>
+<td>NTLM <code>fc525c9683e8fe067095ba2ddc971889</code></td>
+<td><code>hashdump</code></td>
+<td>Hash local recuperado de <code>IEUser</code> y <code>Administrator</code>.</td>
+</tr>
+<tr>
+<td>Credencial resuelta</td>
+<td><code>Passw0rd!</code></td>
+<td>Resolución externa del hash</td>
+<td>Contraseña local asociada al hash NTLM recuperado.</td>
+</tr>
+<tr>
+<td>Malware</td>
+<td><code>C:\Users\IEUser\Desktop\key.exe</code></td>
+<td><code>Amcache</code>, <code>Prefetch</code>, memoria</td>
+<td>Binario sospechoso con funcionalidad de keylogger.</td>
+</tr>
+<tr>
+<td>Hash de malware</td>
+<td>SHA-1 <code>8ff90488fc3afd7fa7b7a4201890f9d0c4c27ed7</code></td>
+<td><code>Amcache</code></td>
+<td>Huella útil para búsqueda retroactiva y bloqueo.</td>
+</tr>
+<tr>
+<td>Servicio remoto</td>
+<td><code>C:\Program Files\OpenSSH\usr\sbin\sshd.exe</code></td>
+<td>Memoria, firewall, <code>RecentFileCache</code></td>
+<td>Servicio SSH activo en el equipo.</td>
+</tr>
+<tr>
+<td>Servicio de correo</td>
+<td><code>C:\Program Files (x86)\hMailServer\Bin\hMailServer.exe</code></td>
+<td>Memoria, eventos, <code>Prefetch</code></td>
+<td>Servicio de correo local activo.</td>
+</tr>
+<tr>
+<td>IP local</td>
+<td><code>192.168.65.135</code></td>
+<td><code>consoles</code> / <code>ipconfig</code></td>
+<td>Dirección interna observada durante la sesión.</td>
+</tr>
+<tr>
+<td>IP remota</td>
+<td><code>200.228.36.6</code></td>
+<td><code>netscan</code></td>
+<td>Destino externo observado en conexión cerrada.</td>
+</tr>
+<tr>
+<td>Puertos</td>
+<td><code>22</code>, <code>25</code>, <code>110</code>, <code>143</code>, <code>587</code></td>
+<td><code>netscan</code></td>
+<td>Servicios expuestos o activos durante el incidente.</td>
+</tr>
+<tr>
+<td>Documento sensible</td>
+<td><code>C:\Users\IEUser\Documents\Documentacion empresa\Plan_de_cuentas.xls</code></td>
+<td><code>LECmd</code>, <code>AutomaticDestinations</code>, <code>RBCmd</code></td>
+<td>Documento financiero accedido y eliminado.</td>
+</tr>
+<tr>
+<td>Documento sensible</td>
+<td><code>C:\Users\IEUser\Documents\Documentacion empresa\CLIENTES DEL BANCO.xls</code></td>
+<td><code>LECmd</code>, <code>AutomaticDestinations</code>, <code>RBCmd</code></td>
+<td>Segundo documento financiero accedido y eliminado.</td>
+</tr>
+<tr>
+<td>Huella anti-forense</td>
+<td><code>HashMyFiles.cfg</code></td>
+<td><code>consoles</code>, <code>Prefetch</code></td>
+<td>Archivo de configuración borrado tras usar <code>HashMyFiles</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 class="page-break">10. Conclusiones</h2>
+<p>La evidencia analizada permite sostener, con un grado alto de consistencia técnica, que el sistema <code>IEWIN7</code> fue utilizado en un escenario de acceso indebido a información sensible. No se aprecia un hecho aislado ni casual. La preparación previa del entorno, la ejecución repetida de <code>key.exe</code>, el acceso a documentos financieros concretos, la actividad de servicios remotos y el borrado posterior de archivos encajan mejor con una secuencia planificada que con un uso normal del equipo.</p>
+<p>La memoria aportó la visión del sistema en funcionamiento: procesos, credenciales, consola, servicios y conectividad. El disco y el triaje completaron esa imagen con el contexto histórico: herramientas instaladas, documentos abiertos, rastro de borrado y artefactos complementarios. La relación entre ambos bloques es directa y suficientemente sólida como para integrarlos en un único relato pericial sin perder claridad analítica.</p>
+<p>Sobre la base de la evidencia, puede sostenerse que:</p>
+<ol>
+<li><code>IEUser</code> y <code>Administrator</code> compartían una credencial débil y recuperable.</li>
+<li><code>key.exe</code> se ejecutó en reiteradas ocasiones y es compatible con un keylogger.</li>
+<li>El host tenía <code>OpenSSH</code> y <code>hMailServer</code> disponibles y activos en momentos relevantes del incidente.</li>
+<li>Los archivos <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code> fueron accedidos y eliminados el 2021-03-23 UTC.</li>
+<li>Se intentó reducir la huella local mediante el borrado de <code>HashMyFiles.cfg</code> y de los documentos trabajados.</li>
+</ol>
+<p>Con la evidencia disponible no puede precisarse con el mismo nivel de certeza cuál fue el canal exacto por el que salieron los datos ni quién fue su destinatario final. Sí puede afirmarse, en cambio, que existían medios técnicos suficientes para ello y que la IP <code>200.228.36.6</code> constituye un indicador externo de especial interés para cualquier continuación de la investigación.</p>
+<hr>
+<h2>11. Recomendaciones y plan de acción</h2>
+<p>Las recomendaciones que siguen se ordenan por prioridad para facilitar su aplicación. Todas derivan de los hallazgos expuestos en el informe y buscan traducir la evidencia técnica en medidas concretas y verificables.</p>
+<table>
+<thead>
+<tr>
+<th>Prioridad</th>
+<th>Recomendación</th>
+<th>Recursos necesarios</th>
+<th>Plazo estimado</th>
+<th>Criterio de éxito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alta</td>
+<td>Rotar de inmediato las credenciales locales de <code>IEUser</code> y <code>Administrator</code>, invalidando cualquier reutilización de <code>Passw0rd!</code> en otros entornos.</td>
+<td>Administración de sistemas, acceso al host y política de contraseñas.</td>
+<td>Menos de 24 horas.</td>
+<td>Las credenciales antiguas dejan de autenticar y queda constancia del cambio efectivo.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Segregar la gestión de credenciales locales entre equipos y, si el entorno lo permite, implantar Microsoft LAPS o un control equivalente para evitar reutilización de contraseñas administrativas.</td>
+<td>Administración de sistemas, directorio corporativo y política de gestión de identidades.</td>
+<td>24 a 72 horas.</td>
+<td>Cada equipo mantiene credenciales locales diferenciadas y auditables, sin reutilización manual de claves.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Aislar o retirar de servicio el host analizado hasta completar una revisión de integridad, dado que existió malware con capacidad de captura de credenciales.</td>
+<td>Equipo de sistemas, red y respuesta a incidentes.</td>
+<td>Menos de 24 horas.</td>
+<td>El host deja de tener conectividad con la red de producción y queda bajo contención.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Bloquear y monitorizar la IP <code>200.228.36.6</code>, además de revisar si aparece en otros registros corporativos, proxys, firewall o SIEM.</td>
+<td>Firewall, SIEM, registros de red y personal SOC.</td>
+<td>24 a 48 horas.</td>
+<td>La IP queda bloqueada y se completa una búsqueda retrospectiva documentada.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Buscar de forma retrospectiva el hash SHA-1 de <code>key.exe</code> en antivirus, EDR, sandbox y repositorios internos de malware.</td>
+<td>Consolas AV/EDR, repositorios de indicadores y analistas SOC.</td>
+<td>24 a 48 horas.</td>
+<td>Se determina si hubo más equipos con el mismo binario o se descarta su propagación interna.</td>
+</tr>
+<tr>
+<td>Media</td>
+<td>Revisar la instalación de <code>OpenSSH</code> y <code>hMailServer</code> en el resto de equipos del entorno para descartar despliegues no autorizados.</td>
+<td>Inventario de activos, escaneo de software y acceso administrativo.</td>
+<td>2 a 5 días.</td>
+<td>Se obtiene una relación de hosts con esos componentes y se valida su legitimidad.</td>
+</tr>
+<tr>
+<td>Media</td>
+<td>Intentar la recuperación de los archivos eliminados y revisar snapshots, copias de seguridad y buzones asociados a <code>Thunderbird</code> o <code>hMailServer</code>.</td>
+<td>Copias de seguridad, herramientas forenses adicionales y acceso a correo local.</td>
+<td>2 a 5 días.</td>
+<td>Se confirma si los documentos o los rastros de exfiltración pueden restaurarse o preservarse adicionalmente.</td>
+</tr>
+<tr>
+<td>Media</td>
+<td>Auditar la carpeta <code>Documentacion empresa</code> y clasificar formalmente su contenido, dado que la evidencia apunta a exposición de información financiera.</td>
+<td>Responsable funcional, clasificación de datos y equipo de cumplimiento o seguridad.</td>
+<td>5 a 10 días.</td>
+<td>La organización conoce la sensibilidad del contenido afectado y ajusta sus controles de acceso.</td>
+</tr>
+<tr>
+<td>Media</td>
+<td>Reforzar el control de salida de datos y la instalación de software, especialmente en servicios de correo, herramientas de acceso remoto y binarios descargados de internet.</td>
+<td>Políticas de hardening, listas de control de aplicaciones y seguridad perimetral.</td>
+<td>1 a 3 semanas.</td>
+<td>Se reduce la posibilidad de instalar software no autorizado y mejora la detección de transferencia no legítima.</td>
+</tr>
+<tr>
+<td>Baja</td>
+<td>Mantener una línea temporal única del caso y una plantilla reutilizable de informe para futuros incidentes, diferenciando con claridad memoria, disco y adquisición forense.</td>
+<td>Equipo forense y documentación interna.</td>
+<td>1 a 2 semanas.</td>
+<td>Las siguientes investigaciones reutilizan una estructura homogénea, trazable y más fácil de auditar.</td>
+</tr>
+</tbody>
+</table>
+<h2 class="page-break">Anexo de figuras</h2><section class="annex-list"><figure class="annex-figure" id="figura-1"><img alt="Figura 1. Verificación inicial de integridad de las evidencias EV-01 y EV-02." src="Evidencias/ram_image_hashes.png"><figcaption><em>Figura 1. Cálculo de los hashes SHA-256 del volcado de memoria <code>ram-001.raw</code> y de la imagen de disco <code>IE11-Win7-VMWare-disk1-002.vmdk</code>, utilizado como punto de partida de la cadena de custodia.</em></figcaption></figure><figure class="annex-figure" id="figura-2"><img alt="Figura 2. Perfil y hora de referencia de la imagen RAM." src="Evidencias/volatility-imageinfo.png"><figcaption><em>Figura 2. Salida de <code>Volatility imageinfo</code>, donde se identifica el perfil <code>Win7SP1x64</code> y la hora de referencia de la imagen de memoria.</em></figcaption></figure><figure class="annex-figure" id="figura-3"><img alt="Figura 3. Extracción de hashes locales desde memoria." src="Evidencias/volatility-hashdump.png"><figcaption><em>Figura 3. Salida de <code>Volatility hashdump</code> con los hashes locales recuperados, incluyendo <code>IEUser</code> y <code>Administrator</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-4"><img alt="Figura 4. Resolución del hash NTLM recuperado." src="Evidencias/hashes.com-password.png"><figcaption><em>Figura 4. Evidencia visual de la resolución del hash NTLM <code>fc525c9683e8fe067095ba2ddc971889</code> a la contraseña <code>Passw0rd!</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-5"><img alt="Figura 5. Procesos y líneas de comando observadas en RAM." src="Evidencias/volatility-cmdline-2.png"><figcaption><em>Figura 5. Salida de <code>cmdline</code> donde aparecen <code>key.exe</code>, <code>hMailServer.exe</code>, <code>sshd.exe</code> y otros procesos de interés durante la captura de memoria.</em></figcaption></figure><figure class="annex-figure" id="figura-6"><img alt="Figura 6. Actividad de consola recuperada en memoria." src="Evidencias/volatility-consoles.png"><figcaption><em>Figura 6. <code>Volatility consoles</code> mostrando la secuencia <code>ipconfig</code>, <code>cd Desktop</code> y <code>del HashMyFiles.cfg</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-7"><img alt="Figura 7. Conectividad y puertos observados en memoria." src="Evidencias/volatility-netscan.png"><figcaption><em>Figura 7. <code>Volatility netscan</code> con presencia de <code>sshd.exe</code>, <code>hMailServer.exe</code> y conexión cerrada a <code>200.228.36.6</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-8"><img alt="Figura 8. Carpeta con documentación sensible y archivo confesional." src="Evidencias/ftk_imager_ieuser_documentacion_documentacion_empresa.png"><figcaption><em>Figura 8. Vista de FTK Imager sobre <code>C:\Users\IEUser\Documents\Documentacion empresa</code>, donde aparece <code>flag2.txt</code> en la misma ruta de los documentos sensibles.</em></figcaption></figure><figure class="annex-figure" id="figura-9"><img alt="Figura 9. Descargas y herramientas preparatorias localizadas en el disco." src="Evidencias/ftk_imager_ieuser_downloads.png"><figcaption><em>Figura 9. Vista de FTK Imager sobre <code>Downloads</code>, con instaladores y elementos compatibles con la preparación del entorno.</em></figcaption></figure><figure class="annex-figure" id="figura-10"><img alt="Figura 10. Accesos recientes a documentos financieros." src="Evidencias/kape_triage_lecmd_output.png"><figcaption><em>Figura 10. Salida de <code>LECmd</code> en TimeLine Explorer con referencias a <code>Plan_de_cuentas.xls</code> y <code>CLIENTES DEL BANCO.xls</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-11"><img alt="Figura 11. Evidencia de ejecución en Prefetch." src="Evidencias/kape_triage_pecmd_output.png"><figcaption><em>Figura 11. Salida de <code>PECmd</code> que documenta, entre otros, <code>KEY.EXE</code>, <code>HASHMYFILES.EXE</code> y <code>HMAILSERVER.EXE</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-12"><img alt="Figura 12. Configuración de adquisición lógica con KAPE." src="Evidencias/kape_triage.png"><figcaption><em>Figura 12. Ejecución de KAPE sobre la unidad montada derivada de la imagen, utilizada para generar artefactos de trabajo del análisis.</em></figcaption></figure><figure class="annex-figure" id="figura-13"><img alt="Figura 13. Correlación entre Amcache y reputación externa del malware." src="Evidencias/amcache_parser_virus_total_key.exe_malware_family.png"><figcaption><em>Figura 13. Evidencia visual del binario <code>key.exe</code> y de su clasificación en VirusTotal como artefacto malicioso.</em></figcaption></figure><figure class="annex-figure" id="figura-14"><img alt="Figura 14. Borrado de los documentos financieros desde la papelera." src="Evidencias/kape_triage_rbcmd_output.png"><figcaption><em>Figura 14. Salida de <code>RBCmd</code> que documenta la eliminación de <code>CLIENTES DEL BANCO.xls</code> y <code>Plan_de_cuentas.xls</code> a las 23:08:59 UTC.</em></figcaption></figure><figure class="annex-figure" id="figura-15"><img alt="Figura 15. Revisión de persistencia simple en NTUSER.DAT." src="Evidencias/wrr_ntuserdat.png"><figcaption><em>Figura 15. Exploración de <code>NTUSER.DAT</code> con Windows Registry Recovery, sin evidencia concluyente de persistencia simple en claves <code>Run</code> del usuario.</em></figcaption></figure><figure class="annex-figure" id="figura-16"><img alt="Figura 16. Revisión de persistencia simple en SOFTWARE." src="Evidencias/wrr_software.png"><figcaption><em>Figura 16. Exploración de la colmena <code>SOFTWARE</code>, utilizada para descartar persistencia evidente mediante claves <code>Run</code> a nivel de sistema.</em></figcaption></figure><figure class="annex-figure" id="figura-17"><img alt="Figura 17. Historial WebCache con navegación externa y referencias locales del caso." src="Evidencias/browsing_history_view_web_cache.png"><figcaption><em>Figura 17. Resultado de <code>BrowsingHistoryView</code> sobre <code>WebCacheV01.dat</code>, con historial mixto de URLs externas y referencias locales del perfil <code>IEUser</code>.</em></figcaption></figure><figure class="annex-figure" id="figura-18"><img alt="Figura 18. Detalle de navegación recuperada con referencia a mls-software.com/opensshd.html." src="Evidencias/browsing_history_view_web_cache_2.png"><figcaption><em>Figura 18. Detalle del historial recuperado donde aparece la visita a <code>http://www.mls-software.com/opensshd.html</code>, coherente con la preparación previa del componente <code>OpenSSH</code> observado en otros artefactos.</em></figcaption></figure></section>
+  </main>
+</body>
+</html>
