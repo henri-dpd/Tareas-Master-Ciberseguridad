@@ -8,7 +8,7 @@
 - **Usuario principal observado:** IEUser
 - **Evidencias originales:** EV-01 (`ram-001.raw`) y EV-02 (`IE11-Win7-VMWare-disk1-002.vmdk`)
 - **Fecha de redacción:** 2026-05-05 UTC
-- **Criterio de elaboración:** documento estructurado conforme a los campos mínimos del temario y a la referencia a UNE 197010:2015 señalada en la documentación de la asignatura y en la aclaración del profesor
+- **Criterio de elaboración:** documento redactado con enfoque técnico-académico, siguiendo los campos mínimos del temario y la referencia a UNE 197010:2015 señalada en la documentación de la asignatura y en la aclaración del profesor
 
 ---
 
@@ -37,7 +37,7 @@
 5. Figura 5. Procesos y líneas de comando observadas en RAM.
 6. Figura 6. Actividad de consola recuperada en memoria.
 7. Figura 7. Conectividad y puertos observados en memoria.
-8. Figura 8. Carpeta con documentación sensible y archivo confesional.
+8. Figura 8. Carpeta con documentación sensible y archivo indicativo.
 9. Figura 9. Descargas y herramientas preparatorias localizadas en el disco.
 10. Figura 10. Accesos recientes a documentos financieros.
 11. Figura 11. Evidencia de ejecución en Prefetch.
@@ -53,15 +53,24 @@
 
 ## 1. Resumen ejecutivo
 
+### 1.1 Respuesta directa a las preguntas del enunciado
+
+1. **Acceso a archivos confidenciales.** Sí. Los documentos `CLIENTES DEL BANCO.xls` y `Plan_de_cuentas.xls`, ubicados en `C:\Users\IEUser\Documents\Documentacion empresa`, fueron abiertos el `2021-03-23 23:07:55 UTC` y el `2021-03-23 23:08:31 UTC`, respectivamente, y quedaron eliminados a continuación según `RBCmd` el `2021-03-23 23:08:59 UTC`.
+2. **Exfiltración y evidencia de ataque.** Sí existen indicios. Se documentó la ejecución de `key.exe` como binario compatible con keylogger, la presencia activa de `sshd.exe` y `hMailServer.exe`, la ejecución de `HASHMYFILES.EXE`, y una conexión cerrada hacia la IP pública `200.228.36.6`. Todo ello es coherente con técnicas de captura de credenciales, acceso remoto, preparación del entorno y posible salida de información.
+3. **Dispositivos externos.** Sí existen evidencias de conexión de almacenamiento USB. En `setupapi.dev.log` quedó registrada una instalación iniciada por hardware para `USB\VID_0951&PID_1666`, identificada por el sistema como `DataTraveler 3.0` y tratada con el driver `USB Mass Storage Device`, con inicio de sección el `2021-03-19 05:26:01 UTC`.
+4. **Conexiones a la nube o a correos web externos.** Sí existen trazas de conexión o intento de acceso, aunque no prueba completa de subida de archivos. Los artefactos de navegador reflejan una entrada de `Internet Explorer` hacia `https://login.yahoo.com/...done=https://mail.yahoo.com/` con marcas del `2021-03-19 08:24:58 UTC` a `2021-03-19 08:28:43 UTC`, y en el perfil de `Edge` aparecen huellas de `docs.google.com`, `drive.google.com`, `mail.google.com` y `gmail.com`. Estas trazas permiten afirmar actividad hacia correo web y servicios cloud, pero no por sí solas una exfiltración consumada mediante esos servicios.
+5. **Punto evaluable 1.** La contraseña del usuario `IEUser` es `Passw0rd!`, obtenida tras resolver el hash NTLM `fc525c9683e8fe067095ba2ddc971889` recuperado desde memoria.
+6. **Punto evaluable 2.** Sí hubo ejecución de comandos para borrar rastro. En memoria se recuperaron `ipconfig`, `cd Desktop` y `del HashMyFiles.cfg`; el fichero eliminado identificado de forma directa es `HashMyFiles.cfg`.
+
 El análisis conjunto de la memoria RAM `ram-001.raw` y de la imagen de disco `IE11-Win7-VMWare-disk1-002.vmdk` permitió reconstruir un incidente con indicios consistentes de compromiso del sistema `IEWIN7`, uso de herramientas de acceso remoto y manipulación de documentación sensible almacenada en el perfil del usuario `IEUser`.
 
 En la memoria se aislaron tres hallazgos especialmente relevantes. Por un lado, se recuperaron credenciales locales válidas a partir del volcado de hashes SAM, obteniéndose para `IEUser` el hash NTLM `fc525c9683e8fe067095ba2ddc971889`, cuya resolución en fuentes abiertas devolvió la contraseña `Passw0rd!`. Por otro, se localizó en ejecución el binario `key.exe`, compatible con una herramienta de captura de credenciales. A ello se sumó la presencia de procesos y servicios aptos para acceso remoto o salida de información, entre ellos `sshd.exe` y `hMailServer.exe`, además de una conexión cerrada hacia la IP pública `200.228.36.6`.
 
-La revisión del disco y el triaje posterior confirmaron que no se trató de una actuación improvisada. Desde el 2021-03-19 UTC quedaron rastros de instaladores y componentes asociados a `hMailServer`, `Thunderbird`, `LibreOffice` y `OpenSSH`. Los artefactos `LNK`, `AutomaticDestinations`, `Prefetch`, `Amcache`, `MFT`, `Recycle Bin` y distintos eventos del sistema permitieron relacionar esa preparación con el acceso a documentos financieros concretos, en especial `Plan_de_cuentas.xls` y `CLIENTES DEL BANCO.xls`, ambos ubicados en `C:\Users\IEUser\Documents\Documentacion empresa` y eliminados después de su apertura el 2021-03-23 UTC.
+La revisión del disco y el triaje posterior mostraron una secuencia no compatible con un uso ordinario del sistema. Desde el 2021-03-19 UTC quedaron rastros de instaladores y componentes asociados a `hMailServer`, `Thunderbird`, `LibreOffice` y `OpenSSH`. Los artefactos `LNK`, `AutomaticDestinations`, `Prefetch`, `Amcache`, `MFT`, `Recycle Bin` y distintos eventos del sistema permitieron relacionar esa preparación con el acceso a documentos financieros concretos, en especial `Plan_de_cuentas.xls` y `CLIENTES DEL BANCO.xls`, ambos ubicados en `C:\Users\IEUser\Documents\Documentacion empresa` y eliminados después de su apertura el 2021-03-23 UTC.
 
-También quedaron indicios claros de actividad anti-forense. En memoria se recuperó el uso de consola para ejecutar `ipconfig`, desplazarse al escritorio y borrar `HashMyFiles.cfg`. Además, el análisis de `Prefetch` mostró la ejecución de `HASHMYFILES.EXE` desde el escritorio e incluyó la referencia directa a `HASHMYFILES.CFG`, lo que encaja con esa secuencia de consulta y eliminación. En el disco, la presencia de `flag2.txt` en la misma carpeta de la documentación sensible reforzó que el objetivo principal eran archivos con extensión `.xls`.
+También quedaron indicios claros de actividad anti-forense. En memoria se recuperó el uso de consola para ejecutar `ipconfig`, desplazarse al escritorio y borrar `HashMyFiles.cfg`. Además, el análisis de `Prefetch` mostró la ejecución de `HASHMYFILES.EXE` desde el escritorio e incluyó la referencia directa a `HASHMYFILES.CFG`, lo que encaja con esa secuencia de consulta y eliminación. En el disco, la presencia de `flag2.txt` en la misma carpeta de la documentación sensible reforzó que el interés del conjunto analizado se centró en archivos con extensión `.xls`.
 
-En conjunto, la evidencia apunta a una preparación previa del entorno, a la ejecución reiterada de un binario compatible con keylogger, al acceso a documentación sensible y al borrado posterior de ficheros para reducir la huella local. El informe mantiene separadas las fases de memoria, disco y triaje para facilitar la lectura, aunque las tres forman parte del mismo hilo de compromiso.
+En conjunto, la evidencia apunta a una preparación previa del entorno, a la ejecución reiterada de un binario compatible con keylogger, al acceso a documentación sensible y al borrado posterior de ficheros para reducir la huella local. El informe separa las fases de memoria, disco y triaje para facilitar la lectura, aunque las tres responden a una misma secuencia técnica.
 
 ---
 
@@ -104,15 +113,17 @@ En conjunto, la evidencia apunta a una preparación previa del entorno, a la eje
 
 La secuencia técnica recuperada permite distinguir cuatro momentos bien diferenciados.
 
-**Preparación del entorno.** El 2021-03-19 UTC quedaron instalados o disponibles componentes que no forman parte del uso habitual de un puesto de trabajo orientado a ofimática básica: `hMailServer`, `Thunderbird`, `LibreOffice` y `OpenSSH`. Esta combinación sugiere que el equipo fue acondicionado con antelación para abrir, preparar y eventualmente mover información.
+**Preparación del entorno.** El 2021-03-19 UTC quedaron instalados o disponibles componentes que no forman parte del uso habitual de un puesto de trabajo orientado a ofimática básica: `hMailServer`, `Thunderbird`, `LibreOffice` y `OpenSSH`. Esta combinación indica una preparación previa del sistema para tratamiento documental, acceso remoto y posibles comunicaciones salientes.
 
-**Ejecución de malware orientado a captura.** El binario `key.exe` aparece en escritorio, queda registrado en `Amcache`, dispone de `Prefetch` propio y acumuló ocho ejecuciones. La evidencia externa aportada mediante VirusTotal lo clasifica como artefacto malicioso de tipo keylogger/troyano. No se observó persistencia simple mediante claves `Run`, por lo que el mecanismo exacto de arranque no quedó totalmente resuelto con el material revisado.
+**Ejecución de malware orientado a captura.** El binario `key.exe` aparece en escritorio, queda registrado en `Amcache`, dispone de `Prefetch` propio y acumuló ocho ejecuciones. La evidencia externa aportada mediante VirusTotal lo clasifica como artefacto malicioso con funcionalidad de keylogging/troyano. No se observó persistencia simple mediante claves `Run`, por lo que el mecanismo exacto de arranque no quedó totalmente resuelto con el material revisado.
 
 **Acceso y tratamiento de información sensible.** Los documentos financieros de la carpeta `Documentacion empresa` fueron abiertos en fechas muy concretas y después eliminados. `flag2.txt`, localizado en la misma ruta, contiene un mensaje explícito indicando que los archivos filtrados eran `.xls`, lo que encaja con los dos documentos recuperados por nombre y con la actividad reciente de LibreOffice Calc.
 
 **Borrado selectivo y reducción de huella.** El incidente incluyó acciones coherentes con anti-forense: eliminación de `HashMyFiles.cfg`, borrado de los dos `.xls` y desaparición de binarios o ficheros asociados a la actividad. La secuencia no elimina el rastro pericial, pero sí demuestra intención de dificultar la reconstrucción posterior.
 
 En cuanto a exfiltración, la evidencia permite afirmar que el sistema contaba con `OpenSSH` activo, `hMailServer` operativo y al menos una conexión cerrada hacia `200.228.36.6`. Eso sostiene un escenario técnicamente viable de salida de información, aunque con la evidencia disponible no se recuperó el destinatario final exacto ni el contenido transmitido por correo.
+
+En relación con otras preguntas del enunciado, el análisis de `setupapi.dev.log` permitió acreditar la conexión de un dispositivo de almacenamiento masivo USB identificado como `USB\VID_0951&PID_1666` (`DataTraveler 3.0`) el `2021-03-19 05:26:01 UTC`. Además, los artefactos de navegador mostraron accesos o intentos de acceso a `mail.yahoo.com`, `docs.google.com`, `drive.google.com`, `mail.google.com` y `gmail.com`. Estas últimas evidencias son compatibles con uso de correo web y servicios cloud, aunque no permiten atribuir por sí solas una transferencia efectiva de los documentos sustraídos por ese canal.
 
 ---
 
@@ -124,7 +135,7 @@ El escenario reconstruido muestra una actuación planificada. Días antes del mo
 
 El análisis de memoria aportó la fotografía del sistema en funcionamiento: procesos, cuentas, consola, servicios y conectividad. El análisis de disco y el triaje añadieron la perspectiva histórica: cuándo se preparó el entorno, qué documentos se abrieron, qué se intentó borrar y qué artefactos quedaron como rastro. Aunque la práctica planteaba frentes distintos, ambos terminaron convergiendo en una misma narrativa técnica y por eso se integran en un único informe.
 
-**Alcance del análisis.** Este informe se limita a las dos evidencias originales facilitadas, `ram-001.raw` y `IE11-Win7-VMWare-disk1-002.vmdk`, así como a los artefactos derivados obtenidos a partir de ellas durante el proceso pericial. No se dispuso de capturas completas de tráfico, telemetría EDR, registros de proxy, exportaciones de buzones ni evidencia directa del extremo remoto `200.228.36.6`. Por ello, el informe acredita con solidez la preparación del entorno, la ejecución del malware, el acceso a los documentos y el borrado posterior, pero no permite atribuir con certeza absoluta el mecanismo final de exfiltración ni el destinatario último de los datos.
+**Alcance del análisis.** Este trabajo se circunscribe a las dos evidencias originales facilitadas, `ram-001.raw` y `IE11-Win7-VMWare-disk1-002.vmdk`, así como a los artefactos derivados obtenidos a partir de ellas durante la práctica. No se dispuso de capturas completas de tráfico, telemetría EDR, registros de proxy, exportaciones de buzones ni evidencia directa del extremo remoto `200.228.36.6`. Por ello, el análisis acredita con solidez la preparación del entorno, la ejecución del malware, el acceso a los documentos y el borrado posterior, pero no permite atribuir con certeza absoluta el mecanismo final de exfiltración ni el destinatario último de los datos.
 
 ---
 
@@ -279,7 +290,7 @@ Sobre `EV-02` se revisaron manualmente rutas relevantes del perfil de `IEUser`, 
 
 En `Documents\Documentacion empresa` se encontró `flag2.txt`, cuyo contenido indicaba literalmente que los archivos filtrados eran `.xls`. En esa misma ruta y en artefactos asociados aparecieron los nombres `Plan_de_cuentas.xls` y `CLIENTES DEL BANCO.xls`, ambos coherentes con documentación financiera. La carpeta `Downloads` mostró presencia de instaladores de `hMailServer`, `Thunderbird` y `LibreOffice`, además de una carpeta `malware` ligada al binario sospechoso.
 
-![Figura 8. Carpeta con documentación sensible y archivo confesional.](Evidencias/ftk_imager_ieuser_documentacion_documentacion_empresa.png)
+![Figura 8. Carpeta con documentación sensible y archivo indicativo.](Evidencias/ftk_imager_ieuser_documentacion_documentacion_empresa.png)
 
 _Figura 8. Vista de FTK Imager sobre `C:\Users\IEUser\Documents\Documentacion empresa`, donde aparece `flag2.txt` en la misma ruta de los documentos sensibles._
 
@@ -379,7 +390,7 @@ Estos comandos no sustituyen la descripción analítica de los apartados anterio
 
 Se recuperó el hash NTLM de `IEUser` y se resolvió como `Passw0rd!`. El mismo valor apareció asociado a `Administrator`, lo que evidencia una debilidad importante en la gestión de credenciales y eleva el impacto potencial del incidente. No se trata sólo de un hallazgo técnico: obliga a considerar comprometidas ambas cuentas locales y a tratarlas como tales en cualquier medida de contención.
 
-### 8.2 Ejecución de un binario malicioso compatible con keylogger
+### 8.2 Ejecución de un binario malicioso con funcionalidad de keylogging
 
 `key.exe` apareció activo en memoria, quedó registrado en `Amcache` y generó su propio `Prefetch`, acumulando ocho ejecuciones. La evidencia contrastada en VirusTotal lo clasificó como malware con capacidad de robo de credenciales. La consistencia entre memoria, disco y reputación externa convierte este punto en uno de los hallazgos más sólidos de toda la investigación.
 
@@ -387,17 +398,19 @@ Se recuperó el hash NTLM de `IEUser` y se resolvió como `Passw0rd!`. El mismo 
 
 En el momento del análisis estaban presentes `sshd.exe` y `hMailServer.exe`. `netscan` mostró el puerto 22 y los puertos 25, 110, 143 y 587, mientras que el triaje localizó reglas de firewall y eventos del sistema coherentes con ambos servicios. Esto, por sí mismo, no demuestra cada transferencia que pudo haberse realizado, pero sí deja claro que el equipo disponía de medios técnicos suficientes para comunicación remota y posible salida de información.
 
-### 8.4 Acceso a documentación financiera concreta
+### 8.4 Actividad web relevante para la preparación del entorno
 
 La revisión del historial web almacenado en `WebCacheV01.dat` añadió contexto útil, aunque no definitivo, sobre la preparación del entorno. En concreto, `BrowsingHistoryView` recuperó una visita a `http://www.mls-software.com/opensshd.html` y varias referencias locales a archivos del perfil de `IEUser`. Este hallazgo no basta para afirmar por sí solo la descarga de `key.exe`, pero sí refuerza que el navegador dejó rastro tanto de componentes vinculados a `OpenSSH` como de archivos relevantes del caso.
 
 ### 8.5 Acceso a documentación financiera concreta
 
-Los documentos `Plan_de_cuentas.xls` y `CLIENTES DEL BANCO.xls` quedaron reflejados en `LNK`, `AutomaticDestinations` y `RBCmd`. Ambos estaban ubicados en `C:\Users\IEUser\Documents\Documentacion empresa`. La actividad reciente indica que fueron abiertos el 2021-03-23 UTC y eliminados inmediatamente después. `flag2.txt`, hallado en la misma carpeta, reforzó el enfoque del actor al mencionar expresamente que los archivos filtrados eran `.xls`.
+Los documentos `Plan_de_cuentas.xls` y `CLIENTES DEL BANCO.xls` quedaron reflejados en `LNK`, `AutomaticDestinations` y `RBCmd`. Ambos estaban ubicados en `C:\Users\IEUser\Documents\Documentacion empresa`. La actividad reciente indica que fueron abiertos el 2021-03-23 UTC y eliminados inmediatamente después. `flag2.txt`, hallado en la misma carpeta, refuerza la vinculación del incidente con archivos de extensión `.xls`.
+
+También se localizaron respuestas claras para dos preguntas adicionales del enunciado. Por un lado, `setupapi.dev.log` registró una instalación de `USB Mass Storage Device` para el identificador `USB\VID_0951&PID_1666`, correspondiente a `DataTraveler 3.0`, con inicio el `2021-03-19 05:26:01 UTC`, lo que acredita conexión de almacenamiento USB al equipo. Por otro, los artefactos de navegación mostraron una ruta de `Internet Explorer` hacia `mail.yahoo.com` y huellas de `Edge` asociadas a `docs.google.com`, `drive.google.com`, `mail.google.com` y `gmail.com`; eso permite afirmar actividad de navegador hacia webmail y servicios cloud, si bien no una subida de archivos demostrada por esos mismos artefactos.
 
 ### 8.6 Borrado selectivo de rastro
 
-La acción `del HashMyFiles.cfg` fue recuperada en la consola en memoria. Además, `Prefetch` mostró la ejecución previa de `HASHMYFILES.EXE` y la existencia del propio `HASHMYFILES.CFG` en el escritorio del usuario. En paralelo, `RBCmd` y los artefactos de acceso reciente demostraron el borrado de los dos documentos financieros inmediatamente después de su apertura. Esta secuencia es compatible con una maniobra deliberada para reducir evidencia visible en el sistema. De forma más concreta, el borrado de `HashMyFiles.cfg` eliminó la traza de configuración inmediata dejada por esa utilidad; con la evidencia disponible no puede determinarse qué elementos concretos fueron consultados desde `HashMyFiles`, pero sí que se intentó suprimir ese rastro local después de usarla.
+La acción `del HashMyFiles.cfg` fue recuperada en la consola en memoria. Además, `Prefetch` mostró la ejecución previa de `HASHMYFILES.EXE` y la existencia del propio `HASHMYFILES.CFG` en el escritorio del usuario. En paralelo, `RBCmd` y los artefactos de acceso reciente demostraron el borrado de los dos documentos financieros inmediatamente después de su apertura. Esta secuencia es consistente con una actuación deliberada orientada a reducir evidencia visible en el sistema. De forma más concreta, el borrado de `HashMyFiles.cfg` eliminó la traza de configuración inmediata dejada por esa utilidad; con la evidencia disponible no puede determinarse qué elementos concretos fueron consultados desde `HashMyFiles`, pero sí que se intentó suprimir ese rastro local después de usarla.
 
 ### 8.7 Relación entre memoria y disco
 
@@ -428,17 +441,19 @@ La principal fortaleza del caso no está en un artefacto aislado, sino en la for
 
 ## 10. Conclusiones
 
-La evidencia analizada permite sostener, con un grado alto de consistencia técnica, que el sistema `IEWIN7` fue utilizado en un escenario de acceso indebido a información sensible. No se aprecia un hecho aislado ni casual. La preparación previa del entorno, la ejecución repetida de `key.exe`, el acceso a documentos financieros concretos, la actividad de servicios remotos y el borrado posterior de archivos encajan mejor con una secuencia planificada que con un uso normal del equipo.
+La evidencia analizada permite concluir, con un grado alto de consistencia técnica, que el sistema `IEWIN7` fue utilizado en un escenario de acceso indebido a información sensible. La preparación previa del entorno, la ejecución repetida de `key.exe`, el acceso a documentos financieros concretos, la actividad de servicios remotos y el borrado posterior de archivos resultan consistentes con una secuencia planificada y no con un uso ordinario del equipo.
 
-La memoria aportó la visión del sistema en funcionamiento: procesos, credenciales, consola, servicios y conectividad. El disco y el triaje completaron esa imagen con el contexto histórico: herramientas instaladas, documentos abiertos, rastro de borrado y artefactos complementarios. La relación entre ambos bloques es directa y suficientemente sólida como para integrarlos en un único relato pericial sin perder claridad analítica.
+La memoria aportó la visión del sistema en funcionamiento: procesos, credenciales, consola, servicios y conectividad. El disco y el triaje completaron esa imagen con el contexto histórico: herramientas instaladas, documentos abiertos, rastro de borrado y artefactos complementarios. La relación entre ambos bloques es directa y suficientemente sólida como para integrarlos en un único análisis técnico, manteniendo una lectura clara y trazable.
 
-Sobre la base de la evidencia, puede sostenerse que:
+Sobre la base de la evidencia revisada en esta práctica, las conclusiones principales son las siguientes:
 
 1. `IEUser` y `Administrator` compartían una credencial débil y recuperable.
 2. `key.exe` se ejecutó en reiteradas ocasiones y es compatible con un keylogger.
 3. El host tenía `OpenSSH` y `hMailServer` disponibles y activos en momentos relevantes del incidente.
 4. Los archivos `Plan_de_cuentas.xls` y `CLIENTES DEL BANCO.xls` fueron accedidos y eliminados el 2021-03-23 UTC.
 5. Se intentó reducir la huella local mediante el borrado de `HashMyFiles.cfg` y de los documentos trabajados.
+6. Quedó acreditada la conexión de un dispositivo de almacenamiento USB `DataTraveler 3.0` el 2021-03-19 05:26:01 UTC.
+7. Existen trazas de actividad hacia correo web y servicios cloud (`mail.yahoo.com`, `docs.google.com`, `drive.google.com`, `mail.google.com`, `gmail.com`), aunque sin prueba bastante de exfiltración consumada por esos canales.
 
 Con la evidencia disponible no puede precisarse con el mismo nivel de certeza cuál fue el canal exacto por el que salieron los datos ni quién fue su destinatario final. Sí puede afirmarse, en cambio, que existían medios técnicos suficientes para ello y que la IP `200.228.36.6` constituye un indicador externo de especial interés para cualquier continuación de la investigación.
 
