@@ -1,0 +1,123 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram name="Page-1" id="A7j0K5M0ehptOw1fjQh3">
+    <mxGraphModel dx="1007" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-59" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-60" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Registro obligatorio de DNI, motivo, hora y empresa de provedencia" vertex="1">
+          <mxGeometry height="60" width="135" x="172.5" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-61" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1;fontSize=16;" value="Ante llegada de personas externas" vertex="1">
+          <mxGeometry height="30" width="150" x="165" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-62" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-63" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Validación con empleado encargado de seguridad" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-64" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-70">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-65" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Acreditación visible y acompañamiento a zonas autorizadas" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-66" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-72">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="507" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-67" connectable="0" parent="Ofa6CETj6pHAOvdHM0s8-66" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NO" vertex="1">
+          <mxGeometry relative="1" x="0.0526" y="2" as="geometry">
+            <mxPoint x="15" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-68" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="507" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-69" connectable="0" parent="Ofa6CETj6pHAOvdHM0s8-68" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="SI" vertex="1">
+          <mxGeometry relative="1" x="-0.4878" y="1" as="geometry">
+            <mxPoint x="24" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-70" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Se detecta dispositivo sospechoso?" vertex="1">
+          <mxGeometry height="90" width="240" x="120" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-71" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-65">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="590" />
+              <mxPoint x="20" y="360" />
+            </Array>
+            <mxPoint x="20" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-72" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Continúa bajo supervisión" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-73" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Ofa6CETj6pHAOvdHM0s8-76">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-74" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="No tocar, no conectar, no manipular" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-75" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Ofa6CETj6pHAOvdHM0s8-78">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-76" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Aislar zona o equipo involucrado si procede" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-77" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-80">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-78" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Retirada segura del dispositivo, análisis y registro del incidente" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-79" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="Ofa6CETj6pHAOvdHM0s8-83">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="950" />
+              <mxPoint x="480" y="175" />
+            </Array>
+            <mxPoint x="480" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-80" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Aprendizaje: compartir documentación, hacer charlas y cursos." vertex="1">
+          <mxGeometry height="60" width="140" x="310" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-81" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1;fontSize=16;" value="Formación Continua - Programa de prevención y concienciación" vertex="1">
+          <mxGeometry height="30" width="260" x="540" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-82" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-86">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-83" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;Charlas y cursos periódicos para empleados&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Riesgos de USB desconocidos&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Implantes WiFi y dispositivos ocultos&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Visitas no autorizadas&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Buenas prácticas de actuación&amp;nbsp;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="90" width="260" x="540" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-84" edge="1" parent="1" source="Ofa6CETj6pHAOvdHM0s8-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ofa6CETj6pHAOvdHM0s8-87">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-85" connectable="0" parent="Ofa6CETj6pHAOvdHM0s8-84" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Establecer protocolos y buenas prácticas" vertex="1">
+          <mxGeometry relative="1" x="0.05" y="3" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-86" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;Simulacros controlados&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Prueba con pendrives inofensivos&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Simulación de visitas no autorizadas&lt;/span&gt;&lt;br style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&amp;nbsp;- Dispositivos sospechosos en zonas comunes&amp;nbsp;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="90" width="260" x="540" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="Ofa6CETj6pHAOvdHM0s8-87" parent="1" style="whiteSpace=wrap;html=1;align=center;" value="&lt;div style=&quot;&quot;&gt;&lt;table style=&quot;border-radius: 6px; overflow: hidden; border-spacing: 0px; border-color: rgba(255, 255, 255, 0.1); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; font-family: &amp;quot;Segoe WPC&amp;quot;, &amp;quot;Segoe UI&amp;quot;, sans-serif;&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;border-color: currentcolor rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) currentcolor; border-style: none solid solid none; border-width: medium 1px 1px medium; border-image: none 100% / 1 / 0 stretch; padding: 4px 6px;&quot;&gt;&lt;font style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;Publicar política de uso de dispositivos externos&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-color: currentcolor rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) currentcolor; border-style: none solid solid none; border-width: medium 1px 1px medium; border-image: none 100% / 1 / 0 stretch; padding: 4px 6px;&quot;&gt;&lt;font style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;Establecer controles físicos (tornos, cámaras, tarjetas/biometría)&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-color: currentcolor rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) currentcolor; border-style: none solid solid none; border-width: medium 1px 1px medium; border-image: none 100% / 1 / 0 stretch; padding: 4px 6px;&quot;&gt;&lt;font style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;Deshabilitar puertos USB en equipos críticos&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-color: currentcolor rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) currentcolor; border-style: none solid solid none; border-width: medium 1px 1px medium; border-image: none 100% / 1 / 0 stretch; padding: 4px 6px;&quot;&gt;&lt;font style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;Monitorización de red para detectar WiFi no autorizados&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-color: currentcolor rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) currentcolor; border-style: none solid solid none; border-width: medium 1px 1px medium; border-image: none 100% / 1 / 0 stretch; padding: 4px 6px;&quot;&gt;&lt;font style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;Canal de reporte (Seguridad / IT / SOC / Helpdesk)&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200" width="260" x="540" y="480" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
